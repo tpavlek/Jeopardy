@@ -1,0 +1,18 @@
+{
+    "name": "depotwarehouse/jeopardy",
+    "require": {
+        "cboden/ratchet": "0.3.*",
+        "league/event": "~2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Depotwarehouse\\Jeopardy\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Troy Pavlek",
+            "email": "ebonwumon@depotwarehouse.net"
+        }
+    ]
+}
