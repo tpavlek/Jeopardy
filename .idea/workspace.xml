@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/index.html">
+      <file leaf-file-name="admin.html" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/admin.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4737631" vertical-offset="1430" max-vertical-offset="2448">
-              <caret line="97" column="55" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
+            <state vertical-scroll-proportion="0.62068963" vertical-offset="0" max-vertical-offset="702">
+              <caret line="23" column="75" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
               <folding />
             </state>
           </provider>
@@ -50,12 +50,13 @@
         <option value="$PROJECT_DIR$/src/Buzzer/BuzzReceivedEvent.php" />
         <option value="$PROJECT_DIR$/src/Buzzer/BuzzerResolution.php" />
         <option value="$PROJECT_DIR$/client/style.css" />
-        <option value="$PROJECT_DIR$/client/admin.html" />
         <option value="$PROJECT_DIR$/src/Buzzer/BuzzerStatusChangeEvent.php" />
         <option value="$PROJECT_DIR$/src/Server.php" />
         <option value="$PROJECT_DIR$/src/WampConnector.php" />
         <option value="$PROJECT_DIR$/src/Buzzer/BuzzerStatus.php" />
+        <option value="$PROJECT_DIR$/client/jeopardy.js" />
         <option value="$PROJECT_DIR$/client/index.html" />
+        <option value="$PROJECT_DIR$/client/admin.html" />
       </list>
     </option>
   </component>
@@ -394,19 +395,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.389049" vertical-offset="0" max-vertical-offset="396">
-          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-          <folding>
-            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Buzzer/BuzzerStatusChangeEvent.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4857571" vertical-offset="0" max-vertical-offset="667">
@@ -493,40 +481,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/admin.html">
+    <entry file="file://$PROJECT_DIR$/client/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2173913" vertical-offset="647" max-vertical-offset="2178">
-          <caret line="44" column="7" selection-start-line="44" selection-start-column="7" selection-end-line="44" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.389049" vertical-offset="0" max-vertical-offset="396">
+          <caret line="15" column="1" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
           <folding>
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Troy&quot;...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1423587645361" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423587359364" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/jeopardy.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6368876" vertical-offset="1736" max-vertical-offset="2538">
+          <caret line="121" column="43" selection-start-line="121" selection-start-column="43" selection-end-line="121" selection-end-column="43" />
+          <folding>
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595251864" expanded="true" signature="-1:-1" placeholder="{...}" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/client/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4737631" vertical-offset="1430" max-vertical-offset="2448">
-          <caret line="97" column="55" selection-start-line="97" selection-start-column="55" selection-end-line="97" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.55472267" vertical-offset="332" max-vertical-offset="1206">
+          <caret line="39" column="26" selection-start-line="39" selection-start-column="26" selection-end-line="39" selection-end-column="26" />
+          <folding>
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1423595301014" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.62068963" vertical-offset="0" max-vertical-offset="720">
+          <caret line="23" column="75" selection-start-line="23" selection-start-column="75" selection-end-line="23" selection-end-column="75" />
           <folding />
         </state>
       </provider>

@@ -5,108 +5,26 @@
 <body>
 <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
 <script src="http://autobahn.s3.amazonaws.com/js/autobahn.min.jgz"></script>
+<script src="jeopardy.js"></script>
 
 <h1>Jeopardy Admin Console</h1>
 
-<strong>Buzzer: </strong> <span class="inactive-buzzer">Inactive</span>
+<strong>Buzzer: </strong> <span id="status-indicator" class="inactive-buzzer">Inactive</span>
 <button id="toggle-status" data-status="false">Toggle</button>
 
 <script>
+    var jeo = window.jeopardy;
+    jeo.admin_mode = true;
+    jeo.getStatusIndicatorElement = function() {
+        return $('#status-indicator');
+    };
 
-    window.buzzer_active_at = false;
-    window.current_penalty = 0;
-    var penalty_amount = 250; // amt in milliseconds that you're penalized for clicking early
-    var buzzer_topic = 'com.sc2ctl.jeopardy.buzzer';
-    var buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
-    var buzzer_status_indicator = $('#buzzer-status');
-    var penalty_span = $('#penalty');
-
-    var conn = new ab.Session('ws://localhost:9001',
-            function() {
-                conn.subscribe(buzzer_topic, function(topic, data) {
-                    // This is where you would add the new article to the DOM (beyond the scope of this tutorial)
-                    console.log(data);
-                });
-
-                conn.subscribe('com.sc2ctl.jeopardy.buzzer_status', processBuzzerActiveResult);
-            },
-            function() {
-                console.warn('WebSocket connection closed');
-            },
-            {'skipSubprotocolCheck': true}
-    );
-
-
-    $('#toggle-status').click(function() {
-        var status = {
-            'active': !$(this).attr('data-status')
-        };
-        conn.publish(buzzer_status_topic, status, [], [])
+    $(document).ready(function() {
+        $('#toggle-status').click(function() {
+            jeo.attemptBuzzerStatusChange($('#status-indicator').hasClass('inactive-buzzer'));
+        });
     });
 
-
-    $('#buzzer').click(attemptBuzz);
-
-    function attemptBuzz() {
-
-        if (window.buzzer_active_at === false) {
-            addToPenalty(penalty_amount);
-            return;
-        }
-
-        var difference = (Date.now() - window.buzzer_active_at) + window.current_penalty;
-
-        disableBuzzButton();
-        resetPenalty();
-
-        var buzz = {
-            'name': "Troy",
-            'difference': difference
-        };
-        conn.publish(buzzer_topic, buzz, [], []);
-    }
-
-    function resetPenalty() {
-        window.current_penalty = 0;
-        penalty_span.html(window.current_penalty);
-    }
-
-    function addToPenalty(amt) {
-        window.current_penalty += amt;
-        penalty_span.html(window.current_penalty);
-    }
-
-    function processBuzzerActiveResult(topic, data) {
-        data = JSON.parse(data);
-
-        if (data.active == true) {
-            setBuzzerActive(buzzer_status_indicator);
-        }
-    }
-
-    function setBuzzerActive(status_indicator) {
-        window.buzzer_active_at = Date.now();
-        status_indicator.removeClass('inactive-buzzer').addClass('active-buzzer');
-    }
-
-    function setBuzzerInactive(status_indicator) {
-        window.buzzer_active_at = false;
-        resetPenalty();
-        status_indicator.removeClass('active-buzzer').addClass('inactive-buzzer');
-        enableBuzzButton();
-    }
-
-    function disableBuzzButton() {
-        $('#buzzer').prop('disabled', true);
-    }
-
-    function enableBuzzButton() {
-        $('#buzzer').prop('disabled', false);
-    }
-
-    setTimeout(function() {
-        setBuzzerActive(buzzer_status_indicator)
-    }, 3000);
 
 
 </script>
