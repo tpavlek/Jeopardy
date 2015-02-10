@@ -26,7 +26,7 @@ class Server
      * The time, in seconds, in which we want to wait after receiving the first buzz before resolving a winner.
      * @var float
      */
-    protected $buzzer_resolve_timeout = 0.5;
+    protected $buzzer_resolve_timeout = 5;
 
     public function __construct(LoopInterface $loopInterface)
     {
