@@ -2,15 +2,18 @@
 
 namespace Depotwarehouse\Jeopardy\Buzzer;
 
-class BuzzerStatus
+use Illuminate\Contracts\Support\Jsonable;
+
+class BuzzerStatus implements Jsonable
 {
 
     protected $begin;
-    protected $active = false;
+    protected $active;
 
-    public function __construct()
+    public function __construct($active = false)
     {
         $this->begin = microtime(true);
+        $this->active = $active;
     }
 
     public function makeActive()
@@ -29,4 +32,16 @@ class BuzzerStatus
         return $this->active;
     }
 
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode([
+            'active' => $this->active
+        ]);
+    }
 }

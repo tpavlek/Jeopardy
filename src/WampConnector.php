@@ -4,6 +4,7 @@ namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
 use League\Event\Emitter;
@@ -15,7 +16,7 @@ class WampConnector implements WampServerInterface
 {
 
     const BUZZER_TOPIC = "com.sc2ctl.jeopardy.buzzer";
-    const BUZZER_STATUAS = "com.sc2ctl.jeopardy.buzzer_status";
+    const BUZZER_STATUS_TOPIC = "com.sc2ctl.jeopardy.buzzer_status";
 
     public function __construct(Emitter $emitter)
     {
@@ -102,8 +103,19 @@ class WampConnector implements WampServerInterface
      */
     function onPublish(ConnectionInterface $conn, $topic, $event, array $exclude, array $eligible)
     {
-        $contestant = new Contestant($event['name']);
-        $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
+        if ($topic == self::BUZZER_TOPIC) {
+            $contestant = new Contestant($event['name']);
+            $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
+        }
+
+        if ($topic == self::BUZZER_STATUS_TOPIC) {
+            $this->emitter->emit(
+                new BuzzerStatusChangeEvent(
+                    new BuzzerStatus($event['active'])
+                )
+            );
+        }
+
     }
 
     /**
@@ -123,7 +135,7 @@ class WampConnector implements WampServerInterface
 
     public function onBuzzerStatusChange(BuzzerStatus $status)
     {
-
+        $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson());
     }
 
 }

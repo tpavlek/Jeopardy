@@ -4,6 +4,7 @@ namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolutionEvent;
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
@@ -70,6 +71,10 @@ class Server
 
             $resolver->addBuzz($event);
 
+        });
+
+        $emitter->addListener(BuzzerStatusChangeEvent::class, function(BuzzerStatusChangeEvent $event) use ($wamp) {
+            $wamp->onBuzzerStatusChange($event->getBuzzerStatus());
         });
 
         $this->eventLoop->run();

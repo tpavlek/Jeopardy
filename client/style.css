@@ -1,0 +1,16 @@
+.buzzer {
+    width: 200px;
+    height: 200px;
+}
+.active-buzzer {
+    background: green;
+}
+.inactive-buzzer {
+    background:red;
+    color: white;
+}
+#penalty {
+    color:red;
+    font-size: 200%;
+    font-weight: bold;
+}
