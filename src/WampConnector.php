@@ -14,7 +14,11 @@ use Ratchet\Wamp\WampServerInterface;
 class WampConnector implements WampServerInterface
 {
 
-    public function __construct(Emitter $emitter) {
+    const BUZZER_TOPIC = "com.sc2ctl.jeopardy.buzzer";
+    const BUZZER_STATUAS = "com.sc2ctl.jeopardy.buzzer_status";
+
+    public function __construct(Emitter $emitter)
+    {
         $this->emitter = $emitter;
     }
 
@@ -22,7 +26,7 @@ class WampConnector implements WampServerInterface
     protected $emitter;
 
     /** @var Topic[] */
-    protected $subscribedTopics = [];
+    protected $subscribedTopics = [ ];
 
     /**
      * When a new connection is opened it will be passed to this method
@@ -98,7 +102,8 @@ class WampConnector implements WampServerInterface
      */
     function onPublish(ConnectionInterface $conn, $topic, $event, array $exclude, array $eligible)
     {
-        $this->emitter->emit(new BuzzReceivedEvent(new Contestant("Fred")));
+        $contestant = new Contestant($event['name']);
+        $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
     }
 
     /**
@@ -108,17 +113,16 @@ class WampConnector implements WampServerInterface
      */
     public function onBuzzerResolution(BuzzerResolution $resolution)
     {
-        $buzzerTopic = "buzzer";
-
         // Is anyone subscribed to buzzer events right now?
-        if (!array_key_exists($buzzerTopic, $this->subscribedTopics)) {
+        if (!array_key_exists(self::BUZZER_TOPIC, $this->subscribedTopics)) {
             return;
         }
 
-        $this->subscribedTopics[$buzzerTopic]->broadcast($resolution->toJson());
+        $this->subscribedTopics[self::BUZZER_TOPIC]->broadcast($resolution->toJson());
     }
 
-    public function onBuzzerStatusChange(BuzzerStatus $status) {
+    public function onBuzzerStatusChange(BuzzerStatus $status)
+    {
 
     }
 

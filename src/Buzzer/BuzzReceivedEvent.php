@@ -8,28 +8,35 @@ use League\Event\AbstractEvent;
 class BuzzReceivedEvent extends AbstractEvent
 {
 
-    /** @var Contestant  */
+    /** @var Contestant */
     protected $contestant;
-
-    public function __construct(Contestant $contestant) {
-        $this->contestant = $contestant;
-    }
-
     /**
-     * Get the event name.
-     *
-     * @return string
+     * The client-provided value that represents the difference in time from when the buzzer went active until they
+     * submitted.
+     * @var int
      */
-    public function getName()
+    protected $difference;
+
+    public function __construct(Contestant $contestant, $difference)
     {
-        return "BuzzReceivedEvent";
+        $this->contestant = $contestant;
+        $this->difference = $difference;
     }
 
 
     /**
      * @return Contestant
      */
-    public function getContestant() {
+    public function getContestant()
+    {
         return $this->contestant;
+    }
+
+    /**
+     * @return int
+     */
+    public function getDifference()
+    {
+        return $this->difference;
     }
 }

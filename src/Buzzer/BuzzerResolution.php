@@ -26,13 +26,20 @@ class BuzzerResolution
         return $this->contestant;
     }
 
+    public function getTime()
+    {
+        return $this->time;
+    }
+
     public function toJson()
     {
-        $response = [];
+        $response = [ ];
+
         if ($this->hasWinner()) {
             $response = [
                 'success' => true,
-                'contestant' => $this->contestant->getName()
+                'contestant' => $this->contestant->getName(),
+                'time' => $this->getTime()
             ];
         } else {
             $response = [

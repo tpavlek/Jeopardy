@@ -3,7 +3,9 @@
 namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolutionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
+use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
 use League\Event\Emitter;
 use League\Event\Event;
@@ -19,6 +21,12 @@ class Server
 
     /** @var  LoopInterface */
     protected $eventLoop;
+
+    /**
+     * The time, in seconds, in which we want to wait after receiving the first buzz before resolving a winner.
+     * @var float
+     */
+    protected $buzzer_resolve_timeout = 0.5;
 
     public function __construct(LoopInterface $loopInterface)
     {
@@ -44,21 +52,23 @@ class Server
             $webSocket
         );
 
-        $emitter->addListener("BuzzReceivedEvent", function(BuzzReceivedEvent $event) {
-            echo "Event recieved";
+        $resolver = new Resolver();
+
+        $emitter->addListener(BuzzerResolutionEvent::class, function(BuzzerResolutionEvent $event) use ($wamp) {
+            $wamp->onBuzzerResolution($event->getResolution());
         });
 
-        $i = 0;
+        $emitter->addListener(BuzzReceivedEvent::class, function(BuzzReceivedEvent $event) use ($resolver, $emitter) {
 
-        $this->eventLoop->addPeriodicTimer(5, function() use ($wamp, $emitter, &$i) {
+            if ($resolver->isEmpty()) {
+                // If this is the first buzz, then we want to resolve it after the timeout.
+                $this->eventLoop->addTimer($this->buzzer_resolve_timeout, function() use ($resolver, $emitter) {
+                    $resolution = $resolver->resolve();
+                    $emitter->emit(new BuzzerResolutionEvent($resolution));
+                });
+            }
 
-            /*$resolution = BuzzerResolution::createSuccess(
-                new Contestant("Fred"), microtime(true)
-            );
-            $wamp->onBuzzerResolution($resolution);*/
-
-
-
+            $resolver->addBuzz($event);
 
         });
 
