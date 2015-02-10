@@ -51,7 +51,7 @@ window.jeopardy = (function(jeopardy) {
             'name': name,
             'difference': difference
         };
-        conn.publish(buzzer_topic, buzz, [], []);
+        conn.publish(jeopardy.buzzer_topic, buzz, [], []);
     };
 
     jeopardy.attemptBuzzerStatusChange = function(status) {
@@ -78,6 +78,7 @@ window.jeopardy = (function(jeopardy) {
 
     function handleBuzzEvent(topic, data) {
         console.log(data);
+        setBuzzerInactive(jeopardy.getStatusIndicatorElement());
     }
 
 

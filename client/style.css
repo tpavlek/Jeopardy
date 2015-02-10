@@ -4,10 +4,17 @@
 }
 .active-buzzer {
     background: green;
+    color:white;
 }
 .inactive-buzzer {
     background:red;
     color: white;
+}
+span.inactive-buzzer:after {
+    content:"Inactive";
+}
+span.active-buzzer:after {
+    content:"Active";
 }
 #penalty {
     color:red;
