@@ -36,6 +36,5 @@ class ResolverTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Murphy", $resolution->getContestant()->getName());
         $this->assertEquals(10, $resolution->getTime());
 
-
     }
 }
