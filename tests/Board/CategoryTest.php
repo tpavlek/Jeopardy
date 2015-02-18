@@ -25,7 +25,16 @@ class CategoryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf(Collection::class, $category->getQuestions());
         $this->assertEquals(2, $category->getQuestions()->count());
-        $this->assertInstanceOf(Question::class, $category->getQuestions()->first());
+
+        /** @var Question $first_question */
+        $first_question = $category->getQuestions()->first();
+        $this->assertInstanceOf(Question::class, $first_question);
+        $this->assertEquals(200, $first_question->getValue());
+    }
+
+    public function test_it_serializes_to_array()
+    {
+        // TODO test this.
     }
 
 }

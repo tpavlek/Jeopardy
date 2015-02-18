@@ -3,7 +3,8 @@
     "require": {
         "cboden/ratchet": "0.3.*",
         "league/event": "~2.0",
-        "illuminate/support": "~5.0"
+        "illuminate/support": "~5.0",
+        "symfony/var-dumper": "~2.6"
     },
     "autoload": {
         "psr-4": {

@@ -13,6 +13,11 @@ class Answer
         $this->text = $text;
     }
 
+    public function __toString()
+    {
+        return $this->getText();
+    }
+
     /**
      * @return string
      */

@@ -2,9 +2,10 @@
 
 namespace Depotwarehouse\Jeopardy\Board;
 
+use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Collection;
 
-class Category
+class Category implements Arrayable
 {
 
     /** @var  string */
@@ -61,4 +62,18 @@ class Category
     }
 
 
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'name' => $this->getName(),
+            'questions' => $this->getQuestions()->map(function(Question $question) {
+                return $question->toArray();
+            })->toArray()
+        ];
+    }
 }

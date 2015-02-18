@@ -7,6 +7,7 @@ use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Illuminate\Support\Collection;
 use League\Event\Emitter;
 use Ratchet\ConnectionInterface;
 use Ratchet\Wamp\Topic;
@@ -17,6 +18,7 @@ class WampConnector implements WampServerInterface
 
     const BUZZER_TOPIC = "com.sc2ctl.jeopardy.buzzer";
     const BUZZER_STATUS_TOPIC = "com.sc2ctl.jeopardy.buzzer_status";
+    const QUESTION_DISPLAY_TOPIC = "com.sc2ctl.jeopardy.question_display";
 
     public function __construct(Emitter $emitter)
     {
@@ -81,6 +83,10 @@ class WampConnector implements WampServerInterface
     function onSubscribe(ConnectionInterface $conn, $topic)
     {
         $this->subscribedTopics[$topic->getId()] = $topic;
+
+        if ($topic == self::QUESTION_DISPLAY_TOPIC) {
+
+        }
     }
 
     /**
@@ -136,6 +142,16 @@ class WampConnector implements WampServerInterface
     public function onBuzzerStatusChange(BuzzerStatus $status)
     {
         $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson());
+    }
+
+    /**
+     * We have a new subscriber to the question feed, which means we want to send them the data about all the currently
+     * active questions.
+     * @param Collection $categories A collection which contains Category objects.
+     */
+    public function onQuestionSubscribe(Collection $categories)
+    {
+
     }
 
 }

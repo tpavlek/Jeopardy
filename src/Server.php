@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\Jeopardy;
 
+use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolutionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
@@ -41,6 +42,8 @@ class Server
 
         $webSocket = new \React\Socket\Server($this->eventLoop);
         $webSocket->listen(9001, '0.0.0.0');
+
+        $board = BoardFactory::initialize();
 
         $webServer = new IoServer(
             new HttpServer(
