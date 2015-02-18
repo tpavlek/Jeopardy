@@ -3,6 +3,8 @@
 namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\Category;
+use Depotwarehouse\Jeopardy\Board\Question;
+use Depotwarehouse\Jeopardy\Board\QuestionDisplayRequestEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
@@ -120,17 +122,29 @@ class WampConnector implements WampServerInterface
      */
     function onPublish(ConnectionInterface $conn, $topic, $event, array $exclude, array $eligible)
     {
-        if ($topic == self::BUZZER_TOPIC) {
-            $contestant = new Contestant($event['name']);
-            $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
-        }
 
-        if ($topic == self::BUZZER_STATUS_TOPIC) {
-            $this->emitter->emit(
-                new BuzzerStatusChangeEvent(
-                    new BuzzerStatus($event['active'])
-                )
-            );
+        switch ((string)$topic) {
+            case self::BUZZER_TOPIC:
+                $contestant = new Contestant($event['name']);
+                $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
+                break;
+            case self::BUZZER_STATUS_TOPIC:
+                $this->emitter->emit(
+                    new BuzzerStatusChangeEvent(
+                        new BuzzerStatus($event['active'])
+                    )
+                );
+                break;
+            case self::QUESTION_DISPLAY_TOPIC:
+                if (!isset($event['category']) || !isset($event['value'])) {
+                    //TODO log this
+                    echo "Did not receive proper question request, did not have a category or value";
+                    break;
+                }
+                $this->emitter->emit(new QuestionDisplayRequestEvent($event['category'], $event['value']));
+                break;
+            default:
+                break;
         }
 
     }
@@ -157,7 +171,7 @@ class WampConnector implements WampServerInterface
         $this->subscribedTopics[self::BUZZER_TOPIC]->broadcast($resolution->toJson());
     }
 
-    public function onBuzzerStatusChange(BuzzerStatus $status, $blacklist = [], $whitelist = [])
+    public function onBuzzerStatusChange(BuzzerStatus $status, $blacklist = [ ], $whitelist = [ ])
     {
         $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson(), $blacklist, $whitelist);
     }
@@ -170,11 +184,17 @@ class WampConnector implements WampServerInterface
      */
     public function onQuestionSubscribe(Collection $categories, $sessionId)
     {
-        $response = $categories->map(function(Category $category) {
+        $response = $categories->map(function (Category $category) {
             return $category->toArray();
         });
 
-        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast(json_encode($response), [], [ $sessionId ]);
+        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast(json_encode($response), [ ], [ $sessionId ]);
+    }
+
+    public function onQuestionDisplay(Question $question)
+    {
+        $response = $question->toJson();
+        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast($response);
     }
 
 }

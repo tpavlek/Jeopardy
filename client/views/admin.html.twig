@@ -10,7 +10,7 @@
 
     </div>
     <div class="content-wrapper">
-
+        {% include 'partials/board.html.twig' %}
     </div>
 
     <script>
@@ -19,10 +19,21 @@
         jeo.getStatusIndicatorElement = function() {
             return $('#status-indicator');
         };
+        jeo.getJeopardyBoardElement = function() {
+            return $('.jeopardy-board');
+        };
+
 
         $(document).ready(function() {
             $('#toggle-status').click(function() {
                 jeo.attemptBuzzerStatusChange($('#status-indicator').hasClass('inactive-buzzer'));
+            });
+
+            $('.question.box').click(function() {
+                var categoryName = $(this).attr('data-category');
+                var value = $(this).html();
+
+                jeo.attemptNewQuestionDisplay(categoryName, value);
             });
         });
 

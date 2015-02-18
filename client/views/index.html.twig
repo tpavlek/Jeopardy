@@ -8,12 +8,12 @@
         <br />
         <button class="button" id="buzzer">Buzz In</button>
 
-        <div class="penalty-box">
+        <div class="penalty">
             Penalty: <span id="penalty">0</span>
         </div>
     </div>
     <div class="content-wrapper">
-        blue
+        {% include 'partials/board.html.twig' %}
     </div>
 
 
@@ -28,6 +28,9 @@
     };
     jeo.getPenaltyDisplayElement = function() {
         return $('#penalty');
+    };
+    jeo.getJeopardyBoardElement = function() {
+        return $('.jeopardy-board');
     };
 
     $(document).ready(function() {

@@ -3,8 +3,9 @@
 namespace Depotwarehouse\Jeopardy\Board;
 
 use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
 
-class Question implements Arrayable
+class Question implements Arrayable, Jsonable
 {
 
     protected $clue;
@@ -82,5 +83,16 @@ class Question implements Arrayable
             'value' => (int)$this->getValue(),
             'used' => (bool)$this->isUsed()
         ];
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray());
     }
 }

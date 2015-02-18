@@ -3,6 +3,8 @@
 namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
+use Depotwarehouse\Jeopardy\Board\QuestionDisplayRequestEvent;
+use Depotwarehouse\Jeopardy\Board\QuestionNotFoundException;
 use Depotwarehouse\Jeopardy\Board\QuestionSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolutionEvent;
@@ -30,7 +32,7 @@ class Server
      * The time, in seconds, in which we want to wait after receiving the first buzz before resolving a winner.
      * @var float
      */
-    protected $buzzer_resolve_timeout = 5;
+    protected $buzzer_resolve_timeout = 0.5;
 
     public function __construct(LoopInterface $loopInterface)
     {
@@ -68,6 +70,17 @@ class Server
 
         $emitter->addListener(BuzzerResolutionEvent::class, function(BuzzerResolutionEvent $event) use ($wamp) {
             $wamp->onBuzzerResolution($event->getResolution());
+        });
+
+        $emitter->addListener(QuestionDisplayRequestEvent::class, function(QuestionDisplayRequestEvent $event) use ($wamp, $board) {
+            try {
+                $question = $board->getQuestionByCategoryAndValue($event->getCategoryName(), $event->getValue());
+                $wamp->onQuestionDisplay($question);
+            } catch (QuestionNotFoundException $exception) {
+                //TODO log this somewhere.
+                echo "Error occured, could not find question in category: {$event->getCategoryName()} valued at: {$event->getValue()}";
+            }
+
         });
 
         $emitter->addListener(BuzzReceivedEvent::class, function(BuzzReceivedEvent $event) use ($board, $emitter) {

@@ -36,6 +36,10 @@ window.jeopardy = (function(jeopardy) {
         console.warn("You need to override the getPenaltyDisplayElement method!");
     };
 
+    jeopardy.getJeopardyBoardElement = function() {
+        console.warn("You need to override the getJeopardyBoardElement method!");
+    };
+
     /* Our public API */
 
     jeopardy.attemptBuzz = function(name) {
@@ -64,6 +68,15 @@ window.jeopardy = (function(jeopardy) {
         conn.publish(jeopardy.buzzer_status_topic, payload, [], [])
     };
 
+    jeopardy.attemptNewQuestionDisplay = function(categoryName, value) {
+        var payload = {
+            category: categoryName,
+            value: value
+        };
+
+        conn.publish(jeopardy.question_display_topic, payload, [], []);
+    };
+
 
     /* These are library functions */
 
@@ -85,7 +98,30 @@ window.jeopardy = (function(jeopardy) {
     }
 
     function handleQuestionDisplay(topic, data) {
+        data = JSON.parse(data);
         console.log(data);
+        var board = jeopardy.getJeopardyBoardElement();
+        var categories = board.find('.category');
+
+        for (var i in data) {
+            var category_data = data[i];
+            var category_column = categories[i];
+
+            $(category_column).find('.category-name').html(category_data.name);
+
+            var questions_column = $(category_column).find('.question.box');
+
+            var questions_data = category_data.questions;
+            for (var j in questions_data) {
+                if (questions_data[j].used) {
+                    continue;
+                }
+                $(questions_column[j]).html(questions_data[j].value);
+                $(questions_column[j]).attr('data-category', category_data.name);
+            }
+
+
+        }
     }
 
 
