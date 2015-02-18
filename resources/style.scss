@@ -1,0 +1,49 @@
+@import "forms";
+@import "vars";
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Slabo 27px', serif;
+}
+
+.buzzer-column {
+  width:10rem;
+  text-align: center;
+  display: inline-block;
+  float:left;
+}
+
+.buzzer {
+  height:50px;
+  width:100%;
+}
+.active-buzzer {
+  background: green;
+  color:white;
+}
+.inactive-buzzer {
+  background:red;
+  color: white;
+}
+span.inactive-buzzer:after {
+  content:"Inactive";
+}
+span.active-buzzer:after {
+  content:"Active";
+}
+#penalty {
+  color:red;
+  font-weight: bold;
+}
+
+.content-wrapper {
+  @include box-sizing();
+  text-align: center;
+  padding: 1rem;
+  float:right;
+  display: inline-block;
+  width: calc(100% - 10rem);
+  background:#1460DB;
+  height:100%;
+}

@@ -1,0 +1,32 @@
+@mixin box-sizing( $type: border-box ) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  -o-box-sizing: $type;
+  -ms-box-sizing: $type;
+  box-sizing: $type;
+}
+
+$contact-header-background: #333333;
+$contact-header-foreground: #E6E6E6;
+
+$navigation-header-background: #F1F1F1;
+$navigation-header-foreground: black;
+
+$call-to-action-block-background-color: #FF6C2E;
+$call-to-action-block-foreground-color: white;
+
+$button-primary-foreground-color: black;
+$button-primary-background-color: #E3E344;
+
+$inverted-button-background-color: white;
+$inverted-button-foreground-color: white;
+
+$section-header-color: white;
+$section-header-underline-color: #EDC800;
+
+$section-border-color: #B2B2B2;
+
+$carousel-selector-color: #333333;
+
+$subsplash-background-color: #EDC800;
+$subsplash-foreground-color: black;

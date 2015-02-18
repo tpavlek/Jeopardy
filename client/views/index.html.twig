@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="buzzer-column">
+        <h1>Buzzer</h1>
+        <div id="buzzer-status" class="buzzer inactive-buzzer"></div>
+        <br />
+        <br />
+        <button class="button" id="buzzer">Buzz In</button>
+
+        <div class="penalty-box">
+            Penalty: <span id="penalty">0</span>
+        </div>
+    </div>
+    <div class="content-wrapper">
+        blue
+    </div>
+
+
+
+<script>
+    var jeo = window.jeopardy;
+    jeo.getStatusIndicatorElement = function() {
+        return $('#buzzer-status');
+    };
+    jeo.getBuzzerButtonElement = function() {
+        return $('#buzzer');
+    };
+    jeo.getPenaltyDisplayElement = function() {
+        return $('#penalty');
+    };
+
+    $(document).ready(function() {
+        $('#buzzer').click(function() {
+            jeo.attemptBuzz("Troy");
+        });
+
+    });
+
+</script>
+
+{% endblock %}

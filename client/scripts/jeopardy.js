@@ -1,6 +1,8 @@
 window.jeopardy = (function(jeopardy) {
+
     jeopardy.buzzer_topic = 'com.sc2ctl.jeopardy.buzzer';
     jeopardy.buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
+    jeopardy.question_display_topic = 'com.sc2ctl.jeopardy.question_display';
     jeopardy.penalty_amount = 250; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.current_penalty = 0;
@@ -12,6 +14,7 @@ window.jeopardy = (function(jeopardy) {
         function() {
             conn.subscribe(jeopardy.buzzer_topic, handleBuzzEvent);
             conn.subscribe(jeopardy.buzzer_status_topic, processBuzzerActiveResult);
+            conn.subscribe(jeopardy.question_display_topic, handleQuestionDisplay);
         },
         function() {
             console.warn('WebSocket connection closed');
@@ -79,6 +82,10 @@ window.jeopardy = (function(jeopardy) {
     function handleBuzzEvent(topic, data) {
         console.log(data);
         setBuzzerInactive(jeopardy.getStatusIndicatorElement());
+    }
+
+    function handleQuestionDisplay(topic, data) {
+        console.log(data);
     }
 
 

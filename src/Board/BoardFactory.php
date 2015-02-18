@@ -2,6 +2,8 @@
 
 namespace Depotwarehouse\Jeopardy\Board;
 
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
+use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
 
 class BoardFactory
@@ -25,30 +27,35 @@ class BoardFactory
     public static function fromJson($json)
     {
         $values = json_decode($json);
+        $contestants = array_map(
+            function (\stdClass $contestant) {
+                return new Contestant($contestant->name);
+            },
+            $values->contestants
+        );
+
+        $categories = array_map(
+            function (\stdClass $category) {
+                return new Category(
+                    $category->name,
+                    array_map(
+                        function (\stdClass $question) {
+                            return new Question(
+                                new Clue($question->clue),
+                                new Answer($question->answer),
+                                $question->value);
+                        },
+                        $category->questions
+                    )
+                );
+            }, $values->categories
+        );
 
         $board = new Board(
-            array_map(
-                function (\stdClass $contestant) {
-                    return new Contestant($contestant->name);
-                },
-                $values->contestants
-            ),
-            array_map(
-                function (\stdClass $category) {
-                    return new Category(
-                        $category->name,
-                        array_map(
-                            function (\stdClass $question) {
-                                return new Question(
-                                    new Clue($question->clue),
-                                    new Answer($question->answer),
-                                    $question->value);
-                            },
-                            $category->questions
-                        )
-                    );
-                }, $values->categories
-            )
+            $contestants,
+            $categories,
+            new Resolver(),
+            new BuzzerStatus()
         );
 
         return $board;

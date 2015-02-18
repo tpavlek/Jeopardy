@@ -2,9 +2,12 @@
 
 namespace Depotwarehouse\Jeopardy;
 
+use Depotwarehouse\Jeopardy\Board\Category;
+use Depotwarehouse\Jeopardy\Board\QuestionSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
 use Illuminate\Support\Collection;
@@ -84,9 +87,17 @@ class WampConnector implements WampServerInterface
     {
         $this->subscribedTopics[$topic->getId()] = $topic;
 
-        if ($topic == self::QUESTION_DISPLAY_TOPIC) {
-
+        switch ((string)$topic) {
+            case self::QUESTION_DISPLAY_TOPIC:
+                $this->emitter->emit(new QuestionSubscriptionEvent($this->getSessionIdFromConnection($conn)));
+                break;
+            case self::BUZZER_STATUS_TOPIC:
+                $this->emitter->emit(new BuzzerStatusSubscriptionEvent($this->getSessionIdFromConnection($conn)));
+                break;
+            default:
+                break;
         }
+
     }
 
     /**
@@ -124,6 +135,13 @@ class WampConnector implements WampServerInterface
 
     }
 
+    private function getSessionIdFromConnection(ConnectionInterface $conn)
+    {
+        //TODO this doesn't seem safe at all. Maybe a pull request?
+        // TODO https://github.com/ratchetphp/Ratchet/issues/282
+        return $conn->wrappedConn->WAMP->sessionId;
+    }
+
     /**
      * We have resolved who buzzed in first, notify the relevant entities.
      *
@@ -139,19 +157,24 @@ class WampConnector implements WampServerInterface
         $this->subscribedTopics[self::BUZZER_TOPIC]->broadcast($resolution->toJson());
     }
 
-    public function onBuzzerStatusChange(BuzzerStatus $status)
+    public function onBuzzerStatusChange(BuzzerStatus $status, $blacklist = [], $whitelist = [])
     {
-        $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson());
+        $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson(), $blacklist, $whitelist);
     }
 
     /**
      * We have a new subscriber to the question feed, which means we want to send them the data about all the currently
      * active questions.
      * @param Collection $categories A collection which contains Category objects.
+     * @param string $sessionId The session ID of the user who subscribed.
      */
-    public function onQuestionSubscribe(Collection $categories)
+    public function onQuestionSubscribe(Collection $categories, $sessionId)
     {
+        $response = $categories->map(function(Category $category) {
+            return $category->toArray();
+        });
 
+        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast(json_encode($response), [], [ $sessionId ]);
     }
 
 }
