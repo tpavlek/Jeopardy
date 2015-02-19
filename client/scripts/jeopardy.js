@@ -8,7 +8,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.penalty_amount = 250; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.current_penalty = 0;
-    jeopardy.host = 'ws://localhost:9001';
+    jeopardy.host = 'ws://' + window.location.hostname + ':9001';
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
 
 
