@@ -4,6 +4,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 require_once '../vendor/autoload.php';
+require_once '../config/config.php';
 
 $loader = new Twig_Loader_Filesystem('views');
 
@@ -11,13 +12,29 @@ $twig = new Twig_Environment($loader);
 
 $router = new \League\Route\RouteCollection();
 
-$router->get('/', function (Request $request, Response $response) use ($twig) {
-    $response->setContent($twig->render('index.html.twig'));
+$router->get('/', function (Request $request, Response $response) use ($twig, $config) {
+    $response->setContent("index page");
     return $response;
 });
 
-$router->addRoute('GET', '/admin', function (Request $request, Response $response) use ($twig) {
-    $response->setContent($twig->render('admin.html.twig'));
+$router->get('/play', function (Request $request, Response $response, array $args) use ($twig, $config) {
+    return new \Symfony\Component\HttpFoundation\RedirectResponse('/');
+});
+
+$router->get('/play/{player}', function (Request $request, Response $response, array $args) use ($twig, $config) {
+    $player = ucfirst(strtolower($args['player']));
+
+    if (!in_array($player, $config['players'])) {
+        return new \Symfony\Component\HttpFoundation\RedirectResponse('/');
+    }
+    $response->setContent($twig->render('play.html.twig', [ 'players' => $config['players'], 'user' => $player ]));
+    return $response;
+});
+
+
+
+$router->addRoute('GET', '/admin', function (Request $request, Response $response) use ($twig, $config) {
+    $response->setContent($twig->render('admin.html.twig', [ 'players' => $config['players'] ]));
     return $response;
 });
 

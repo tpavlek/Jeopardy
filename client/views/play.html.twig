@@ -11,6 +11,8 @@
         <div class="penalty">
             Penalty: <span id="penalty">0</span>
         </div>
+
+        {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}
     </div>
     <div class="content-wrapper">
         {% include 'partials/board.html.twig' %}
@@ -31,6 +33,12 @@
     };
     jeo.getJeopardyBoardElement = function() {
         return $('.jeopardy-board');
+    };
+    jeo.getQuestionDisplayModal = function() {
+        return $('#question-display-modal');
+    };
+    jeo.getPlayerElements = function() {
+        return $('.player-container').find('.player').toArray();
     };
 
     $(document).ready(function() {

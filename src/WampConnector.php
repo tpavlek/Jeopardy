@@ -24,6 +24,7 @@ class WampConnector implements WampServerInterface
     const BUZZER_TOPIC = "com.sc2ctl.jeopardy.buzzer";
     const BUZZER_STATUS_TOPIC = "com.sc2ctl.jeopardy.buzzer_status";
     const QUESTION_DISPLAY_TOPIC = "com.sc2ctl.jeopardy.question_display";
+    const QUESTION_DISMISS_TOPIC = "com.sc2ctl.jeopardy.question_dismiss";
 
     public function __construct(Emitter $emitter)
     {
@@ -143,6 +144,15 @@ class WampConnector implements WampServerInterface
                 }
                 $this->emitter->emit(new QuestionDisplayRequestEvent($event['category'], $event['value']));
                 break;
+            case self::QUESTION_DISMISS_TOPIC:
+                if (!isset($event['category']) || !isset($event['value'])) {
+                    //TODO log this
+                    echo "Did not receive proper dismiss request, did not have a category or value";
+                    break;
+                }
+
+                $this->emitter->emit(new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'], $event['value'])));
+                break;
             default:
                 break;
         }
@@ -191,10 +201,19 @@ class WampConnector implements WampServerInterface
         $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast(json_encode($response), [ ], [ $sessionId ]);
     }
 
-    public function onQuestionDisplay(Question $question)
+    public function onQuestionDisplay(Question $question, $category)
     {
-        $response = $question->toJson();
+        $response = $question->toArray();
+        $response['category'] = $category;
+        $response = json_encode($response);
+
         $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast($response);
+    }
+
+    public function onQuestionDismiss(Question\QuestionDismissal $dismissal)
+    {
+        $response = $dismissal->toJson();
+        $this->subscribedTopics[self::QUESTION_DISMISS_TOPIC]->broadcast($response);
     }
 
 }

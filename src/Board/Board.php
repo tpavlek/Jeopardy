@@ -73,6 +73,21 @@ class Board
     }
 
     /**
+     * @param Contestant $contestant
+     * @param $value
+     * @return Contestant
+     */
+    public function addScore(Contestant $contestant, $value)
+    {
+        /** @var Contestant $contestant */
+        $contestant = $this->getContestants()->first(function($key, Contestant $c) use ($contestant) {
+            return $c->getName() == $contestant->getName();
+        });
+        $contestant->addScore($value);
+        return $contestant;
+    }
+
+    /**
      * Gets the first question that matches both the category and value.
      * @param $categoryName
      * @param int $value
@@ -84,20 +99,25 @@ class Board
         //TODO what if we can't find anything? what if either of these return empty. Must throw exceptions, I suppose.
 
         /** @var Category $category */
-        $category = $this->categories->first(function($key, Category $category) use ($categoryName) {
+        $category = $this->categories->first(function ($key, Category $category) use ($categoryName) {
             return $category->getName() == $categoryName;
         });
 
-        if ($category == null) throw new QuestionNotFoundException;
+        if ($category == null) {
+            throw new QuestionNotFoundException;
+        }
 
-        $question = $category->getQuestions()->first(function($key, Question $question) use ($value) {
+        $question = $category->getQuestions()->first(function ($key, Question $question) use ($value) {
             return $question->getValue() == $value;
         });
 
-        if ($question == null) throw new QuestionNotFoundException;
+        if ($question == null) {
+            throw new QuestionNotFoundException;
+        }
 
         return $question;
     }
+
 
     /**
      * @return Collection

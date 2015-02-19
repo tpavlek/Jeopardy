@@ -8,6 +8,8 @@ class Contestant
     /** @var  string */
     protected $name;
 
+    protected $score = 0;
+
     function __construct($name)
     {
         $this->name = $name;
@@ -21,7 +23,18 @@ class Contestant
         return $this->name;
     }
 
+    /**
+     * @return int
+     */
+    public function getScore()
+    {
+        return $this->score;
+    }
 
+    public function addScore($value)
+    {
+        $this->score += $value;
+    }
 
 
 }

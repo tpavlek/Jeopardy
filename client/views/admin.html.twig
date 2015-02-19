@@ -8,6 +8,13 @@
         <br />
         <button class="button" id="toggle-status">Toggle</button>
 
+        <br />
+        <br/>
+        <button class="button bad" id="modal-dismiss">Dismiss</button>
+        {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}
+
+
+
     </div>
     <div class="content-wrapper">
         {% include 'partials/board.html.twig' %}
@@ -22,6 +29,12 @@
         jeo.getJeopardyBoardElement = function() {
             return $('.jeopardy-board');
         };
+        jeo.getPlayerElements = function() {
+            return $('.player-container').find('.player').toArray();
+        };
+        jeo.getQuestionDisplayModal = function() {
+            return $('#question-display-modal');
+        };
 
 
         $(document).ready(function() {
@@ -35,6 +48,13 @@
 
                 jeo.attemptNewQuestionDisplay(categoryName, value);
             });
+
+            $('#modal-dismiss').click(function() {
+                var modal = jeo.getQuestionDisplayModal();
+                var category = modal.attr('data-category');
+                var value = modal.attr('data-value');
+                jeopardy.attemptQuestionDismiss(category, value, null);
+            })
         });
 
 

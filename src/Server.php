@@ -3,6 +3,7 @@
 namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
+use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionDisplayRequestEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionNotFoundException;
 use Depotwarehouse\Jeopardy\Board\QuestionSubscriptionEvent;
@@ -75,11 +76,21 @@ class Server
         $emitter->addListener(QuestionDisplayRequestEvent::class, function(QuestionDisplayRequestEvent $event) use ($wamp, $board) {
             try {
                 $question = $board->getQuestionByCategoryAndValue($event->getCategoryName(), $event->getValue());
-                $wamp->onQuestionDisplay($question);
+                $wamp->onQuestionDisplay($question, $event->getCategoryName());
             } catch (QuestionNotFoundException $exception) {
                 //TODO log this somewhere.
                 echo "Error occured, could not find question in category: {$event->getCategoryName()} valued at: {$event->getValue()}";
             }
+
+        });
+
+        $emitter->addListener(QuestionDismissalEvent::class, function(QuestionDismissalEvent $event) use ($wamp, $board) {
+            $dismissal = $event->getDismissal();
+            if ($dismissal->hasWinner()) {
+                $board->addScore($dismissal->getWinner(), $dismissal->getValue());
+            }
+
+            $wamp->onQuestionDismiss($dismissal);
 
         });
 

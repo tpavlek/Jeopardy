@@ -1,0 +1,8 @@
+<div class="player-container">
+    {% for player in players %}
+        <div class="player {{ player }} {% if user == player %}active{% endif %}" >
+            <h2>{{ player }}</h2>
+            <span class="score">0</span>
+        </div>
+    {% endfor %}
+</div>
