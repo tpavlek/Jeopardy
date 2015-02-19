@@ -54,7 +54,16 @@
                 var category = modal.attr('data-category');
                 var value = modal.attr('data-value');
                 jeopardy.attemptQuestionDismiss(category, value, null);
-            })
+            });
+
+            $('.player').click(function() {
+                var playerName = $(this).attr('data-player-name');
+                var modal = jeo.getQuestionDisplayModal();
+                var category = modal.attr('data-category');
+                var value = modal.attr('data-value');
+
+                jeopardy.attemptQuestionDismiss(category, value, playerName);
+            });
         });
 
 

@@ -4,7 +4,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 require_once '../vendor/autoload.php';
-require_once '../config/config.php';
+
+$json = json_decode(file_get_contents('../game_data/questions.json'), true);
+
+$config = [];
+$config['players'] = array_map(function(array $contestant_info) {
+    return $contestant_info['name'];
+}, $json['contestants']);
+
 
 $loader = new Twig_Loader_Filesystem('views');
 

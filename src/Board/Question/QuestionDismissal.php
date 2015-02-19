@@ -41,6 +41,15 @@ class QuestionDismissal implements Arrayable, Jsonable
         return $this->winner;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+
 
     /**
      * @param Contestant $contestant
@@ -67,6 +76,7 @@ class QuestionDismissal implements Arrayable, Jsonable
     {
         return [
             'has_winner' => $this->hasWinner(),
+            'category' => $this->getCategory(),
             'value' => $this->getValue(),
             'winner' => ($this->hasWinner()) ? $this->getWinner()->getName() : null
         ];

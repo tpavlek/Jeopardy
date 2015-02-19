@@ -51,7 +51,11 @@ span.active-buzzer:after {
   right: 0;
   margin-bottom: 1rem;
   .player {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    cursor: pointer;
     h2 {
+      margin-top: 0;
       margin-bottom: 0;
     }
   }
@@ -60,7 +64,10 @@ span.active-buzzer:after {
   }
   .player.buzz {
     color: black;
-    background: #E3E34D;
+    background: #E3E34D !important;
+  }
+  .player:hover {
+    background: #CDE1FA;
   }
 }
 

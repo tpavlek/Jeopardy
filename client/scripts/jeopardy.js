@@ -156,6 +156,7 @@ window.jeopardy = (function (jeopardy) {
             var category_data = data[i];
             var category_column = categories[i];
 
+            $(category_column).attr('data-category', category_data.name);
             $(category_column).find('.category-name').html(category_data.name);
 
             var questions_column = $(category_column).find('.question.box');
@@ -167,6 +168,7 @@ window.jeopardy = (function (jeopardy) {
                     continue;
                 }
                 $(questions_column[j]).html(questions_data[j].value);
+                $(questions_column[j]).attr('data-value', questions_data[j].value);
                 $(questions_column[j]).attr('data-category', category_data.name);
             }
 
@@ -181,16 +183,33 @@ window.jeopardy = (function (jeopardy) {
             for (var i in players) {
                 if ($(players[i]).hasClass(data.winner)) {
                     var score = parseInt($(players[i]).find('.score').html());
-                    $(players[i]).find('.score').html(score + data.value);
+                    $(players[i]).find('.score').html(score + parseInt(data.value));
                 }
             }
         }
-
+        console.log(data);
+        blankOutQuestionBox(data.category, data.value);
         var modal = jeopardy.getQuestionDisplayModal();
         modal.attr('data-category', "");
         modal.attr('data-value', "");
         modal.find('.content').first().html("");
         modal.hide('fast');
+    }
+
+    function blankOutQuestionBox(categoryName, value) {
+        var categories = jeo.getJeopardyBoardElement().find('.category').toArray();
+
+        for (var i in categories) {
+            if ($(categories[i]).attr('data-category') == categoryName) {
+                var questions = $(categories[i]).find('.question.box').toArray();
+                for (var j in questions) {
+                    if ($(questions[j]).attr('data-value') == value) {
+                        $(questions[j]).html("");
+                        $(questions[j]).removeClass('question');
+                    }
+                }
+            }
+        }
     }
 
 

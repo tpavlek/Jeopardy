@@ -150,8 +150,13 @@ class WampConnector implements WampServerInterface
                     echo "Did not receive proper dismiss request, did not have a category or value";
                     break;
                 }
+                $dismissal = new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'], $event['value']));
 
-                $this->emitter->emit(new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'], $event['value'])));
+                if (isset($event['winner']) and $winner = $event['winner']) {
+                    $dismissal->getDismissal()->setWinner(new Contestant($winner));
+                }
+
+                $this->emitter->emit($dismissal);
                 break;
             default:
                 break;
