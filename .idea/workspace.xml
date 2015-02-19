@@ -28,8 +28,8 @@
       <file leaf-file-name="jeopardy.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43438914" vertical-offset="3492" max-vertical-offset="5274">
-              <caret line="210" column="27" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="27" />
+            <state vertical-scroll-proportion="0.22677165" vertical-offset="0" max-vertical-offset="5580">
+              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -82,13 +82,13 @@
         <option value="$PROJECT_DIR$/src/WampConnector.php" />
         <option value="$PROJECT_DIR$/src/Participant/Contestant.php" />
         <option value="$PROJECT_DIR$/src/Server.php" />
-        <option value="$PROJECT_DIR$/client/views/play.html.twig" />
         <option value="$PROJECT_DIR$/client/views/admin.html.twig" />
         <option value="$PROJECT_DIR$/client/index.php" />
         <option value="$PROJECT_DIR$/client/views/index.html.twig" />
         <option value="$PROJECT_DIR$/resources/style.scss" />
         <option value="$PROJECT_DIR$/client/views/layout.html.twig" />
         <option value="$PROJECT_DIR$/client/views/partials/board.html.twig" />
+        <option value="$PROJECT_DIR$/client/views/play.html.twig" />
         <option value="$PROJECT_DIR$/client/scripts/jeopardy.js" />
       </list>
     </option>
@@ -1465,28 +1465,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/play.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.82822084" vertical-offset="0" max-vertical-offset="1062">
-          <caret line="45" column="40" selection-start-line="45" selection-start-column="40" selection-end-line="45" selection-end-column="40" />
-          <folding>
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{% block content ...%}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="..." />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424382395893" expanded="true" signature="-1:-1" placeholder="{...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/index.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12883435" vertical-offset="0" max-vertical-offset="978">
@@ -1610,10 +1588,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/play.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5660377" vertical-offset="0" max-vertical-offset="1062">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{% block content ...%}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424385982936" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43438914" vertical-offset="3492" max-vertical-offset="5274">
-          <caret line="210" column="27" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.22677165" vertical-offset="0" max-vertical-offset="5580">
+          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>

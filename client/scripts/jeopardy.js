@@ -5,9 +5,9 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.question_display_topic = 'com.sc2ctl.jeopardy.question_display';
     jeopardy.question_dismiss_topic = 'com.sc2ctl.jeopardy.question_dismiss';
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
-    jeopardy.penalty_amount = 250; // amt in milliseconds that you're penalized for clicking early
+    jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
-    jeopardy.current_penalty = 0;
+    jeopardy.penalty_until = 0;
     jeopardy.host = 'ws://' + window.location.hostname + ':9001';
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
 
@@ -55,11 +55,21 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.attemptBuzz = function (name) {
 
         if (jeopardy.buzzer_active_at === false) {
-            addToPenalty(jeopardy.penalty_amount);
+            enablePenalty();
             return;
         }
+        var difference = 0;
 
-        var difference = (Date.now() - jeopardy.buzzer_active_at) + jeopardy.current_penalty;
+        var now = Date.now();
+        console.log(jeopardy.penalty_until);
+        console.log(now);
+        if (jeopardy.penalty_until > now) {
+            difference = (now - jeopardy.buzzer_active_at) + jeopardy.penalty_amount;
+            console.log("submitting with penalty");
+        } else {
+            console.log("submitting without penalty");
+            difference = (now - jeopardy.buzzer_active_at);
+        }
 
         disableBuzzButton(jeopardy.getBuzzerButtonElement());
         resetPenalty();
@@ -130,7 +140,7 @@ window.jeopardy = (function (jeopardy) {
 
     function handleBuzzEvent(topic, data) {
         data = JSON.parse(data);
-        console.log(data.contestant);
+        console.log(data);
         addPlayerBuzz(data.contestant);
         // We only want the buzz to show for 3 seconds.
         setTimeout(clearPlayerBuzzes, 3000);
@@ -238,23 +248,30 @@ window.jeopardy = (function (jeopardy) {
             return true;
         }
 
-        jeopardy.current_penalty = 0;
+        var now = Date.now();
+        if (now < jeopardy.penalty_until) {
+            return;
+        }
+
+        jeopardy.penalty_until = 0;
 
         var penalty_span = jeopardy.getPenaltyDisplayElement();
         if (penalty_span == null) {
             return;
         }
-        penalty_span.html(jeopardy.current_penalty);
+        penalty_span.html("");
     }
 
-    function addToPenalty(amt) {
-        jeopardy.current_penalty += amt;
+    function enablePenalty() {
+        jeopardy.penalty_until = Date.now() + jeopardy.penalty_amount;
 
         var penalty_span = jeopardy.getPenaltyDisplayElement();
         if (penalty_span == null) {
             return;
         }
-        penalty_span.html(jeopardy.current_penalty);
+        penalty_span.html("Penalty!");
+
+        setTimeout(resetPenalty, 4 * jeopardy.penalty_amount);
     }
 
     function processBuzzerActiveResult(topic, data) {
