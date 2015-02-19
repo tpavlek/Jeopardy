@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="board.html.twig" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/views/partials/board.html.twig">
+      <file leaf-file-name="jeopardy.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.6217617" vertical-offset="0" max-vertical-offset="1260">
-              <caret line="20" column="68" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
+            <state vertical-scroll-proportion="0.43438914" vertical-offset="3492" max-vertical-offset="5274">
+              <caret line="210" column="27" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -88,8 +88,8 @@
         <option value="$PROJECT_DIR$/client/views/index.html.twig" />
         <option value="$PROJECT_DIR$/resources/style.scss" />
         <option value="$PROJECT_DIR$/client/views/layout.html.twig" />
-        <option value="$PROJECT_DIR$/client/scripts/jeopardy.js" />
         <option value="$PROJECT_DIR$/client/views/partials/board.html.twig" />
+        <option value="$PROJECT_DIR$/client/scripts/jeopardy.js" />
       </list>
     </option>
   </component>
@@ -1584,80 +1584,36 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
+    <entry file="file://$PROJECT_DIR$/client/views/partials/board.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6244344" vertical-offset="2952" max-vertical-offset="5274">
-          <caret line="187" column="26" selection-start-line="187" selection-start-column="26" selection-end-line="187" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.5595855" vertical-offset="0" max-vertical-offset="1260">
+          <caret line="18" column="22" selection-start-line="18" selection-start-column="22" selection-end-line="18" selection-end-column="22" />
           <folding>
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="/*...*/" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424384343606" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
+            <marker date="1424384411186" expanded="true" signature="-1:-1" placeholder="..." />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/partials/board.html.twig">
+    <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6217617" vertical-offset="0" max-vertical-offset="1260">
-          <caret line="20" column="68" selection-start-line="20" selection-start-column="68" selection-end-line="20" selection-end-column="68" />
+        <state vertical-scroll-proportion="0.43438914" vertical-offset="3492" max-vertical-offset="5274">
+          <caret line="210" column="27" selection-start-line="210" selection-start-column="27" selection-end-line="210" selection-end-column="27" />
           <folding />
         </state>
       </provider>

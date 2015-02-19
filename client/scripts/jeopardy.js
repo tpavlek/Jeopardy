@@ -207,7 +207,7 @@ window.jeopardy = (function (jeopardy) {
         var modal = jeopardy.getQuestionDisplayModal();
         modal.attr('data-category', "");
         modal.attr('data-value', "");
-        modal.find('.content').first().html("");
+        modal.find('.content').first().find('.clue').first().html("");
         modal.hide('fast');
     }
 
