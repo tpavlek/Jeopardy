@@ -189,8 +189,6 @@ window.jeopardy = (function (jeopardy) {
                 $(questions_column[j]).attr('data-value', questions_data[j].value);
                 $(questions_column[j]).attr('data-category', category_data.name);
             }
-
-
         }
     }
 
