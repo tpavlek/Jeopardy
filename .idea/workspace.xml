@@ -25,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="jeopardy.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
+      <file leaf-file-name="questions.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/game_data/questions.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5307087" vertical-offset="4163" max-vertical-offset="5562">
-              <caret line="250" column="41" selection-start-line="250" selection-start-column="41" selection-end-line="250" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.5754717" vertical-offset="858" max-vertical-offset="1530">
+              <caret line="68" column="22" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -75,7 +75,6 @@
         <option value="$PROJECT_DIR$/src/Board/Board.php" />
         <option value="$PROJECT_DIR$/src/Board/Question/QuestionDismissal.php" />
         <option value="$PROJECT_DIR$/client/views/partials/contestants.html.twig" />
-        <option value="$PROJECT_DIR$/game_data/questions.json" />
         <option value="$PROJECT_DIR$/config/config.php" />
         <option value="$PROJECT_DIR$/src/Board/Question.php" />
         <option value="$PROJECT_DIR$/src/Participant/ContestantScoreSubscriptionEvent.php" />
@@ -90,6 +89,7 @@
         <option value="$PROJECT_DIR$/client/views/partials/board.html.twig" />
         <option value="$PROJECT_DIR$/client/views/play.html.twig" />
         <option value="$PROJECT_DIR$/client/scripts/jeopardy.js" />
+        <option value="$PROJECT_DIR$/game_data/questions.json" />
       </list>
     </option>
   </component>
@@ -1539,29 +1539,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/game_data/questions.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5660377" vertical-offset="0" max-vertical-offset="990">
-          <caret line="20" column="9" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
-          <folding>
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="[...]" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Troy&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Eggs&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Farts&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="[...]" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Potent Potables&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="[...]" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;clue&quot;: &quot;Clue 1&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;clue&quot;: &quot;Clue 2&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;name&quot;: &quot;Terran It Up&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="[...]" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;clue&quot;: &quot;A MULE can carry this many minerals in a single load.&quot;...}" />
-            <marker date="1424377839370" expanded="true" signature="-1:-1" placeholder="{&quot;clue&quot;: &quot;This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta&quot;...}" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/partials/board.html.twig">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5595855" vertical-offset="0" max-vertical-offset="1260">
@@ -1612,8 +1589,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5307087" vertical-offset="4163" max-vertical-offset="5562">
-          <caret line="250" column="41" selection-start-line="250" selection-start-column="41" selection-end-line="250" selection-end-column="41" />
+        <state vertical-scroll-proportion="0.36048266" vertical-offset="2245" max-vertical-offset="5508">
+          <caret line="138" column="19" selection-start-line="138" selection-start-column="8" selection-end-line="138" selection-end-column="19" />
+          <folding>
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="/*...*/" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+            <marker date="1424386856436" expanded="true" signature="-1:-1" placeholder="{...}" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/game_data/questions.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5754717" vertical-offset="858" max-vertical-offset="1530">
+          <caret line="68" column="22" selection-start-line="68" selection-start-column="22" selection-end-line="68" selection-end-column="22" />
           <folding />
         </state>
       </provider>
