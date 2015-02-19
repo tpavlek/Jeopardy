@@ -61,13 +61,9 @@ window.jeopardy = (function (jeopardy) {
         var difference = 0;
 
         var now = Date.now();
-        console.log(jeopardy.penalty_until);
-        console.log(now);
         if (jeopardy.penalty_until > now) {
             difference = (now - jeopardy.buzzer_active_at) + jeopardy.penalty_amount;
-            console.log("submitting with penalty");
         } else {
-            console.log("submitting without penalty");
             difference = (now - jeopardy.buzzer_active_at);
         }
 

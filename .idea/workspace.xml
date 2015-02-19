@@ -28,8 +28,8 @@
       <file leaf-file-name="jeopardy.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22677165" vertical-offset="0" max-vertical-offset="5580">
-              <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+            <state vertical-scroll-proportion="0.5307087" vertical-offset="4163" max-vertical-offset="5562">
+              <caret line="250" column="41" selection-start-line="250" selection-start-column="41" selection-end-line="250" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -1612,8 +1612,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/scripts/jeopardy.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22677165" vertical-offset="0" max-vertical-offset="5580">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
+        <state vertical-scroll-proportion="0.5307087" vertical-offset="4163" max-vertical-offset="5562">
+          <caret line="250" column="41" selection-start-line="250" selection-start-column="41" selection-end-line="250" selection-end-column="41" />
           <folding />
         </state>
       </provider>
