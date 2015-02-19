@@ -4,6 +4,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
     jeopardy.question_display_topic = 'com.sc2ctl.jeopardy.question_display';
     jeopardy.question_dismiss_topic = 'com.sc2ctl.jeopardy.question_dismiss';
+    jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
     jeopardy.penalty_amount = 250; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.current_penalty = 0;
@@ -17,6 +18,7 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.buzzer_status_topic, processBuzzerActiveResult);
             conn.subscribe(jeopardy.question_display_topic, handleQuestionDisplay);
             conn.subscribe(jeopardy.question_dismiss_topic, handleQuestionDismiss);
+            conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
         },
         function () {
             console.warn('WebSocket connection closed');
@@ -135,6 +137,17 @@ window.jeopardy = (function (jeopardy) {
         setBuzzerInactive(jeopardy.getStatusIndicatorElement());
     }
 
+    function handleContestantScore(topic, data) {
+        data = JSON.parse(data);
+        for (var i in data) {
+            updateContestantScore(data[i].name, data[i].score);
+        }
+    }
+
+    function updateContestantScore(contestant, score) {
+        $('.player.' + contestant).find('.score').first().html(score);
+    }
+
     function handleQuestionDisplay(topic, data) {
         data = JSON.parse(data);
         if (data instanceof Array) {
@@ -145,7 +158,12 @@ window.jeopardy = (function (jeopardy) {
         var modal = jeopardy.getQuestionDisplayModal();
         modal.attr('data-category', data.category);
         modal.attr('data-value', data.value);
-        modal.show('fast').find('.content').first().html(data.clue);
+        modal.find('.content').first().find('.clue').first().html(data.clue);
+        if (jeopardy.admin_mode) {
+            modal.find('.content').first().find('.answer').first().show();
+            modal.find('.content').first().find('.answer').first().find('.content').html(data.answer);
+        }
+        modal.show('fast')
     }
 
     function populateBoard(data) {
@@ -164,10 +182,10 @@ window.jeopardy = (function (jeopardy) {
             var questions_data = category_data.questions;
             for (var j in questions_data) {
                 if (questions_data[j].used) {
-                    $(questions_column[j]).html("");
+                    clearQuestionBox($(questions_column[j]));
                     continue;
                 }
-                $(questions_column[j]).html(questions_data[j].value);
+                $(questions_column[j]).find('.clue').first().html(questions_data[j].value);
                 $(questions_column[j]).attr('data-value', questions_data[j].value);
                 $(questions_column[j]).attr('data-category', category_data.name);
             }
@@ -187,7 +205,6 @@ window.jeopardy = (function (jeopardy) {
                 }
             }
         }
-        console.log(data);
         blankOutQuestionBox(data.category, data.value);
         var modal = jeopardy.getQuestionDisplayModal();
         modal.attr('data-category', "");
@@ -204,12 +221,17 @@ window.jeopardy = (function (jeopardy) {
                 var questions = $(categories[i]).find('.question.box').toArray();
                 for (var j in questions) {
                     if ($(questions[j]).attr('data-value') == value) {
-                        $(questions[j]).html("");
-                        $(questions[j]).removeClass('question');
+                        clearQuestionBox($(questions[j]));
                     }
                 }
             }
         }
+    }
+
+    function clearQuestionBox(questionBox) {
+        questionBox.unbind("click");
+        questionBox.html("");
+        questionBox.removeClass('question');
     }
 
 

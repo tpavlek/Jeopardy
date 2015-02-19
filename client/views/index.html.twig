@@ -1,0 +1,16 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+
+    <div style="text-align: center">
+        <h1>Choose a player:</h1>
+        {% for player in players %}
+            <a class="player-choice" href="/play/{{ player }}">
+                <div class="player-select">
+                    <h2>{{ player }}</h2>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+
+{% endblock %}

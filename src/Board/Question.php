@@ -35,6 +35,18 @@ class Question implements Arrayable, Jsonable
     }
 
     /**
+     * Sets a question as used for this game.
+     *
+     * @param bool $used
+     * @return $this
+     */
+    public function setUsed($used = true)
+    {
+        $this->used = $used;
+        return $this;
+    }
+
+    /**
      * @return Clue
      */
     public function getClue()

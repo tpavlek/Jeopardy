@@ -14,6 +14,7 @@ use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Depotwarehouse\Jeopardy\Participant\ContestantScoreSubscriptionEvent;
 use League\Event\Emitter;
 use League\Event\Event;
 use Ratchet\Http\HttpServer;
@@ -65,6 +66,10 @@ class Server
             $wamp->onQuestionSubscribe($board->getCategories(), $event->getSessionId());
         });
 
+        $emitter->addListener(ContestantScoreSubscriptionEvent::class, function(ContestantScoreSubscriptionEvent $event) use ($wamp, $board) {
+            $wamp->onContestantScoreSubscription($board->getContestants(), $event->getSessionId());
+        });
+
         $emitter->addListener(BuzzerStatusSubscriptionEvent::class, function(BuzzerStatusSubscriptionEvent $event) use ($wamp, $board) {
             $wamp->onBuzzerStatusChange($board->getBuzzerStatus(), [], [ $event->getSessionId() ]);
         });
@@ -76,6 +81,7 @@ class Server
         $emitter->addListener(QuestionDisplayRequestEvent::class, function(QuestionDisplayRequestEvent $event) use ($wamp, $board) {
             try {
                 $question = $board->getQuestionByCategoryAndValue($event->getCategoryName(), $event->getValue());
+                $question->setUsed();
                 $wamp->onQuestionDisplay($question, $event->getCategoryName());
             } catch (QuestionNotFoundException $exception) {
                 //TODO log this somewhere.

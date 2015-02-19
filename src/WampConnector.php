@@ -12,6 +12,7 @@ use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Depotwarehouse\Jeopardy\Participant\ContestantScoreSubscriptionEvent;
 use Illuminate\Support\Collection;
 use League\Event\Emitter;
 use Ratchet\ConnectionInterface;
@@ -25,6 +26,7 @@ class WampConnector implements WampServerInterface
     const BUZZER_STATUS_TOPIC = "com.sc2ctl.jeopardy.buzzer_status";
     const QUESTION_DISPLAY_TOPIC = "com.sc2ctl.jeopardy.question_display";
     const QUESTION_DISMISS_TOPIC = "com.sc2ctl.jeopardy.question_dismiss";
+    const CONTESTANT_SCORE = "com.sc2ctl.jeopardy.contestant_score";
 
     public function __construct(Emitter $emitter)
     {
@@ -97,6 +99,9 @@ class WampConnector implements WampServerInterface
             case self::BUZZER_STATUS_TOPIC:
                 $this->emitter->emit(new BuzzerStatusSubscriptionEvent($this->getSessionIdFromConnection($conn)));
                 break;
+            case self::CONTESTANT_SCORE:
+                $this->emitter->emit(new ContestantScoreSubscriptionEvent($this->getSessionIdFromConnection($conn)));
+                break;
             default:
                 break;
         }
@@ -150,7 +155,8 @@ class WampConnector implements WampServerInterface
                     echo "Did not receive proper dismiss request, did not have a category or value";
                     break;
                 }
-                $dismissal = new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'], $event['value']));
+                $dismissal = new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'],
+                    $event['value']));
 
                 if (isset($event['winner']) and $winner = $event['winner']) {
                     $dismissal->getDismissal()->setWinner(new Contestant($winner));
@@ -189,6 +195,20 @@ class WampConnector implements WampServerInterface
     public function onBuzzerStatusChange(BuzzerStatus $status, $blacklist = [ ], $whitelist = [ ])
     {
         $this->subscribedTopics[self::BUZZER_STATUS_TOPIC]->broadcast($status->toJson(), $blacklist, $whitelist);
+    }
+
+    /**
+     * When a user subscribes to the Contestant Score feed, they should get and update of all the current contestants
+     * @param Collection $contestants
+     * @param string $sessionId The session ID of the user who subscribed.
+     */
+    public function onContestantScoreSubscription(Collection $contestants, $sessionId)
+    {
+        $response = $contestants->map(function(Contestant $contestant) {
+            return $contestant->toArray();
+        })->toJson();
+
+        $this->subscribedTopics[self::CONTESTANT_SCORE]->broadcast($response, [], [ $sessionId ]);
     }
 
     /**

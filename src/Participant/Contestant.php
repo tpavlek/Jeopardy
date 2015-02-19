@@ -2,7 +2,10 @@
 
 namespace Depotwarehouse\Jeopardy\Participant;
 
-class Contestant
+use Illuminate\Contracts\Support\Arrayable;
+use Illuminate\Contracts\Support\Jsonable;
+
+class Contestant implements Arrayable, Jsonable
 {
 
     /** @var  string */
@@ -37,4 +40,27 @@ class Contestant
     }
 
 
+    /**
+     * Get the instance as an array.
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+        return [
+            'name' => $this->getName(),
+            'score' => $this->getScore()
+        ];
+    }
+
+    /**
+     * Convert the object to its JSON representation.
+     *
+     * @param  int $options
+     * @return string
+     */
+    public function toJson($options = 0)
+    {
+        return json_encode($this->toArray());
+    }
 }

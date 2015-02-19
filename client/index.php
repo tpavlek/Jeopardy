@@ -20,7 +20,7 @@ $twig = new Twig_Environment($loader);
 $router = new \League\Route\RouteCollection();
 
 $router->get('/', function (Request $request, Response $response) use ($twig, $config) {
-    $response->setContent("index page");
+    $response->setContent($twig->render('index.html.twig', [ 'players' => $config['players'] ]));
     return $response;
 });
 
