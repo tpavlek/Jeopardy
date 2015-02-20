@@ -1,10 +1,9 @@
+{% set admin = true %}
 {% extends 'layout.html.twig' %}
 
 {% block content %}
     <div class="buzzer-column">
-        <h1>Buzzer</h1>
         <div id="status-indicator" class="buzzer inactive-buzzer"></div>
-        <br />
         <br />
         <button class="button" id="toggle-status">Toggle</button>
 
@@ -35,6 +34,9 @@
         jeo.getQuestionDisplayModal = function() {
             return $('#question-display-modal');
         };
+        jeo.getDailyDoubleModal = function() {
+            return $('#daily-double-display-modal');
+        };
 
 
         $(document).ready(function() {
@@ -52,7 +54,7 @@
             $('#modal-dismiss').click(function() {
                 var modal = jeo.getQuestionDisplayModal();
                 var category = modal.attr('data-category');
-                var value = modal.attr('data-value');
+                var value = jeo.getRealModalValue(modal);
                 jeopardy.attemptQuestionDismiss(category, value, null);
             });
 
@@ -61,8 +63,31 @@
                 var modal = jeo.getQuestionDisplayModal();
                 var category = modal.attr('data-category');
                 var value = modal.attr('data-value');
+                var bet = jeo.getRealModalValue(modal);
 
-                jeopardy.attemptQuestionDismiss(category, value, playerName);
+                jeopardy.attemptQuestionDismiss(category, value, playerName, bet);
+            });
+
+            $('.player').bind('contextmenu', function() {
+                var playerName = $(this).attr('data-player-name');
+                var modal = jeo.getQuestionDisplayModal();
+                var category = modal.attr('data-category');
+                var value = parseInt(jeo.getRealModalValue(modal));
+                var bet = jeo.getRealModalValue(modal) * -1;
+
+
+                jeopardy.attemptQuestionDismiss(category, value, playerName, bet);
+
+                return false;
+            });
+
+            $('#daily-double-form').submit(function() {
+                var modal = jeo.getDailyDoubleModal();
+                var category = modal.attr('data-category');
+                var value = parseInt(modal.attr('data-value'));
+                var bet = $('#daily-double-bet').val();
+                jeo.attemptDailyDoubleBet(category, value, bet);
+                return false;
             });
         });
 

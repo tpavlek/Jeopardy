@@ -5,6 +5,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.question_display_topic = 'com.sc2ctl.jeopardy.question_display';
     jeopardy.question_dismiss_topic = 'com.sc2ctl.jeopardy.question_dismiss';
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
+    jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.penalty_until = 0;
@@ -19,6 +20,7 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.question_display_topic, handleQuestionDisplay);
             conn.subscribe(jeopardy.question_dismiss_topic, handleQuestionDismiss);
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
+            conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
         },
         function () {
             console.warn('WebSocket connection closed');
@@ -45,6 +47,9 @@ window.jeopardy = (function (jeopardy) {
     };
     jeopardy.getQuestionDisplayModal = function () {
         console.warn("You need to override the getQuestionDisplayModal");
+    };
+    jeopardy.getDailyDoubleModal = function () {
+        console.warn("You need to override the getDailyDoubleModal");
     };
     jeopardy.getPlayerElements = function () {
         console.warn("You need to override the getPlayerElements method!");
@@ -93,14 +98,47 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.question_display_topic, payload, [], []);
     };
 
-    jeopardy.attemptQuestionDismiss = function (category, value, winner) {
+    jeopardy.
+        attemptQuestionDismiss = function (category, value, winner, bet) {
+        if (category == undefined || value == undefined) {
+            console.warn("Attempted to award with undefined category or value");
+            return;
+        }
         var payload = {
             category: category,
             value: value,
-            winner: winner
+            winner: winner,
+            bet: bet
         };
 
         conn.publish(jeopardy.question_dismiss_topic, payload, [], []);
+    };
+
+    jeopardy.attemptDailyDoubleBet = function (category, value, bet) {
+        var payload = {
+            category: category,
+            value: value,
+            bet: bet
+        };
+
+        conn.publish(jeopardy.daily_double_bet_topic, payload, [], []);
+    };
+
+    jeopardy.attemptSetPlayerScore = function (playerName, score) {
+
+    };
+
+
+    /* Helper public functions (which should probably be moved to another module sometime */
+    jeopardy.getRealModalValue = function(modal) {
+        var bet = modal.attr('data-bet');
+        var value = modal.attr('data-value');
+
+        if (bet != undefined && bet != null) {
+            return bet;
+        }
+
+        return value;
     };
 
 
@@ -154,6 +192,15 @@ window.jeopardy = (function (jeopardy) {
         $('.player.' + contestant).find('.score').first().html(score);
     }
 
+    function handleDailyDoubleBet(topic, data) {
+        var modal = jeopardy.getDailyDoubleModal();
+        clearModalData(modal);
+        modal.hide('fast');
+        data = JSON.parse(data);
+
+        showQuestionModal(data.category, data.value, data.clue, data.answer, data.bet);
+    }
+
     function handleQuestionDisplay(topic, data) {
         data = JSON.parse(data);
         if (data instanceof Array) {
@@ -161,15 +208,30 @@ window.jeopardy = (function (jeopardy) {
             return;
         }
 
+        if (data.daily_double) {
+            showDailyDouble(data);
+            return;
+        }
+
+        data.bet = (data.bet != null && data.bet != undefined) ? data.bet : null;
+        showQuestionModal(data.category, data.value, data.clue, data.answer, data.bet);
+    }
+
+    function showDailyDouble(data) {
+        var modal = jeopardy.getDailyDoubleModal();
+        setModalData(modal, data);
+        modal.show('fast');
+    }
+
+    function showQuestionModal(category, value, clue, answer, bet) {
         var modal = jeopardy.getQuestionDisplayModal();
-        modal.attr('data-category', data.category);
-        modal.attr('data-value', data.value);
-        modal.find('.content').first().find('.clue').first().html(data.clue);
+        setModalData(modal, { category: category, value: value, bet: bet });
+        modal.find('.content').first().find('.clue').first().html(clue);
         if (jeopardy.admin_mode) {
             modal.find('.content').first().find('.answer').first().show();
-            modal.find('.content').first().find('.answer').first().find('.content').html(data.answer);
+            modal.find('.content').first().find('.answer').first().find('.content').html(answer);
         }
-        modal.show('fast')
+        modal.show('fast');
     }
 
     function populateBoard(data) {
@@ -205,14 +267,13 @@ window.jeopardy = (function (jeopardy) {
             for (var i in players) {
                 if ($(players[i]).hasClass(data.winner)) {
                     var score = parseInt($(players[i]).find('.score').html());
-                    $(players[i]).find('.score').html(score + parseInt(data.value));
+                    $(players[i]).find('.score').html(score + parseInt(data.bet));
                 }
             }
         }
         blankOutQuestionBox(data.category, data.value);
         var modal = jeopardy.getQuestionDisplayModal();
-        modal.attr('data-category', "");
-        modal.attr('data-value', "");
+        clearModalData(modal);
         modal.find('.content').first().find('.clue').first().html("");
         modal.hide('fast');
     }
@@ -231,6 +292,22 @@ window.jeopardy = (function (jeopardy) {
             }
         }
     }
+
+    function setModalData(modal, data) {
+        modal.attr('data-category', data.category);
+        modal.attr('data-value', data.value);
+        if (data.bet != null) {
+            modal.attr('data-bet', data.bet);
+        }
+    }
+
+    function clearModalData(modal) {
+        modal.attr('data-category', null);
+        modal.attr('data-value', null);
+        modal.attr('data-bet', null);
+    }
+
+
 
     function clearQuestionBox(questionBox) {
         questionBox.unbind("click");

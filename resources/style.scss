@@ -1,7 +1,7 @@
 @import "forms";
 @import "vars";
 
-$buzzer-column-width: 10rem;
+$buzzer-column-width: 20rem;
 
 body, html {
   margin: 0;
@@ -22,6 +22,7 @@ body, html {
 .buzzer {
   height:50px;
   width:100%;
+  margin-top:0.5rem;
 }
 .active-buzzer {
   background: green;
@@ -45,11 +46,12 @@ span.active-buzzer:after {
 .player-container {
   position: absolute;
   bottom: 0;
+  //max-height: 100%;
   margin-left: auto;
   margin-right: auto;
   left: 0;
   right: 0;
-  margin-bottom: 1rem;
+
   .player {
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
@@ -58,12 +60,25 @@ span.active-buzzer:after {
       margin-top: 0;
       margin-bottom: 0;
     }
+    .img-wrapper {
+      height: 10rem;
+      background:#3D3D3D;
+      img {
+        max-height: 10rem;
+      }
+
+    }
+
   }
   .player.active {
     background: #D0D6D6;
   }
   .player.buzz {
     color: black;
+    background: #E3E34D !important;
+  }
+
+  .player.buzz .img-wrapper {
     background: #E3E34D !important;
   }
   .player:hover {
@@ -77,7 +92,7 @@ span.active-buzzer:after {
   float:right;
   display: inline-block;
   // TODO make this buzzer-column-width
-  width: calc(100% - 10rem);
+  width: calc(100% - 20rem);
   background:#1460DB;
   height:100%;
 }
@@ -124,28 +139,37 @@ span.active-buzzer:after {
   }
 }
 
-#question-display-modal {
+@mixin modal() {
   @include box-sizing(border-box);
   display: none;
   position:absolute;
-  width: calc(100% - 10rem);
-  left: 10rem;
+  // TODO buzzer-column-width
+  width: calc(100% - 20rem);
+  left: $buzzer-column-width;
   height: 100%;
   background: rgba(0,0,0,0.5);
   padding-left:2rem;
   padding-top: 3rem;
   padding-bottom: 3rem;
   padding-right: 2rem;
+}
+
+@mixin modal-content() {
+  @include box-sizing(border-box);
+  text-align:center;
+  position:relative;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background:#202899;
+  color: white;
+}
+
+#question-display-modal {
+  @include modal;
 
   .content {
-    @include box-sizing(border-box);
-    text-align:center;
-    position:relative;
-    width: 100%;
-    height: 100%;
-    padding: 1rem;
-    background:#202899;
-    color: white;
+    @include modal-content;
   }
 
   .clue {
@@ -171,6 +195,15 @@ span.active-buzzer:after {
   }
 }
 
+#daily-double-display-modal {
+  @include modal;
+  .content {
+    @include modal-content;
+    font-size:300%;
+
+  }
+}
+
 a.player-choice {
   text-decoration: none;
   color: black;
@@ -186,6 +219,10 @@ a.player-choice {
 
 .player-select:hover {
   background:#CDE1FA;
+}
+
+.daily-double {
+  display:none;
 }
 
 

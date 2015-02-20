@@ -43,7 +43,9 @@ class BoardFactory
                             return new Question(
                                 new Clue($question->clue),
                                 new Answer($question->answer),
-                                $question->value);
+                                $question->value,
+                                (isset($question->daily_double)) ? $question->daily_double : false
+                            );
                         },
                         $category->questions
                     )

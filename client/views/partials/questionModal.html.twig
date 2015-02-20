@@ -1,0 +1,28 @@
+<div id="question-display-modal">
+    <div class="content">
+        <div class="clue">
+            <div class="content"></div>
+        </div>
+        <div class="answer">
+            <h1>Answer</h1>
+            <div class="content"></div>
+        </div>
+    </div>
+</div>
+
+<div id="daily-double-display-modal">
+    <div class="content">
+        <h1>Daily</h1>
+        <h1>Double!</h1>
+
+        {% if admin %}
+            <form id="daily-double-form">
+                <label for="daily-double-bet">Bet: </label>
+                <input type="number" id="daily-double-bet" value="" />
+                <br />
+                <input type="submit" class="button" value="Submit" />
+            </form>
+
+        {% endif %}
+    </div>
+</div>

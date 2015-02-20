@@ -5,11 +5,11 @@
       "score": 0
     },
     {
-      "name": "Eggs",
+      "name": "Bob",
       "score": 0
     },
     {
-      "name": "Farts",
+      "name": "Phil",
       "score": 0
     }
   ],
@@ -21,7 +21,8 @@
         {
           "clue": "Clue 1",
           "answer": "Answer 1",
-          "value": 200
+          "value": 200,
+          "daily_double": true
         },
         {
           "clue": "Clue 2",

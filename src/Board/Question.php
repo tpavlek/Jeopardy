@@ -19,11 +19,14 @@ class Question implements Arrayable, Jsonable
      */
     protected $used = false;
 
-    public function __construct(Clue $clue, Answer $answer, $value)
+    protected $isDailyDouble = false;
+
+    public function __construct(Clue $clue, Answer $answer, $value, $isDailyDouble = false)
     {
         $this->clue = $clue;
         $this->answer = $answer;
         $this->value = $value;
+        $this->isDailyDouble = $isDailyDouble;
     }
 
     /**
@@ -44,6 +47,14 @@ class Question implements Arrayable, Jsonable
     {
         $this->used = $used;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDailyDouble()
+    {
+        return $this->isDailyDouble;
     }
 
     /**
@@ -93,7 +104,8 @@ class Question implements Arrayable, Jsonable
             'clue' => (string)$this->getClue(),
             'answer' => (string)$this->getAnswer(),
             'value' => (int)$this->getValue(),
-            'used' => (bool)$this->isUsed()
+            'used' => (bool)$this->isUsed(),
+            'daily_double' => $this->isDailyDouble()
         ];
     }
 

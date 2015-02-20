@@ -13,8 +13,12 @@ class QuestionDismissal implements Arrayable, Jsonable
     /** @var  Contestant */
     protected $winner;
 
-    /** @var  Question */
-    protected $question;
+    /**
+     * If this was a daily double, then there is a bet included.
+     *
+     * @var int
+     */
+    protected $bet = null;
 
     protected $category;
     protected $value;
@@ -26,7 +30,28 @@ class QuestionDismissal implements Arrayable, Jsonable
     }
 
     /**
-     * @return mixed
+     * Get the actual value of this clue for the winner.
+     *
+     * If this was a Daily Double, it will be whatever they bet. Otherwise it will be the regular value of the clue.
+     *
+     * @return int
+     */
+    public function getRealValue()
+    {
+        if ($this->bet !== null) {
+            return $this->bet;
+        }
+
+        return $this->value;
+    }
+
+    public function setBet($bet)
+    {
+        $this->bet = $bet;
+    }
+
+    /**
+     * @return int
      */
     public function getValue()
     {
@@ -50,12 +75,12 @@ class QuestionDismissal implements Arrayable, Jsonable
     }
 
 
-
     /**
      * @param Contestant $contestant
      * @return $this
      */
-    public function setWinner(Contestant $contestant) {
+    public function setWinner(Contestant $contestant)
+    {
         $this->winner = $contestant;
         return $this;
     }
@@ -63,7 +88,8 @@ class QuestionDismissal implements Arrayable, Jsonable
     /**
      * @return bool
      */
-    public function hasWinner() {
+    public function hasWinner()
+    {
         return $this->winner !== null;
     }
 
@@ -78,7 +104,8 @@ class QuestionDismissal implements Arrayable, Jsonable
             'has_winner' => $this->hasWinner(),
             'category' => $this->getCategory(),
             'value' => $this->getValue(),
-            'winner' => ($this->hasWinner()) ? $this->getWinner()->getName() : null
+            'winner' => ($this->hasWinner()) ? $this->getWinner()->getName() : null,
+            'bet' => $this->getRealValue()
         ];
     }
 

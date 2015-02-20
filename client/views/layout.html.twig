@@ -11,17 +11,6 @@
 
 {% block content %}
 {% endblock %}
-<div id="question-display-modal">
-    <div class="content">
-        <div class="clue">
-            <div class="content"></div>
-        </div>
-        <div class="answer">
-            <h1>Answer</h1>
-            <div class="content"></div>
-        </div>
-    </div>
-
-</div>
+{% include 'partials/questionModal.html.twig' %}
 </body>
 </html>

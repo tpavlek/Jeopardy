@@ -27,6 +27,7 @@ class WampConnector implements WampServerInterface
     const QUESTION_DISPLAY_TOPIC = "com.sc2ctl.jeopardy.question_display";
     const QUESTION_DISMISS_TOPIC = "com.sc2ctl.jeopardy.question_dismiss";
     const CONTESTANT_SCORE = "com.sc2ctl.jeopardy.contestant_score";
+    const DAILY_DOUBLE_BET_TOPIC = "com.sc2ctl.jeopardy.daily_double_bet";
 
     public function __construct(Emitter $emitter)
     {
@@ -134,6 +135,7 @@ class WampConnector implements WampServerInterface
                 $contestant = new Contestant($event['name']);
                 $this->emitter->emit(new BuzzReceivedEvent($contestant, $event['difference']));
                 break;
+
             case self::BUZZER_STATUS_TOPIC:
                 $this->emitter->emit(
                     new BuzzerStatusChangeEvent(
@@ -141,29 +143,58 @@ class WampConnector implements WampServerInterface
                     )
                 );
                 break;
+
             case self::QUESTION_DISPLAY_TOPIC:
                 if (!isset($event['category']) || !isset($event['value'])) {
                     //TODO log this
-                    echo "Did not receive proper question request, did not have a category or value";
+                    echo "Did not receive proper question request, did not have a category or value\n";
                     break;
                 }
                 $this->emitter->emit(new QuestionDisplayRequestEvent($event['category'], $event['value']));
                 break;
+
             case self::QUESTION_DISMISS_TOPIC:
                 if (!isset($event['category']) || !isset($event['value'])) {
                     //TODO log this
-                    echo "Did not receive proper dismiss request, did not have a category or value";
+                    echo "Did not receive proper dismiss request, did not have a category or value\n";
                     break;
                 }
-                $dismissal = new Question\QuestionDismissalEvent(new Question\QuestionDismissal($event['category'],
-                    $event['value']));
+                $dismissal = new Question\QuestionDismissalEvent(
+                    new Question\QuestionDismissal(
+                        $event['category'],
+                        $event['value']
+                    )
+                );
 
                 if (isset($event['winner']) and $winner = $event['winner']) {
                     $dismissal->getDismissal()->setWinner(new Contestant($winner));
                 }
 
+                if (isset($event['bet'])) {
+                    if ($event['bet'] !== null) {
+                        $dismissal->getDismissal()->setBet($event['bet']);
+                    }
+                }
+
                 $this->emitter->emit($dismissal);
                 break;
+
+            case self::DAILY_DOUBLE_BET_TOPIC:
+                if (!isset($event['category']) || !isset($event['value']) || !isset($event['bet'])) {
+                    //TODO logging
+                    echo "Recieved invalid daily double bet\n";
+                    break;
+                }
+
+                $this->emitter->emit(
+                    new Question\DailyDouble\DailyDoubleBetEvent(
+                        $event['value'],
+                        $event['category'],
+                        $event['bet']
+                    )
+                );
+                break;
+
             default:
                 break;
         }
@@ -204,11 +235,11 @@ class WampConnector implements WampServerInterface
      */
     public function onContestantScoreSubscription(Collection $contestants, $sessionId)
     {
-        $response = $contestants->map(function(Contestant $contestant) {
+        $response = $contestants->map(function (Contestant $contestant) {
             return $contestant->toArray();
         })->toJson();
 
-        $this->subscribedTopics[self::CONTESTANT_SCORE]->broadcast($response, [], [ $sessionId ]);
+        $this->subscribedTopics[self::CONTESTANT_SCORE]->broadcast($response, [ ], [ $sessionId ]);
     }
 
     /**
@@ -233,6 +264,16 @@ class WampConnector implements WampServerInterface
         $response = json_encode($response);
 
         $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast($response);
+    }
+
+    public function onDailyDoubleBetRecieved(Question $question, $category, $bet)
+    {
+        $response = $question->toArray();
+        $response['category'] = $category;
+        $response['bet'] = $bet;
+        $response = json_encode($response);
+
+        $this->subscribedTopics[self::DAILY_DOUBLE_BET_TOPIC]->broadcast($response);
     }
 
     public function onQuestionDismiss(Question\QuestionDismissal $dismissal)

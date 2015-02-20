@@ -3,6 +3,7 @@
 namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
+use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionDisplayRequestEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionNotFoundException;
@@ -90,10 +91,15 @@ class Server
 
         });
 
+        $emitter->addListener(DailyDoubleBetEvent::class, function(DailyDoubleBetEvent $event) use ($wamp, $board) {
+            $question = $board->getQuestionByCategoryAndValue($event->getCategory(), $event->getValue());
+            $wamp->onDailyDoubleBetRecieved($question, $event->getCategory(), $event->getBet());
+        });
+
         $emitter->addListener(QuestionDismissalEvent::class, function(QuestionDismissalEvent $event) use ($wamp, $board) {
             $dismissal = $event->getDismissal();
             if ($dismissal->hasWinner()) {
-                $board->addScore($dismissal->getWinner(), $dismissal->getValue());
+                $board->addScore($dismissal->getWinner(), $dismissal->getRealValue());
             }
 
             $wamp->onQuestionDismiss($dismissal);
