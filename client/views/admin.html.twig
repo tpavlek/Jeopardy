@@ -3,13 +3,14 @@
 
 {% block content %}
     <div class="buzzer-column">
-        <div id="status-indicator" class="buzzer inactive-buzzer"></div>
-        <br />
-        <button class="button" id="toggle-status">Toggle</button>
+        <div class="buzzer-controls">
+            <div id="status-indicator" class="buzzer inactive-buzzer"></div>
 
-        <br />
-        <br/>
-        <button class="button bad" id="modal-dismiss">Dismiss</button>
+            <button class="button" id="toggle-status">Toggle</button>
+            <br />
+            <button class="button bad" id="modal-dismiss">Dismiss</button>
+        </div>
+
         {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}
 
 

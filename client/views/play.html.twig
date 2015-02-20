@@ -2,11 +2,13 @@
 
 {% block content %}
     <div class="buzzer-column">
-        <div id="buzzer-status" class="buzzer inactive-buzzer"></div>
-        <button class="button" id="buzzer">Buzz In</button>
+        <div class="buzzer-controls">
+            <div id="buzzer-status" class="buzzer inactive-buzzer"></div>
+            <button class="button" id="buzzer">Buzz In</button>
 
-        <div class="penalty">
-            <span id="penalty"></span>
+            <div class="penalty">
+                <span id="penalty"></span>
+            </div>
         </div>
 
         {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}

@@ -51,6 +51,7 @@ span.active-buzzer:after {
   margin-right: auto;
   left: 0;
   right: 0;
+  z-index: 1;
 
   .player {
     padding-top: 0.5rem;
@@ -120,6 +121,7 @@ span.active-buzzer:after {
       border:3px solid black;
       height:16%;
       font-size: 200%;
+      overflow:hidden;
     }
 
     .question.box {
@@ -223,6 +225,27 @@ a.player-choice {
 
 .daily-double {
   display:none;
+}
+
+.buzzer-controls {
+  position:absolute;
+  top: 0;
+  z-index:2;
+  width: 100%;
+}
+
+@media screen and (max-height: 850px ) {
+  .player-container {
+    .player {
+      .img-wrapper, .img-wrapper img {
+        height: 8rem;
+      }
+    }
+  }
+
+  .jeopardy-board .category .box {
+    font-size: 150%;
+  }
 }
 
 
