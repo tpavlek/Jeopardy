@@ -5,74 +5,187 @@
       "score": 0
     },
     {
-      "name": "Bob",
+      "name": "Phil",
       "score": 0
     },
     {
-      "name": "Phil",
+      "name": "Bob",
       "score": 0
     }
   ],
-
   "categories": [
     {
-      "name": "Potent Potables",
+      "name": "THE BIBLE",
       "questions": [
         {
-          "clue": "Clue 1",
-          "answer": "Answer 1",
+          "clue": "After creating the heavens & the earth, God rested on this number day",
+          "answer": "seven",
           "value": 200,
+          "daily_double": false
+        },
+        {
+          "clue": "The 4 gospel writers of the New Testament were Matthew, Mark & these 2",
+          "answer": "John & Luke",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "An invasion of these amphibians was the second of the 10 plagues of Egypt",
+          "answer": "frogs",
+          "value": 600,
+          "daily_double": false
+        },
+        {
+          "clue": "This great & wise king built his temple around 1000 B.C.",
+          "answer": "Solomon",
+          "value": 800,
+          "daily_double": false
+        },
+        {
+          "clue": "The longest of these songs is number 119, with 176 verses",
+          "answer": "psalms",
+          "value": 500,
           "daily_double": true
-        },
-        {
-          "clue": "Clue 2",
-          "answer": "Answer 2",
-          "value": 400
         }
       ]
     },
     {
-      "name": "Terran It Up",
+      "name": "MOVIES",
       "questions": [
         {
-          "clue": "A MULE can carry this many minerals in a single load.",
-          "answer": "30",
-          "value": 200
+          "clue": "Hiccup, Toothless, Astrid & the rest of the gang return in the sequel to this movie with Vikings & dragons",
+          "answer": "<i>How to Train Your Dragon<\/i>",
+          "value": 200,
+          "daily_double": false
         },
         {
-          "clue": "This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta",
-          "answer": "Seeker Missile",
-          "value": 400
+          "clue": "This villain from \"Sleeping Beauty\" got her own movie in 2014, with Angelina Jolie in the title role",
+          "answer": "Maleficent",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "The latest movie about these mutants is \"Days of Future Past\"; what does that even mean?",
+          "answer": "X-Men",
+          "value": 600,
+          "daily_double": false
+        },
+        {
+          "clue": "Air racer Dusty joins a helicopter named Blade Ranger in this animated movie subtitled \"Fire & Rescue\"",
+          "answer": "<i>Planes<\/i>",
+          "value": 800,
+          "daily_double": false
+        },
+        {
+          "clue": "\"Million Dollar Arm\" tells the true story of an agent who goes to this country to recruit cricket bowlers to play baseball",
+          "answer": "India",
+          "value": 1000,
+          "daily_double": false
         }
       ]
     },
     {
-      "name": "So the Drama",
+      "name": "ETIQUETTE",
       "questions": [
         {
-          "clue": "Racial slurs and \"dumb risks\" lost this person a position at Evil Geniuses.",
-          "answer": "Orb / Jake Sklarew",
-          "value": 200
+          "clue": "English speakers have been using this \"magic word\" since the 1300s, & when you ask for something, you should, too",
+          "answer": "please",
+          "value": 200,
+          "daily_double": false
         },
         {
-          "clue": "This Quebec based player was often accused of stream-sniping and cheating against many grandmaster players",
-          "answer": "RatzDeezer (Deezer)",
-          "value": 400
+          "clue": "In a traditional table setting, this should be placed so that the blade faces the plate",
+          "answer": "the knife",
+          "value": 400,
+          "daily_double": false
         },
         {
-          "clue": "$1800 of profit caused a storm of outrage for this tournament",
-          "answer": "Destiny I",
-          "value": 600
+          "clue": "When doing this, blot your palm if it's damp, look the other person in the eye & use a firm but not crushing grip",
+          "answer": "shaking someone\\'s hand",
+          "value": 600,
+          "daily_double": false
         },
         {
-          "clue": "300,000 karma disappeared when this popular personality deleted his reddit account in August of 2013",
-          "answer": "TotalBiscuit",
-          "value": 800
+          "clue": "When you're at the dinner table, turn off this Apple device introduced in April 2010, even if you're winning at Fruit Ninja",
+          "answer": "an iPad",
+          "value": 800,
+          "daily_double": false
         },
         {
-          "clue": "If you’re hoping for clean games free of scandal, this player is probably not your \"Messiah\"",
-          "answer": "Ma \"Savior\" Jae Yoon",
-          "value": 1000
+          "clue": "You don't have to down your whole soda after you clink glasses for one of these ceremonial drinks; a sip will do",
+          "answer": "a toast",
+          "value": 1000,
+          "daily_double": false
+        }
+      ]
+    },
+    {
+      "name": "TRANSPORTATION PHRASES",
+      "questions": [
+        {
+          "clue": "Go faster! \"Put the pedal to\" this",
+          "answer": "the metal",
+          "value": 200,
+          "daily_double": false
+        },
+        {
+          "clue": "Someone who keeps giving unwelcome advice is this kind of \"driver\"",
+          "answer": "backseat",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "Taken from a 1960s TV show: \"beam me up\", this guy means \"get me out of here\"",
+          "answer": "Scotty",
+          "value": 600,
+          "daily_double": false
+        },
+        {
+          "clue": null,
+          "answer": null,
+          "value": null,
+          "daily_double": false
+        },
+        {
+          "clue": null,
+          "answer": null,
+          "value": null,
+          "daily_double": false
+        }
+      ]
+    },
+    {
+      "name": "CALIFORNIA",
+      "questions": [
+        {
+          "clue": "The oldest art museum in the western U.S., the Crocker Art Museum, opened in this state capital in 1885",
+          "answer": "Sacramento",
+          "value": 200,
+          "daily_double": false
+        },
+        {
+          "clue": "(Sarah of the Clue Crew reports from the California Academy of Sciences in San Francisco.)  From this vantage point at the California Academy of Sciences, I completely understand why this species was the king of its prehistoric age",
+          "answer": "the <i>T. rex<\/i> (<i>Tyrannosaurus rex<\/i>)",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "The original name of California's biggest metropolis translates as \"the village of the queen of\" these beings",
+          "answer": "angels",
+          "value": 600,
+          "daily_double": false
+        },
+        {
+          "clue": "This 800-mile-long fracture in earth's crust runs close to San Jose & Palm Springs & is totally our fault",
+          "answer": "the San Andreas Fault",
+          "value": 800,
+          "daily_double": false
+        },
+        {
+          "clue": "One of the state's landmarks is Half Dome, located at the head of this valley in the same-named national park",
+          "answer": "Yosemite",
+          "value": 1000,
+          "daily_double": false
         }
       ]
     }

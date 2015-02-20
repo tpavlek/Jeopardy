@@ -21,7 +21,8 @@ class Clue implements Arrayable
 
     public function getText()
     {
-        return $this->text;
+
+        return ($this->text !== null) ? $this->text : "";
     }
 
     /**

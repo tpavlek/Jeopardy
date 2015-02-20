@@ -23,7 +23,7 @@ class Answer
      */
     public function getText()
     {
-        return $this->text;
+        return ($this->text !== null) ? $this->text : "";
     }
 
 }
