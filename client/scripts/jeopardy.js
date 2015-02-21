@@ -250,6 +250,7 @@ window.jeopardy = (function (jeopardy) {
             var questions_data = category_data.questions;
             for (var j in questions_data) {
                 if (questions_data[j].used) {
+                    console.log("used");
                     clearQuestionBox($(questions_column[j]));
                     continue;
                 }

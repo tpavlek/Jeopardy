@@ -1,189 +1,190 @@
 {
   "contestants": [
     {
-      "name": "Troy",
+      "name": "Ryane",
       "score": 0
     },
     {
-      "name": "Phil",
+      "name": "Connell",
       "score": 0
     },
     {
-      "name": "Bob",
+      "name": "Crate",
       "score": 0
     }
   ],
   "categories": [
     {
-      "name": "THE BIBLE",
+      "name": "COMPUTER STUFF",
       "questions": [
         {
-          "clue": "After creating the heavens & the earth, God rested on this number day",
-          "answer": "seven",
+          "clue": "A class in school, or a record of where you've gone in a web browser",
+          "answer": "history",
           "value": 200,
-          "daily_double": false
+          "daily_double": false,
+          "used": true
         },
         {
-          "clue": "The 4 gospel writers of the New Testament were Matthew, Mark & these 2",
-          "answer": "John & Luke",
+          "clue": "A single processor sharing multiple jobs is doing this, like when Mom tries to drive & put on makeup",
+          "answer": "multitasking",
           "value": 400,
           "daily_double": false
         },
         {
-          "clue": "An invasion of these amphibians was the second of the 10 plagues of Egypt",
-          "answer": "frogs",
+          "clue": "Before a game's release, Joe Gamer may be asked to play a pre-version usually referred to by this Greek letter",
+          "answer": "beta",
           "value": 600,
           "daily_double": false
         },
         {
-          "clue": "This great & wise king built his temple around 1000 B.C.",
+          "clue": "You may have worked with a newfangled cash register called a POS terminal, the POS standing for this",
+          "answer": "point of sale",
+          "value": 800,
+          "daily_double": false
+        },
+        {
+          "clue": "imgur.com has a button to make this four-letter cultural reference that often spreads online",
+          "answer": "a meme",
+          "value": 1000,
+          "daily_double": false
+        }
+      ]
+    },
+    {
+      "name": "\"MAC\" OR \"P.C.\"",
+      "questions": [
+        {
+          "clue": "\"Holy\" this fish whose king species may lay several million eggs during spawning season",
+          "answer": "a mackerel",
+          "value": 200,
+          "daily_double": false
+        },
+        {
+          "clue": "This vehicle is also called a \"black & white\"",
+          "answer": "a police cruiser",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "American World War II general who was known as the \"Napoleon of Luzon\"",
+          "answer": "Douglas MacArthur",
+          "value": 600,
+          "daily_double": false
+        },
+        {
+          "clue": "This Seattle mastermind is one of the three coaches to win a college national championship and a Super Bowl",
+          "answer": "Pete Carroll",
+          "value": 800,
+          "daily_double": false
+        },
+        {
+          "clue": "Latin phrase meaning \"for each person\", as in \"Americans eat 85 pounds of chicken...\"",
+          "answer": "per capita",
+          "value": 1000,
+          "daily_double": false
+        }
+      ]
+    },
+    {
+      "name": "OLD TESTAMENT HEROES",
+      "questions": [
+        {
+          "clue": "This prophet \"prayed unto the Lord his god out of the fish's belly\"",
+          "answer": "Jonah",
+          "value": 200,
+          "daily_double": false
+        },
+        {
+          "clue": "When he came to present the Israelites with the tablets of the law, they were dancing around a golden calf",
+          "answer": "Moses",
+          "value": 400,
+          "daily_double": false
+        },
+        {
+          "clue": "When presented with this son's bloodstained coat, Jacob assumed that \"an evil beast hath devoured him\"",
+          "answer": "Joseph",
+          "value": 600,
+          "daily_double": true
+        },
+        {
+          "clue": "\"When the Queen of Sheba heard of\" his fame, \"she came to prove him with hard questions\"",
           "answer": "Solomon",
           "value": 800,
           "daily_double": false
         },
         {
-          "clue": "The longest of these songs is number 119, with 176 verses",
-          "answer": "psalms",
-          "value": 500,
-          "daily_double": true
-        }
-      ]
-    },
-    {
-      "name": "MOVIES",
-      "questions": [
-        {
-          "clue": "Hiccup, Toothless, Astrid & the rest of the gang return in the sequel to this movie with Vikings & dragons",
-          "answer": "<i>How to Train Your Dragon<\/i>",
-          "value": 200,
-          "daily_double": false
-        },
-        {
-          "clue": "This villain from \"Sleeping Beauty\" got her own movie in 2014, with Angelina Jolie in the title role",
-          "answer": "Maleficent",
-          "value": 400,
-          "daily_double": false
-        },
-        {
-          "clue": "The latest movie about these mutants is \"Days of Future Past\"; what does that even mean?",
-          "answer": "X-Men",
-          "value": 600,
-          "daily_double": false
-        },
-        {
-          "clue": "Air racer Dusty joins a helicopter named Blade Ranger in this animated movie subtitled \"Fire & Rescue\"",
-          "answer": "<i>Planes<\/i>",
-          "value": 800,
-          "daily_double": false
-        },
-        {
-          "clue": "\"Million Dollar Arm\" tells the true story of an agent who goes to this country to recruit cricket bowlers to play baseball",
-          "answer": "India",
+          "clue": "When a chariot of fire appeared, this prophet went up into heaven",
+          "answer": "Elijah",
           "value": 1000,
           "daily_double": false
         }
       ]
     },
     {
-      "name": "ETIQUETTE",
+      "name": "COMPLETE THE LYRIC",
       "questions": [
         {
-          "clue": "English speakers have been using this \"magic word\" since the 1300s, & when you ask for something, you should, too",
-          "answer": "please",
+          "clue": "Demi Lovato:\"'Cause our love was made, made in the ____\"",
+          "answer": "\"U.S.A.\"",
           "value": 200,
           "daily_double": false
         },
         {
-          "clue": "In a traditional table setting, this should be placed so that the blade faces the plate",
-          "answer": "the knife",
+          "clue": "Of Monsters & Men: \"There's  an old voice in my head that's holding me back \/Tell her that I miss our ____ ____\"",
+          "answer": "\"little talks\"",
           "value": 400,
           "daily_double": false
         },
         {
-          "clue": "When doing this, blot your palm if it's damp, look the other person in the eye & use a firm but not crushing grip",
-          "answer": "shaking someone\\'s hand",
+          "clue": "Bruno Mars: \"Treasure, that is what you are, Honey you're my ____ ____\"",
+          "answer": "\"golden star\"",
           "value": 600,
           "daily_double": false
         },
         {
-          "clue": "When you're at the dinner table, turn off this Apple device introduced in April 2010, even if you're winning at Fruit Ninja",
-          "answer": "an iPad",
+          "clue": "fun.:\"This is it boys,This is ____ --What are we waiting for?\"",
+          "answer": "\"war\"",
           "value": 800,
           "daily_double": false
         },
         {
-          "clue": "You don't have to down your whole soda after you clink glasses for one of these ceremonial drinks; a sip will do",
-          "answer": "a toast",
+          "clue": "Paramore:\"Yeah, after all this time I'm still ____ ____\"",
+          "answer": "\"into you\"",
           "value": 1000,
           "daily_double": false
         }
       ]
     },
     {
-      "name": "TRANSPORTATION PHRASES",
+      "name": "TEEN CHOICE",
       "questions": [
         {
-          "clue": "Go faster! \"Put the pedal to\" this",
-          "answer": "the metal",
+          "clue": "Age mentioned in the 26th amendment",
+          "answer": "18",
           "value": 200,
           "daily_double": false
         },
         {
-          "clue": "Someone who keeps giving unwelcome advice is this kind of \"driver\"",
-          "answer": "backseat",
+          "clue": "Number of nights in a fortnight",
+          "answer": "14",
           "value": 400,
           "daily_double": false
         },
         {
-          "clue": "Taken from a 1960s TV show: \"beam me up\", this guy means \"get me out of here\"",
-          "answer": "Scotty",
+          "clue": "The first point of a tennis game",
+          "answer": "15",
           "value": 600,
           "daily_double": false
         },
         {
-          "clue": null,
-          "answer": null,
-          "value": null,
-          "daily_double": false
-        },
-        {
-          "clue": null,
-          "answer": null,
-          "value": null,
-          "daily_double": false
-        }
-      ]
-    },
-    {
-      "name": "CALIFORNIA",
-      "questions": [
-        {
-          "clue": "The oldest art museum in the western U.S., the Crocker Art Museum, opened in this state capital in 1885",
-          "answer": "Sacramento",
-          "value": 200,
-          "daily_double": false
-        },
-        {
-          "clue": "(Sarah of the Clue Crew reports from the California Academy of Sciences in San Francisco.)  From this vantage point at the California Academy of Sciences, I completely understand why this species was the king of its prehistoric age",
-          "answer": "the <i>T. rex<\/i> (<i>Tyrannosaurus rex<\/i>)",
-          "value": 400,
-          "daily_double": false
-        },
-        {
-          "clue": "The original name of California's biggest metropolis translates as \"the village of the queen of\" these beings",
-          "answer": "angels",
-          "value": 600,
-          "daily_double": false
-        },
-        {
-          "clue": "This 800-mile-long fracture in earth's crust runs close to San Jose & Palm Springs & is totally our fault",
-          "answer": "the San Andreas Fault",
+          "clue": "It's the title of Adele's debut album",
+          "answer": "<i>19<\/i>",
           "value": 800,
           "daily_double": false
         },
         {
-          "clue": "One of the state's landmarks is Half Dome, located at the head of this valley in the same-named national park",
-          "answer": "Yosemite",
+          "clue": "In Italy, it's considered unlucky; fear of it is sometimes called heptadekaphobia",
+          "answer": "17",
           "value": 1000,
           "daily_double": false
         }

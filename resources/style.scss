@@ -10,6 +10,12 @@ body, html {
   height: 100%;
 }
 
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+  /* Set your content font stack here: */
+   font-family: 'Slabo 27px', serif;
+}
+
 .buzzer-column {
   width:$buzzer-column-width;
   text-align: center;
@@ -18,6 +24,7 @@ body, html {
   position:relative;
   height: 100%;
 }
+
 
 .buzzer {
   height:50px;
@@ -120,13 +127,10 @@ span.active-buzzer:after {
       color: $button-primary-background-color;
       border:3px solid black;
       height:16%;
-      font-size: 200%;
+      font-size: 1.5vw;
       overflow:hidden;
     }
 
-    .question.box {
-
-    }
     .question.box .clue {
       position: relative;
       top: 40%;

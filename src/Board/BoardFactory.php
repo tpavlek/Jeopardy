@@ -40,16 +40,16 @@ class BoardFactory
                     $category->name,
                     array_map(
                         function (\stdClass $question) {
-                            $question = new Question(
+                            $questionObj = new Question(
                                 new Clue($question->clue),
                                 new Answer($question->answer),
                                 $question->value,
                                 (isset($question->daily_double)) ? $question->daily_double : false
                             );
-                            if ($question->getClue() == null) {
-                                $question->setUsed(true);
+                            if ($questionObj->getClue() == null || (isset($question->used) && $question->used)) {
+                                $questionObj->setUsed(true);
                             }
-                            return $question;
+                            return $questionObj;
                         },
                         $category->questions
                     )

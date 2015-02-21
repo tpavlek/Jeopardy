@@ -38,8 +38,6 @@ $router->get('/play/{player}', function (Request $request, Response $response, a
     return $response;
 });
 
-
-
 $router->addRoute('GET', '/admin', function (Request $request, Response $response) use ($twig, $config) {
     $response->setContent($twig->render('admin.html.twig', [ 'players' => $config['players'] ]));
     return $response;
