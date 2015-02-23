@@ -79,11 +79,17 @@ class Board
      */
     public function addScore(Contestant $contestant, $value)
     {
-        /** @var Contestant $contestant */
-        $contestant = $this->getContestants()->first(function($key, Contestant $c) use ($contestant) {
+        /** @var Contestant $c */
+        $c = $this->getContestants()->first(function($key, Contestant $c) use ($contestant) {
             return $c->getName() == $contestant->getName();
         });
-        $contestant->addScore($value);
+
+        if ($c == null) {
+            //TODO logging.
+            echo "Unable to find contestant with name {$contestant->getName()}";
+        }
+
+        $c->addScore($value);
         return $contestant;
     }
 
