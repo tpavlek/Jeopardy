@@ -260,9 +260,9 @@ class WampConnector implements WampServerInterface
 
         $response = $categories->map(function (Category $category) {
             return $category->toArray();
-        });
+        })->toJson();
 
-        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast(json_encode($response), [ ], [ $sessionId ]);
+        $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast($response, [ ], [ $sessionId ]);
     }
 
     /**
