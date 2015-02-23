@@ -4,6 +4,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
     jeopardy.question_display_topic = 'com.sc2ctl.jeopardy.question_display';
     jeopardy.question_dismiss_topic = 'com.sc2ctl.jeopardy.question_dismiss';
+    jeopardy.question_answer_topic = 'com.sc2ctl.jeopardy.question_answer';
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
     jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
@@ -18,6 +19,7 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.buzzer_topic, handleBuzzEvent);
             conn.subscribe(jeopardy.buzzer_status_topic, processBuzzerActiveResult);
             conn.subscribe(jeopardy.question_display_topic, handleQuestionDisplay);
+            conn.subscribe(jeopardy.question_answer_topic, handleQuestionAnswer);
             conn.subscribe(jeopardy.question_dismiss_topic, handleQuestionDismiss);
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
             conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
@@ -98,17 +100,31 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.question_display_topic, payload, [], []);
     };
 
+    jeopardy.attemptQuestionAnswer = function(category, value, contestant, bet, correct) {
+        if (correct == undefined) {
+            correct = true;
+        }
+
+        var payload = {
+            category: category,
+            value: value,
+            contestant: contestant,
+            bet: bet,
+            correct: correct
+        };
+
+        conn.publish(jeopardy.question_answer_topic, payload, [], []);
+    };
+
     jeopardy.
-        attemptQuestionDismiss = function (category, value, winner, bet) {
+        attemptQuestionDismiss = function (category, value) {
         if (category == undefined || value == undefined) {
             console.warn("Attempted to award with undefined category or value");
             return;
         }
         var payload = {
             category: category,
-            value: value,
-            winner: winner,
-            bet: bet
+            value: value
         };
 
         conn.publish(jeopardy.question_dismiss_topic, payload, [], []);
@@ -174,7 +190,6 @@ window.jeopardy = (function (jeopardy) {
 
     function handleBuzzEvent(topic, data) {
         data = JSON.parse(data);
-        console.log(data);
         addPlayerBuzz(data.contestant);
         // We only want the buzz to show for 3 seconds.
         setTimeout(clearPlayerBuzzes, 3000);
@@ -261,17 +276,26 @@ window.jeopardy = (function (jeopardy) {
         }
     }
 
-    function handleQuestionDismiss(topic, data) {
+    function handleQuestionAnswer(topic, data) {
         data = JSON.parse(data);
-        if (data.has_winner) {
-            var players = jeopardy.getPlayerElements();
-            for (var i in players) {
-                if ($(players[i]).hasClass(data.winner)) {
-                    var score = parseInt($(players[i]).find('.score').html());
-                    $(players[i]).find('.score').html(score + parseInt(data.bet));
-                }
+        console.log(data);
+
+        var players = jeopardy.getPlayerElements();
+        for (var i in players) {
+            if ($(players[i]).hasClass(data.contestant)) {
+                var score = parseInt($(players[i]).find('.score').html());
+                $(players[i]).find('.score').html(score + parseInt(data.value));
             }
         }
+
+        if (!data.correct) {
+            setBuzzerActive(jeopardy.getStatusIndicatorElement());
+        }
+    }
+
+    function handleQuestionDismiss(topic, data) {
+        data = JSON.parse(data);
+
         blankOutQuestionBox(data.category, data.value);
         var modal = jeopardy.getQuestionDisplayModal();
         clearModalData(modal);

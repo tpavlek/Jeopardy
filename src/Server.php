@@ -4,6 +4,8 @@ namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
+use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswerEvent;
+use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissal;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionDisplayRequestEvent;
 use Depotwarehouse\Jeopardy\Board\QuestionNotFoundException;
@@ -79,6 +81,16 @@ class Server
             $wamp->onBuzzerResolution($event->getResolution());
         });
 
+        $emitter->addListener(QuestionAnswerEvent::class, function(QuestionAnswerEvent $event) use ($wamp, $board, $emitter) {
+            $questionAnswer = $event->getQuestionAnswer();
+            $board->addScore($questionAnswer->getContestant(), $questionAnswer->getRealValue());
+            $wamp->onQuestionAnswer($questionAnswer);
+
+            if ($questionAnswer->isCorrect()) {
+                $emitter->emit(new QuestionDismissalEvent(new QuestionDismissal($questionAnswer->getCategory(), $questionAnswer->getValue())));
+            }
+        });
+
         $emitter->addListener(QuestionDisplayRequestEvent::class, function(QuestionDisplayRequestEvent $event) use ($wamp, $board) {
             try {
                 $question = $board->getQuestionByCategoryAndValue($event->getCategoryName(), $event->getValue());
@@ -98,10 +110,6 @@ class Server
 
         $emitter->addListener(QuestionDismissalEvent::class, function(QuestionDismissalEvent $event) use ($wamp, $board) {
             $dismissal = $event->getDismissal();
-            if ($dismissal->hasWinner()) {
-                $board->addScore($dismissal->getWinner(), $dismissal->getRealValue());
-            }
-
             $wamp->onQuestionDismiss($dismissal);
 
         });

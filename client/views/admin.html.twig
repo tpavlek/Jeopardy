@@ -56,7 +56,7 @@
                 var modal = jeo.getQuestionDisplayModal();
                 var category = modal.attr('data-category');
                 var value = jeo.getRealModalValue(modal);
-                jeopardy.attemptQuestionDismiss(category, value, null);
+                jeopardy.attemptQuestionDismiss(category, value);
             });
 
             $('.player').click(function() {
@@ -66,7 +66,7 @@
                 var value = modal.attr('data-value');
                 var bet = jeo.getRealModalValue(modal);
 
-                jeopardy.attemptQuestionDismiss(category, value, playerName, bet);
+                jeopardy.attemptQuestionAnswer(category, value, playerName, bet, true);
             });
 
             $('.player').bind('contextmenu', function() {
@@ -74,10 +74,10 @@
                 var modal = jeo.getQuestionDisplayModal();
                 var category = modal.attr('data-category');
                 var value = parseInt(jeo.getRealModalValue(modal));
-                var bet = jeo.getRealModalValue(modal) * -1;
+                var bet = jeo.getRealModalValue(modal);
 
 
-                jeopardy.attemptQuestionDismiss(category, value, playerName, bet);
+                jeopardy.attemptQuestionAnswer(category, value, playerName, bet, false);
 
                 return false;
             });

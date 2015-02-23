@@ -26,6 +26,7 @@ class WampConnector implements WampServerInterface
     const BUZZER_STATUS_TOPIC = "com.sc2ctl.jeopardy.buzzer_status";
     const QUESTION_DISPLAY_TOPIC = "com.sc2ctl.jeopardy.question_display";
     const QUESTION_DISMISS_TOPIC = "com.sc2ctl.jeopardy.question_dismiss";
+    const QUESTION_ANSWER_QUESTION = "com.sc2ctl.jeopardy.question_answer";
     const CONTESTANT_SCORE = "com.sc2ctl.jeopardy.contestant_score";
     const DAILY_DOUBLE_BET_TOPIC = "com.sc2ctl.jeopardy.daily_double_bet";
 
@@ -153,6 +154,30 @@ class WampConnector implements WampServerInterface
                 $this->emitter->emit(new QuestionDisplayRequestEvent($event['category'], $event['value']));
                 break;
 
+            case self::QUESTION_ANSWER_QUESTION:
+                if (!isset($event['category']) || !isset($event['value']) || !isset($event['contestant'])) {
+                    //TODO log this
+                    echo "Did not receive proper question answer request, did not have a category or value or playerName\n";
+                    break;
+                }
+
+                $questionAnswerEvent = new Question\QuestionAnswerEvent(
+                    new Question\QuestionAnswer(
+                        $event['category'],
+                        $event['value'],
+                        new Contestant($event['contestant']),
+                        (isset($event['correct'])) ? $event['correct'] : false
+                    )
+                );
+
+                if (isset ($event['bet'])) {
+                    $questionAnswerEvent->getQuestionAnswer()->setBet($event['bet']);
+                }
+
+                $this->emitter->emit($questionAnswerEvent);
+
+                break;
+
             case self::QUESTION_DISMISS_TOPIC:
                 if (!isset($event['category']) || !isset($event['value'])) {
                     //TODO log this
@@ -165,16 +190,6 @@ class WampConnector implements WampServerInterface
                         $event['value']
                     )
                 );
-
-                if (isset($event['winner']) and $winner = $event['winner']) {
-                    $dismissal->getDismissal()->setWinner(new Contestant($winner));
-                }
-
-                if (isset($event['bet'])) {
-                    if ($event['bet'] !== null) {
-                        $dismissal->getDismissal()->setBet($event['bet']);
-                    }
-                }
 
                 $this->emitter->emit($dismissal);
                 break;
@@ -264,6 +279,14 @@ class WampConnector implements WampServerInterface
         $response = json_encode($response);
 
         $this->subscribedTopics[self::QUESTION_DISPLAY_TOPIC]->broadcast($response);
+    }
+
+    public function onQuestionAnswer(Question\QuestionAnswer $questionAnswer)
+    {
+        $response = $questionAnswer->toArray();
+        $response = json_encode($response);
+
+        $this->subscribedTopics[self::QUESTION_ANSWER_QUESTION]->broadcast($response);
     }
 
     public function onDailyDoubleBetRecieved(Question $question, $category, $bet)
