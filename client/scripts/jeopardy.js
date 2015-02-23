@@ -119,7 +119,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.
         attemptQuestionDismiss = function (category, value) {
         if (category == undefined || value == undefined) {
-            console.warn("Attempted to award with undefined category or value");
+            console.warn("Attempted to dismiss with undefined category or value");
             return;
         }
         var payload = {
@@ -301,6 +301,7 @@ window.jeopardy = (function (jeopardy) {
         clearModalData(modal);
         modal.find('.content').first().find('.clue').first().html("");
         modal.hide('fast');
+        setBuzzerInactive(jeopardy.getStatusIndicatorElement());
     }
 
     function blankOutQuestionBox(categoryName, value) {

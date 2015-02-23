@@ -39,6 +39,9 @@
     jeo.getPlayerElements = function() {
         return $('.player-container').find('.player').toArray();
     };
+    jeo.getDailyDoubleModal = function() {
+        return $('#daily-double-display-modal');
+    };
 
     $(document).ready(function() {
         $('#buzzer').click(function() {
