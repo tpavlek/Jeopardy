@@ -12,6 +12,7 @@ use Depotwarehouse\Jeopardy\Board\QuestionNotFoundException;
 use Depotwarehouse\Jeopardy\Board\QuestionSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolution;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerResolutionEvent;
+use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
@@ -29,6 +30,8 @@ use React\EventLoop\LoopInterface;
 
 class Server
 {
+
+    const SOCKET_LISTEN_PORT = 9001;
 
     /** @var  LoopInterface */
     protected $eventLoop;
@@ -50,7 +53,7 @@ class Server
         $wamp = new WampConnector($emitter);
 
         $webSocket = new \React\Socket\Server($this->eventLoop);
-        $webSocket->listen(9001, '0.0.0.0');
+        $webSocket->listen(self::SOCKET_LISTEN_PORT, '0.0.0.0');
 
         $board = BoardFactory::initialize();
 
@@ -88,7 +91,10 @@ class Server
 
             if ($questionAnswer->isCorrect()) {
                 $emitter->emit(new QuestionDismissalEvent(new QuestionDismissal($questionAnswer->getCategory(), $questionAnswer->getValue())));
+                return;
             }
+
+            $emitter->emit(new BuzzerStatusChangeEvent(new BuzzerStatus(true)));
         });
 
         $emitter->addListener(QuestionDisplayRequestEvent::class, function(QuestionDisplayRequestEvent $event) use ($wamp, $board) {

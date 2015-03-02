@@ -1,0 +1,80 @@
+{
+  "contestants": [
+    {
+      "name": "Troy",
+      "score": 0
+    },
+    {
+      "name": "Bob",
+      "score": 0
+    },
+    {
+      "name": "Phil",
+      "score": 0
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "Potent Potables",
+      "questions": [
+        {
+          "clue": "Clue 1",
+          "answer": "Answer 1",
+          "value": 200,
+          "daily_double": true
+        },
+        {
+          "clue": "Clue 2",
+          "answer": "Answer 2",
+          "value": 400
+        }
+      ]
+    },
+    {
+      "name": "Terran It Up",
+      "questions": [
+        {
+          "clue": "A MULE can carry this many minerals in a single load.",
+          "answer": "30",
+          "value": 200
+        },
+        {
+          "clue": "This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta",
+          "answer": "Seeker Missile",
+          "value": 400
+        }
+      ]
+    },
+    {
+      "name": "So the Drama",
+      "questions": [
+        {
+          "clue": "Racial slurs and \"dumb risks\" lost this person a position at Evil Geniuses.",
+          "answer": "Orb / Jake Sklarew",
+          "value": 200
+        },
+        {
+          "clue": "This Quebec based player was often accused of stream-sniping and cheating against many grandmaster players",
+          "answer": "RatzDeezer (Deezer)",
+          "value": 400
+        },
+        {
+          "clue": "$1800 of profit caused a storm of outrage for this tournament",
+          "answer": "Destiny I",
+          "value": 600
+        },
+        {
+          "clue": "300,000 karma disappeared when this popular personality deleted his reddit account in August of 2013",
+          "answer": "TotalBiscuit",
+          "value": 800
+        },
+        {
+          "clue": "If you’re hoping for clean games free of scandal, this player is probably not your \"Messiah\"",
+          "answer": "Ma \"Savior\" Jae Yoon",
+          "value": 1000
+        }
+      ]
+    }
+  ]
+}
