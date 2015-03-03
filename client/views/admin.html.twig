@@ -55,7 +55,7 @@
             $('#modal-dismiss').click(function() {
                 var modal = jeo.getQuestionDisplayModal();
                 var category = modal.attr('data-category');
-                var value = jeo.getRealModalValue(modal);
+                var value = modal.attr('data-value');
                 jeopardy.attemptQuestionDismiss(category, value);
             });
 

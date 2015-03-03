@@ -295,12 +295,19 @@ window.jeopardy = (function (jeopardy) {
 
     function handleQuestionDismiss(topic, data) {
         data = JSON.parse(data);
+        console.log(data);
 
         blankOutQuestionBox(data.category, data.value);
         var modal = jeopardy.getQuestionDisplayModal();
         clearModalData(modal);
         modal.find('.content').first().find('.clue').first().html("");
         modal.hide('fast');
+
+        modal = jeopardy.getDailyDoubleModal();
+        clearModalData(modal);
+        modal.find('.content').first().find('.clue').first().html("");
+        modal.hide('fast');
+
         setBuzzerInactive(jeopardy.getStatusIndicatorElement());
     }
 
