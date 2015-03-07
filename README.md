@@ -31,7 +31,9 @@ This process will take control of your shell, so if you want to continue to use 
 php server.php &
 ```
 
-Now you can point your web-browser to whatever URL you set the client directory to run off of, and you'll be able to play!
+### Web Server
+
+The javascript, by default, connects to whatever host you're running on `/ws`. So, you'll need to set up whatever server software you're using to proxy the websocket connection to the port that you're running the socket server on (`9001`). With apache this can be done using the `mod_proxy_wstunnel` module.
 
 Playing
 --------
