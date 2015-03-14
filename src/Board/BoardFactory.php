@@ -5,6 +5,7 @@ namespace Depotwarehouse\Jeopardy\Board;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Depotwarehouse\Jeopardy\Participant\ContestantFactory;
 
 class BoardFactory
 {
@@ -26,11 +27,11 @@ class BoardFactory
      */
     public static function fromJson($json)
     {
+        $contestantFactory = new ContestantFactory();
+
         $values = json_decode($json);
         $contestants = array_map(
-            function (\stdClass $contestant) {
-                return new Contestant($contestant->name);
-            },
+            [ $contestantFactory, 'createFromObject' ],
             $values->contestants
         );
 

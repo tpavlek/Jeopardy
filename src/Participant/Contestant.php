@@ -11,11 +11,12 @@ class Contestant implements Arrayable, Jsonable
     /** @var  string */
     protected $name;
 
-    protected $score = 0;
+    protected $score;
 
-    function __construct($name)
+    public function __construct($name, $score = 0)
     {
         $this->name = $name;
+        $this->score = $score;
     }
 
     /**
@@ -63,4 +64,5 @@ class Contestant implements Arrayable, Jsonable
     {
         return json_encode($this->toArray());
     }
+
 }
