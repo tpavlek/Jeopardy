@@ -2,11 +2,14 @@
 
 namespace Depotwarehouse\Jeopardy\Board;
 
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\State;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardyClue;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
+use Depotwarehouse\Jeopardy\Participant\Contestant;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
 use Depotwarehouse\Jeopardy\Participant\ContestantFactory;
+use Illuminate\Support\Collection;
 
 class BoardFactory
 {
@@ -57,10 +60,7 @@ class BoardFactory
         $contestantFactory = new ContestantFactory();
 
         $values = json_decode($json);
-        $contestants = array_map(
-            [ $contestantFactory, 'createFromObject' ],
-            $values->contestants
-        );
+        $contestants = (new Collection($values->contestants))->map([ $contestantFactory, 'createFromObject' ]);
 
         $categories = array_map(
             function (\stdClass $category) {
@@ -89,14 +89,18 @@ class BoardFactory
             throw new \Exception("Final Jeopardy is not defined in your questions file");
         }
 
-        $finalJeopardy = new FinalJeopardyClue($values->final->category, $values->final->clue, $values->final->answer);
+        $finalJeopardyClue = new FinalJeopardyClue($values->final->category, $values->final->clue, $values->final->answer);
+        $finalJeopardyState = new State(
+            $finalJeopardyClue,
+            $contestants->map(function(Contestant $contestant) { return $contestant->getName(); })->toArray()
+        );
 
         $board = new Board(
             $contestants,
             $categories,
             new Resolver(),
             new BuzzerStatus(),
-            $finalJeopardy
+            $finalJeopardyState
         );
 
         return $board;

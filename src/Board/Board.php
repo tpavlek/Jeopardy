@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\Jeopardy\Board;
 
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardyClue;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
@@ -24,9 +25,9 @@ class Board
 
     /**
      * Our clue for final Jeopardy.
-     * @var FinalJeopardyClue
+     * @var FinalJeopardy\State
      */
-    protected $finalJeopardyClue;
+    protected $finalJeopardyState;
 
     /**
      * The buzzer resolver which resolves who won a particular buzz.
@@ -39,15 +40,15 @@ class Board
      * @param Category[]|Collection $categories
      * @param Resolver $resolver
      * @param BuzzerStatus $buzzerStatus
-     * @param FinalJeopardyClue $final
+     * @param FinalJeopardy\State $final
      */
-    function __construct($contestants, $categories, Resolver $resolver, BuzzerStatus $buzzerStatus, FinalJeopardyClue $final)
+    function __construct($contestants, $categories, Resolver $resolver, BuzzerStatus $buzzerStatus, FinalJeopardy\State $final)
     {
-        $this->contestants = new Collection($contestants);
+        $this->contestants = ($contestants instanceof Collection) ? $contestants : new Collection($contestants);
         $this->categories = new Collection($categories);
         $this->resolver = $resolver;
         $this->buzzerStatus = $buzzerStatus;
-        $this->finalJeopardyClue = $final;
+        $this->finalJeopardyState = $final;
     }
 
     /**
@@ -166,7 +167,7 @@ class Board
 
     public function getFinalJeopardyClue()
     {
-        return $this->finalJeopardyClue;
+        return $this->finalJeopardyState->getClue();
     }
 
 

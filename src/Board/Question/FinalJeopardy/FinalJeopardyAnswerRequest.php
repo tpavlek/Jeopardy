@@ -2,7 +2,9 @@
 
 namespace Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy;
 
-class FinalJeopardyAnswerRequest 
+use League\Event\AbstractEvent;
+
+class FinalJeopardyAnswerRequest extends AbstractEvent
 {
 
 }

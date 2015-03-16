@@ -153,6 +153,11 @@ class Server
             $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
         });
 
+        $emitter->addListener(FinalJeopardyAnswerRequest::class, function(FinalJeopardyAnswerRequest $event) use ($wamp, $board) {
+            echo "Emitting answer";
+            $wamp->onFinalJeopardyRequest("answer", $board->getFinalJeopardyClue());
+        });
+
         $this->eventLoop->run();
     }
 

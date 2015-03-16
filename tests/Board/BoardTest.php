@@ -4,20 +4,22 @@ namespace Depotwarehouse\Jeopardy\Tests;
 
 
 use Depotwarehouse\Jeopardy\Board\Board;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\State;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardyClue;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Illuminate\Support\Collection;
 
 class BoardTest extends \PHPUnit_Framework_TestCase
 {
 
     public function test_it_can_update_scores()
     {
-        $contestants = [
+        $contestants = new Collection([
             new Contestant("Phil"),
             new Contestant("Bob")
-        ];
+        ]);
         $categories = [];
 
         $board = new Board(
@@ -25,7 +27,11 @@ class BoardTest extends \PHPUnit_Framework_TestCase
             $categories,
             new Resolver(),
             new BuzzerStatus(),
-            new FinalJeopardyClue("mock_category", "mock_clue", "mock_answer")
+            new State(
+                new FinalJeopardyClue("mock_category", "mock_clue", "mock_answer"),
+                $contestants->map(function(Contestant $contestant) { return $contestant->getName(); })->toArray()
+            )
+
         );
 
         $board->addScore(new Contestant("Phil"), 200);

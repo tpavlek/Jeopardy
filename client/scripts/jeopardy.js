@@ -8,6 +8,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
     jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
     jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
+    jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy_final_jeopardy_responses";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.penalty_until = 0;
@@ -232,8 +233,17 @@ window.jeopardy = (function (jeopardy) {
 
         if (data.hasOwnProperty("clue")) {
             modal.find('.final-jeopardy-clue').html(data.clue);
-            $('#final-jeopardy-next').attr('data-current-step', "responses");
+            $('#final-jeopardy-next').attr('data-current-step', "answer");
             return;
+        }
+
+        if (data.hasOwnProperty("answer")) {
+            if (!jeopardy.admin_mode) return;
+
+            modal.find('.responses').show('fast');
+            modal.find('.answer .content').html(data.answer);
+            modal.find('.answer').show('fast');
+            $('#final-jeopardy-next').hide('fast'); //TODO this selector is tightly coupled
         }
     }
 

@@ -31,6 +31,7 @@ class WampConnector implements WampServerInterface
     const CONTESTANT_SCORE = "com.sc2ctl.jeopardy.contestant_score";
     const DAILY_DOUBLE_BET_TOPIC = "com.sc2ctl.jeopardy.daily_double_bet";
     const FINAL_JEOPARDY_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy";
+    const FINAL_JEOPARDY_RESPONSES_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy_responses";
 
     public function __construct(Emitter $emitter)
     {
@@ -188,8 +189,33 @@ class WampConnector implements WampServerInterface
                 }
 
                 if ($event['content'] == "answer") {
+                    echo "Requesting answer";
                     $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerRequest());
                     break;
+                }
+                break;
+
+            case self::FINAL_JEOPARDY_RESPONSES_TOPIC:
+                if (!isset($event['contestant']) || !isset($event['type'])) {
+                    //TODO logging
+                    echo "Invalid jeopardy response, did not specify type or did not include contestant";
+                }
+
+                if ($event['type'] == "bet") {
+                    if (!isset($event['bet'])) {
+                        //TODO logging
+                        echo "Invalid final jeopardy bet, did not include a bet value";
+                    }
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyBetEvent($event['contestant'], $event['bet']));
+                    break;
+                }
+                if ($event['type'] == "answer") {
+                    if (!isset($event['answer'])) {
+                        //TODO Logging
+                        echo "Invalid final jeopardy answer, did not include an answer response";
+                    }
+
+                    $this->emitter->emit()
                 }
 
                 break;
@@ -377,6 +403,7 @@ class WampConnector implements WampServerInterface
 
         $this->subscribedTopics[self::FINAL_JEOPARDY_TOPIC]->broadcast($response);
     }
+
 
 
 

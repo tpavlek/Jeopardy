@@ -1,0 +1,19 @@
+<div id="final-jeopardy-display-modal">
+    <div class="content">
+        <h1 class="final-jeopardy-category"></h1>
+        <h1 class="final-jeopardy-clue"></h1>
+
+        {% if admin %}
+            <div class="responses">
+                {% for player in players %}
+                    <div class="response" data-player="{{ player }}">{{ player }}</div>
+                {% endfor %}
+            </div>
+            <div class="answer">
+                <div class="content"></div>
+            </div>
+            <button id="final-jeopardy-next" data-current-step="category" class="button success">Next</button>
+        {% endif %}
+    </div>
+
+</div>
