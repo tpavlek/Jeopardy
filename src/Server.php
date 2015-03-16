@@ -6,6 +6,7 @@ use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyAnswerRequest;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyCategoryRequest;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyClueRequest;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswerEvent;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissal;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
@@ -146,6 +147,10 @@ class Server
 
         $emitter->addListener(FinalJeopardyCategoryRequest::class, function(FinalJeopardyCategoryRequest $event) use ($wamp, $board) {
             $wamp->onFinalJeopardyRequest("category", $board->getFinalJeopardyClue());
+        });
+
+        $emitter->addListener(FinalJeopardyClueRequest::class, function(FinalJeopardyClueRequest $event) use ($wamp, $board) {
+            $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
         });
 
         $this->eventLoop->run();

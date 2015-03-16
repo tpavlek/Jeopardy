@@ -96,7 +96,7 @@
 
             $('#final-jeopardy-next').click(function() {
                 var current_step = $(this).attr('data-current-step');
-                console.log(current_step);
+                jeo.attemptFinalJeopardyDisplay(current_step);
             });
 
             $('#daily-double-form').submit(function() {

@@ -227,6 +227,13 @@ window.jeopardy = (function (jeopardy) {
             modal.find('.final-jeopardy-category').html(data.category);
             modal.show('fast');
             $('#final-jeopardy-next').attr('data-current-step', "clue");
+            return;
+        }
+
+        if (data.hasOwnProperty("clue")) {
+            modal.find('.final-jeopardy-clue').html(data.clue);
+            $('#final-jeopardy-next').attr('data-current-step', "responses");
+            return;
         }
     }
 
