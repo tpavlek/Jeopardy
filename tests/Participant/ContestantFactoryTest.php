@@ -14,7 +14,8 @@ class ContestantFactoryTest extends \PHPUnit_Framework_TestCase
         $factory = new ContestantFactory();
         $contestant = $factory->createFromObject(json_decode($json));
 
-        $this->assertEquals("mock_contestant", $contestant->getName());
+        // The contestant should have an uppercase first letter.
+        $this->assertEquals("Mock_contestant", $contestant->getName());
         $this->assertEquals(100, $contestant->getScore());
     }
 

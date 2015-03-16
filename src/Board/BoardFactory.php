@@ -2,6 +2,7 @@
 
 namespace Depotwarehouse\Jeopardy\Board;
 
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardyClue;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Illuminate\Contracts\Filesystem\FileNotFoundException;
@@ -84,11 +85,14 @@ class BoardFactory
             }, $values->categories
         );
 
+        $finalJeopardy = new FinalJeopardyClue($values->final->category, $values->final->clue, $values->final->answer);
+
         $board = new Board(
             $contestants,
             $categories,
             new Resolver(),
-            new BuzzerStatus()
+            new BuzzerStatus(),
+            $finalJeopardy
         );
 
         return $board;

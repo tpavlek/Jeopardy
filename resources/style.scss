@@ -94,6 +94,11 @@ span.active-buzzer:after {
   }
 }
 
+.score {
+  font-size: 200%;
+  font-weight: bold;
+}
+
 .content-wrapper {
   @include box-sizing();
   text-align: center;

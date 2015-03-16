@@ -4,6 +4,7 @@ namespace Depotwarehouse\Jeopardy\Tests;
 
 
 use Depotwarehouse\Jeopardy\Board\Board;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardyClue;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatus;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
@@ -23,7 +24,8 @@ class BoardTest extends \PHPUnit_Framework_TestCase
             $contestants,
             $categories,
             new Resolver(),
-            new BuzzerStatus()
+            new BuzzerStatus(),
+            new FinalJeopardyClue("mock_category", "mock_clue", "mock_answer")
         );
 
         $board->addScore(new Contestant("Phil"), 200);

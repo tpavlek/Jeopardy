@@ -1,49 +1,53 @@
 {
-  "contestants": [
-    {
-      "name": "Contestant 1",
-      "score": 0
-    },
-    {
-      "name": "Contestant 2",
-      "score": 100
-    },
-    {
-      "name": "Contestant 3",
-      "score": 0
-    }
-  ],
-
-  "categories": [
-    {
-      "name": "Potent Potables",
-      "questions": [
+    "contestants": [
         {
-          "clue": "Clue 1",
-          "answer": "Answer 1",
-          "value": 200
+            "name": "Contestant 1",
+            "score": 0
         },
         {
-          "clue": "Clue 2",
-          "answer": "Answer 2",
-          "value": 400
-        }
-      ]
-    },
-    {
-      "name": "Terran It Up",
-      "questions": [
-        {
-          "clue": "A MULE can carry this many minerals in a single load.",
-          "answer": "30",
-          "value": 200
+            "name": "Contestant 2",
+            "score": 100
         },
         {
-          "clue": "This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta",
-          "answer": "Seeker Missile",
-          "value": 400
+            "name": "Contestant 3",
+            "score": 0
         }
-      ]
+    ],
+    "categories": [
+        {
+            "name": "Potent Potables",
+            "questions": [
+                {
+                    "clue": "Clue 1",
+                    "answer": "Answer 1",
+                    "value": 200
+                },
+                {
+                    "clue": "Clue 2",
+                    "answer": "Answer 2",
+                    "value": 400
+                }
+            ]
+        },
+        {
+            "name": "Terran It Up",
+            "questions": [
+                {
+                    "clue": "A MULE can carry this many minerals in a single load.",
+                    "answer": "30",
+                    "value": 200
+                },
+                {
+                    "clue": "This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta",
+                    "answer": "Seeker Missile",
+                    "value": 400
+                }
+            ]
+        }
+    ],
+    "final": {
+        "category": "mock_final_category",
+        "clue": "mock_final_clue",
+        "answer": "mock_final_answer"
     }
-  ]
 }

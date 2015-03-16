@@ -9,6 +9,7 @@
             <button class="button" id="toggle-status">Toggle</button>
             <br />
             <button class="button bad" id="modal-dismiss">Dismiss</button>
+            <button id="trigger-final" class="button facebook">Start Final</button>
         </div>
 
         {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}
@@ -80,6 +81,10 @@
                 jeopardy.attemptQuestionAnswer(category, value, playerName, bet, false);
 
                 return false;
+            });
+
+            $('#trigger-final').bind('contextmenu', function() {
+
             });
 
             $('#daily-double-form').submit(function() {
