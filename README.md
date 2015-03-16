@@ -31,7 +31,9 @@ This process will take control of your shell, so if you want to continue to use 
 php server.php &
 ```
 
-Now you can point your web-browser to whatever URL you set the client directory to run off of, and you'll be able to play!
+### Web Server
+
+The javascript, by default, connects to whatever host you're running on `/ws`. So, you'll need to set up whatever server software you're using to proxy the websocket connection to the port that you're running the socket server on (`9001`). With apache this can be done using the `mod_proxy_wstunnel` module.
 
 ### Using other JSON files
 
@@ -113,6 +115,13 @@ is the case, inform the user that using a potato as a modem is not supported beh
 
 Obviously this means that since the client is sending an authoritative delta of time it took them to buzz, if the client was
 malicious, they could win (or at least tie) every time. Don't play with dicks.
+
+Demo
+-----
+
+This system was built for a project called [Starcraft Jeopardy](https://sc2ctl.com/jeopardy). If you would like to see the system in action you can view one of those episodes:
+
+* [Episode 1](http://vods.sc2ctl.com/vod/2015/03/10/jeopardy-one-fenner-jackson-gemini/).
 
 Testing
 --------
