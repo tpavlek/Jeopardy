@@ -30,6 +30,7 @@ class WampConnector implements WampServerInterface
     const QUESTION_ANSWER_QUESTION = "com.sc2ctl.jeopardy.question_answer";
     const CONTESTANT_SCORE = "com.sc2ctl.jeopardy.contestant_score";
     const DAILY_DOUBLE_BET_TOPIC = "com.sc2ctl.jeopardy.daily_double_bet";
+    const FINAL_JEOPARDY_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy";
 
     public function __construct(Emitter $emitter)
     {
@@ -167,6 +168,30 @@ class WampConnector implements WampServerInterface
                         $event['bet']
                     )
                 );
+                break;
+
+            case self::FINAL_JEOPARDY_TOPIC:
+                if (!isset($event['content'])) {
+                    //TODO logging
+                    echo "Recieved invalid final jeopardy topic request - no content selection";
+                    break;
+                }
+
+                if ($event['content'] == "category") {
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyCategoryRequest());
+                    break;
+                }
+
+                if ($event['content'] == "clue") {
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyClueRequest());
+                    break;
+                }
+
+                if ($event['content'] == "answer") {
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerRequest());
+                    break;
+                }
+
                 break;
 
             default:
@@ -338,6 +363,19 @@ class WampConnector implements WampServerInterface
         $response = $dismissal->toJson();
 
         $this->subscribedTopics[self::QUESTION_DISMISS_TOPIC]->broadcast($response);
+    }
+
+    public function onFinalJeopardyRequest($requestType, Question\FinalJeopardyClue $finalJeopardyClue) {
+        if (!array_key_exists(self::FINAL_JEOPARDY_TOPIC, $this->subscribedTopics)) {
+            return;
+        }
+
+        $requestedData = ucfirst($requestType);
+        $data = call_user_func([ $finalJeopardyClue, "get{$requestedData}"]);
+
+        $response = json_encode([ $requestType => $data ]);
+
+        $this->subscribedTopics[self::FINAL_JEOPARDY_TOPIC]->broadcast($response);
     }
 
 

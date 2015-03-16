@@ -4,6 +4,8 @@ namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyAnswerRequest;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyCategoryRequest;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswerEvent;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissal;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
@@ -140,6 +142,10 @@ class Server
         $emitter->addListener(BuzzerStatusChangeEvent::class, function(BuzzerStatusChangeEvent $event) use ($wamp, $board) {
             $board->setBuzzerStatus($event->getBuzzerStatus());
             $wamp->onBuzzerStatusChange($event->getBuzzerStatus());
+        });
+
+        $emitter->addListener(FinalJeopardyCategoryRequest::class, function(FinalJeopardyCategoryRequest $event) use ($wamp, $board) {
+            $wamp->onFinalJeopardyRequest("category", $board->getFinalJeopardyClue());
         });
 
         $this->eventLoop->run();

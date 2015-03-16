@@ -85,6 +85,10 @@ class BoardFactory
             }, $values->categories
         );
 
+        if (!isset($values->final)) {
+            throw new \Exception("Final Jeopardy is not defined in your questions file");
+        }
+
         $finalJeopardy = new FinalJeopardyClue($values->final->category, $values->final->clue, $values->final->answer);
 
         $board = new Board(

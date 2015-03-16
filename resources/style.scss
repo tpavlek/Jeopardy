@@ -215,6 +215,19 @@ span.active-buzzer:after {
   }
 }
 
+#final-jeopardy-display-modal {
+  @include modal;
+
+  .content {
+    @include modal-content;
+    font-size:300%;
+
+    button {
+      bottom: 0;
+    }
+  }
+}
+
 a.player-choice {
   text-decoration: none;
   color: black;

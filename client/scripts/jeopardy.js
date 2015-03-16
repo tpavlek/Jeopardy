@@ -7,6 +7,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.question_answer_topic = 'com.sc2ctl.jeopardy.question_answer';
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
     jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
+    jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.penalty_until = 0;
@@ -23,6 +24,7 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.question_dismiss_topic, handleQuestionDismiss);
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
             conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
+            conn.subscribe(jeopardy.final_jeopardy_topic, handleFinalJeopardy);
         },
         function () {
             console.warn('WebSocket connection closed');
@@ -52,6 +54,9 @@ window.jeopardy = (function (jeopardy) {
     };
     jeopardy.getDailyDoubleModal = function () {
         console.warn("You need to override the getDailyDoubleModal");
+    };
+    jeopardy.getFinalJeopardyModal = function () {
+        console.warn("You need to override the getFinalJeopardyModal");
     };
     jeopardy.getPlayerElements = function () {
         console.warn("You need to override the getPlayerElements method!");
@@ -140,6 +145,13 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.daily_double_bet_topic, payload, [], []);
     };
 
+    jeopardy.attemptFinalJeopardyDisplay = function(content) {
+        var payload = {
+            content: content
+        };
+        conn.publish(jeopardy.final_jeopardy_topic, payload, [], [])
+    };
+
     jeopardy.attemptSetPlayerScore = function (playerName, score) {
 
     };
@@ -205,6 +217,17 @@ window.jeopardy = (function (jeopardy) {
 
     function updateContestantScore(contestant, score) {
         $('.player.' + contestant).find('.score').first().html(score);
+    }
+
+    function handleFinalJeopardy(topic, data) {
+        data = JSON.parse(data);
+        var modal = jeopardy.getFinalJeopardyModal();
+
+        if (data.hasOwnProperty("category")) {
+            modal.find('.final-jeopardy-category').html(data.category);
+            modal.show('fast');
+            $('#final-jeopardy-next').attr('data-current-step', "clue");
+        }
     }
 
     function handleDailyDoubleBet(topic, data) {

@@ -1,1 +1,198 @@
-{"contestants":[{"name":"jlorenz","score":0},{"name":"cpahl","score":0},{"name":"kkimble","score":0}],"categories":[{"name":"COMPUTER STUFF","questions":[{"clue":"A class in school, or a record of where you've gone in a web browser","answer":"history","value":200,"daily_double":false},{"clue":"A single processor sharing multiple jobs is doing this, like when Mom tries to drive & put on makeup","answer":"multitasking","value":400,"daily_double":false},{"clue":"Before a game's release, Joe Gamer may be asked to play a pre-version usually referred to by this Greek letter","answer":"beta","value":600,"daily_double":false},{"clue":"You may have worked with a newfangled cash register called a POS terminal, the POS standing for this","answer":"point of sale","value":800,"daily_double":false},{"clue":"imgur.com has a button to make this four-letter cultural reference that often spreads online","answer":"a meme","value":1000,"daily_double":false}]},{"name":"\"MAC\" OR \"P.C.\"","questions":[{"clue":"\"Holy\" this fish whose king species may lay several million eggs during spawning season","answer":"a mackerel","value":200,"daily_double":false},{"clue":"This vehicle is also called a \"black & white\"","answer":"a police cruiser","value":400,"daily_double":false},{"clue":"American World War II general who was known as the \"Napoleon of Luzon\"","answer":"Douglas MacArthur","value":600,"daily_double":false},{"clue":"This Seattle mastermind is one of the three coaches to win a college national championship and a Super Bowl","answer":"Pete Carroll","value":800,"daily_double":false},{"clue":"Latin phrase meaning \"for each person\", as in \"Americans eat 85 pounds of chicken...\"","answer":"per capita","value":1000,"daily_double":false}]},{"name":"OLD TESTAMENT HEROES","questions":[{"clue":"This prophet \"prayed unto the Lord his god out of the fish's belly\"","answer":"Jonah","value":200,"daily_double":false},{"clue":"When he came to present the Israelites with the tablets of the law, they were dancing around a golden calf","answer":"Moses","value":400,"daily_double":false},{"clue":"When presented with this son's bloodstained coat, Jacob assumed that \"an evil beast hath devoured him\"","answer":"Joseph","value":600,"daily_double":true},{"clue":"\"When the Queen of Sheba heard of\" his fame, \"she came to prove him with hard questions\"","answer":"Solomon","value":800,"daily_double":false},{"clue":"When a chariot of fire appeared, this prophet went up into heaven","answer":"Elijah","value":1000,"daily_double":false}]},{"name":"COMPLETE THE LYRIC","questions":[{"clue":"Demi Lovato:\"'Cause our love was made, made in the ____\"","answer":"\"U.S.A.\"","value":200,"daily_double":false},{"clue":"Of Monsters & Men: \"There's  an old voice in my head that's holding me back \/Tell her that I miss our ____ ____\"","answer":"\"little talks\"","value":400,"daily_double":false},{"clue":"Bruno Mars: \"Treasure, that is what you are, Honey you're my ____ ____\"","answer":"\"golden star\"","value":600,"daily_double":false},{"clue":"fun.:\"This is it boys,This is ____ --What are we waiting for?\"","answer":"\"war\"","value":800,"daily_double":false},{"clue":"Paramore:\"Yeah, after all this time I'm still ____ ____\"","answer":"\"into you\"","value":1000,"daily_double":false}]},{"name":"TEEN CHOICE","questions":[{"clue":"Age mentioned in the 26th amendment","answer":"18","value":200,"daily_double":false},{"clue":"Number of nights in a fortnight","answer":"14","value":400,"daily_double":false},{"clue":"The first point of a tennis game","answer":"15","value":600,"daily_double":false},{"clue":"It's the title of Adele's debut album","answer":"<i>19<\/i>","value":800,"daily_double":false},{"clue":"In Italy, it's considered unlucky; fear of it is sometimes called heptadekaphobia","answer":"17","value":1000,"daily_double":false}]}]}
+{
+    "contestants": [
+        {
+            "name": "jlorenz",
+            "score": 0
+        },
+        {
+            "name": "cpahl",
+            "score": 0
+        },
+        {
+            "name": "kkimble",
+            "score": 0
+        }
+    ],
+    "categories": [
+        {
+            "name": "COMPUTER STUFF",
+            "questions": [
+                {
+                    "clue": "A class in school, or a record of where you've gone in a web browser",
+                    "answer": "history",
+                    "value": 200,
+                    "daily_double": false
+                },
+                {
+                    "clue": "A single processor sharing multiple jobs is doing this, like when Mom tries to drive & put on makeup",
+                    "answer": "multitasking",
+                    "value": 400,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Before a game's release, Joe Gamer may be asked to play a pre-version usually referred to by this Greek letter",
+                    "answer": "beta",
+                    "value": 600,
+                    "daily_double": false
+                },
+                {
+                    "clue": "You may have worked with a newfangled cash register called a POS terminal, the POS standing for this",
+                    "answer": "point of sale",
+                    "value": 800,
+                    "daily_double": false
+                },
+                {
+                    "clue": "imgur.com has a button to make this four-letter cultural reference that often spreads online",
+                    "answer": "a meme",
+                    "value": 1000,
+                    "daily_double": false
+                }
+            ]
+        },
+        {
+            "name": "\"MAC\" OR \"P.C.\"",
+            "questions": [
+                {
+                    "clue": "\"Holy\" this fish whose king species may lay several million eggs during spawning season",
+                    "answer": "a mackerel",
+                    "value": 200,
+                    "daily_double": false
+                },
+                {
+                    "clue": "This vehicle is also called a \"black & white\"",
+                    "answer": "a police cruiser",
+                    "value": 400,
+                    "daily_double": false
+                },
+                {
+                    "clue": "American World War II general who was known as the \"Napoleon of Luzon\"",
+                    "answer": "Douglas MacArthur",
+                    "value": 600,
+                    "daily_double": false
+                },
+                {
+                    "clue": "This Seattle mastermind is one of the three coaches to win a college national championship and a Super Bowl",
+                    "answer": "Pete Carroll",
+                    "value": 800,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Latin phrase meaning \"for each person\", as in \"Americans eat 85 pounds of chicken...\"",
+                    "answer": "per capita",
+                    "value": 1000,
+                    "daily_double": false
+                }
+            ]
+        },
+        {
+            "name": "OLD TESTAMENT HEROES",
+            "questions": [
+                {
+                    "clue": "This prophet \"prayed unto the Lord his god out of the fish's belly\"",
+                    "answer": "Jonah",
+                    "value": 200,
+                    "daily_double": false
+                },
+                {
+                    "clue": "When he came to present the Israelites with the tablets of the law, they were dancing around a golden calf",
+                    "answer": "Moses",
+                    "value": 400,
+                    "daily_double": false
+                },
+                {
+                    "clue": "When presented with this son's bloodstained coat, Jacob assumed that \"an evil beast hath devoured him\"",
+                    "answer": "Joseph",
+                    "value": 600,
+                    "daily_double": true
+                },
+                {
+                    "clue": "\"When the Queen of Sheba heard of\" his fame, \"she came to prove him with hard questions\"",
+                    "answer": "Solomon",
+                    "value": 800,
+                    "daily_double": false
+                },
+                {
+                    "clue": "When a chariot of fire appeared, this prophet went up into heaven",
+                    "answer": "Elijah",
+                    "value": 1000,
+                    "daily_double": false
+                }
+            ]
+        },
+        {
+            "name": "COMPLETE THE LYRIC",
+            "questions": [
+                {
+                    "clue": "Demi Lovato:\"'Cause our love was made, made in the ____\"",
+                    "answer": "\"U.S.A.\"",
+                    "value": 200,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Of Monsters & Men: \"There's  an old voice in my head that's holding me back \/Tell her that I miss our ____ ____\"",
+                    "answer": "\"little talks\"",
+                    "value": 400,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Bruno Mars: \"Treasure, that is what you are, Honey you're my ____ ____\"",
+                    "answer": "\"golden star\"",
+                    "value": 600,
+                    "daily_double": false
+                },
+                {
+                    "clue": "fun.:\"This is it boys,This is ____ --What are we waiting for?\"",
+                    "answer": "\"war\"",
+                    "value": 800,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Paramore:\"Yeah, after all this time I'm still ____ ____\"",
+                    "answer": "\"into you\"",
+                    "value": 1000,
+                    "daily_double": false
+                }
+            ]
+        },
+        {
+            "name": "TEEN CHOICE",
+            "questions": [
+                {
+                    "clue": "Age mentioned in the 26th amendment",
+                    "answer": "18",
+                    "value": 200,
+                    "daily_double": false
+                },
+                {
+                    "clue": "Number of nights in a fortnight",
+                    "answer": "14",
+                    "value": 400,
+                    "daily_double": false
+                },
+                {
+                    "clue": "The first point of a tennis game",
+                    "answer": "15",
+                    "value": 600,
+                    "daily_double": false
+                },
+                {
+                    "clue": "It's the title of Adele's debut album",
+                    "answer": "<i>19<\/i>",
+                    "value": 800,
+                    "daily_double": false
+                },
+                {
+                    "clue": "In Italy, it's considered unlucky; fear of it is sometimes called heptadekaphobia",
+                    "answer": "17",
+                    "value": 1000,
+                    "daily_double": false
+                }
+            ]
+        }
+    ],
+    "final": {
+        "category": "Some final",
+        "clue": "This is a game",
+        "answer": "Jeopardy!"
+    }
+}

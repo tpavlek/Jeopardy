@@ -9,6 +9,7 @@
             <button class="button" id="toggle-status">Toggle</button>
             <br />
             <button class="button bad" id="modal-dismiss">Dismiss</button>
+            <br />
             <button id="trigger-final" class="button facebook">Start Final</button>
         </div>
 
@@ -38,6 +39,9 @@
         };
         jeo.getDailyDoubleModal = function() {
             return $('#daily-double-display-modal');
+        };
+        jeo.getFinalJeopardyModal = function() {
+            return $("#final-jeopardy-display-modal");
         };
 
 
@@ -84,7 +88,15 @@
             });
 
             $('#trigger-final').bind('contextmenu', function() {
+                var current_step = $('#final-jeopardy-next').attr('data-current-step');
+                jeopardy.attemptFinalJeopardyDisplay(current_step);
 
+                return false;
+            });
+
+            $('#final-jeopardy-next').click(function() {
+                var current_step = $(this).attr('data-current-step');
+                console.log(current_step);
             });
 
             $('#daily-double-form').submit(function() {
