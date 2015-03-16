@@ -33,6 +33,16 @@ php server.php &
 
 Now you can point your web-browser to whatever URL you set the client directory to run off of, and you'll be able to play!
 
+### Using other JSON files
+
+You need not use the default `questions.json` naming schema. Simply pass the name of your questions file as an argument
+to `server.php` and you can use it. This filename does *not* include the extension and must be within the `game_data/` folder.
+For example, if you had a file `game_data/my_board.json` you would run:
+
+```
+php server.php my_board &
+```
+
 Playing
 --------
 

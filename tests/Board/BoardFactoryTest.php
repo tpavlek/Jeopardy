@@ -11,7 +11,8 @@ class BoardFactoryTest extends PHPUnit_Framework_TestCase
 
     public function test_it_deserializes_from_json()
     {
-        $board = BoardFactory::fromJson(file_get_contents("tests/questions.json"));
+        $factory = new BoardFactory('questions', 'tests/');
+        $board = $factory->initialize();
 
         $this->assertEquals(3, $board->getContestants()->count());
         $this->assertEquals(2, $board->getCategories()->count());

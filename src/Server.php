@@ -47,7 +47,7 @@ class Server
         $this->eventLoop = $loopInterface;
     }
 
-    public function run()
+    public function run(BoardFactory $boardFactory)
     {
         $emitter = new Emitter();
         $wamp = new WampConnector($emitter);
@@ -55,7 +55,7 @@ class Server
         $webSocket = new \React\Socket\Server($this->eventLoop);
         $webSocket->listen(self::SOCKET_LISTEN_PORT, '0.0.0.0');
 
-        $board = BoardFactory::initialize();
+        $board = $boardFactory->initialize();
 
         $webServer = new IoServer(
             new HttpServer(
