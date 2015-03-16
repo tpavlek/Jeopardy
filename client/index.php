@@ -9,7 +9,7 @@ $json = json_decode(file_get_contents('../game_data/questions.json'), true);
 
 $config = [];
 $config['players'] = array_map(function(array $contestant_info) {
-    return $contestant_info['name'];
+    return ucfirst(strtolower($contestant_info['name']));
 }, $json['contestants']);
 
 
