@@ -165,6 +165,11 @@ class Board
         return $this->categories;
     }
 
+    public function getFinalJeopardy()
+    {
+        return $this->finalJeopardyState;
+    }
+
     public function getFinalJeopardyClue()
     {
         return $this->finalJeopardyState->getClue();

@@ -15,5 +15,23 @@ class FinalJeopardyBetEvent extends AbstractEvent
         $this->bet = $bet;
     }
 
+    /**
+     * @return string
+     */
+    public function getContestant()
+    {
+        return $this->contestant;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBet()
+    {
+        return $this->bet;
+    }
+
+
+
 
 }

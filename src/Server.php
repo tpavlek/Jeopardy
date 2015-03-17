@@ -5,6 +5,7 @@ namespace Depotwarehouse\Jeopardy;
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyAnswerRequest;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyBetEvent;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyCategoryRequest;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyClueRequest;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswerEvent;
@@ -44,6 +45,12 @@ class Server
      * @var float
      */
     protected $buzzer_resolve_timeout = 0.5;
+
+    /**
+     * The time, in seconds that we will wait for final jeopardy bets/responses to come in.
+     * @var int
+     */
+    protected $final_jeopardy_collection_timeout = 5;
 
     public function __construct(LoopInterface $loopInterface)
     {
@@ -150,11 +157,29 @@ class Server
         });
 
         $emitter->addListener(FinalJeopardyClueRequest::class, function(FinalJeopardyClueRequest $event) use ($wamp, $board) {
-            $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
+            // First we need to collect all the bets.
+            $wamp->onFinalJeopardyBetCollectionRequest();
+
+            // We're going to wait for a set time
+            $this->eventLoop->addTimer($this->final_jeopardy_collection_timeout, function() use ($wamp, $board) {
+                if (!$board->getFinalJeopardy()->hasAllBets()) {
+                    //TODO logging
+                    echo "Did not recieve all bets.\n";
+                    $missingbets = $board->getFinalJeopardy()->getMissingBets();
+                    $missingbets = implode(", ", $missingbets);
+                    echo "Require bets from: {$missingbets}\n";
+                }
+                $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
+            });
+
+        });
+
+        $emitter->addListener(FinalJeopardyBetEvent::class, function(FinalJeopardyBetEvent $event) use ($wamp, $board) {
+            $finalJeopardy = $board->getFinalJeopardy();
+            $finalJeopardy->setBet($event->getContestant(), $event->getBet());
         });
 
         $emitter->addListener(FinalJeopardyAnswerRequest::class, function(FinalJeopardyAnswerRequest $event) use ($wamp, $board) {
-            echo "Emitting answer";
             $wamp->onFinalJeopardyRequest("answer", $board->getFinalJeopardyClue());
         });
 

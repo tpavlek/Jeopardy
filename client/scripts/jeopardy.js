@@ -8,7 +8,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.contestant_score_topic = 'com.sc2ctl.jeopardy.contestant_score';
     jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
     jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
-    jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy_final_jeopardy_responses";
+    jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy.final_jeopardy_responses";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.penalty_until = 0;
@@ -26,6 +26,7 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
             conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
             conn.subscribe(jeopardy.final_jeopardy_topic, handleFinalJeopardy);
+            conn.subscribe(jeopardy.final_jeopardy_responses_topic, handleFinalJeopardyResponses)
         },
         function () {
             console.warn('WebSocket connection closed');
@@ -59,6 +60,13 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.getFinalJeopardyModal = function () {
         console.warn("You need to override the getFinalJeopardyModal");
     };
+    jeopardy.getFinalJeopardyBetInput = function () {
+        console.warn("You need to override the getFinalJeopardyBetInput");
+    };
+    jeopardy.getFinalJeopardyAnswerInput = function () {
+        console.warn("You need to override the getFinalJeopardyBetInput");
+    };
+
     jeopardy.getPlayerElements = function () {
         console.warn("You need to override the getPlayerElements method!");
     };
@@ -153,6 +161,16 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.final_jeopardy_topic, payload, [], [])
     };
 
+    jeopardy.attemptFinalJeopardyBet = function(playerName, bet) {
+        var payload = {
+            contestant: playerName,
+            bet: bet,
+            type: "bet"
+        };
+
+        conn.publish(jeopardy.final_jeopardy_responses_topic, payload, [], []);
+    };
+
     jeopardy.attemptSetPlayerScore = function (playerName, score) {
 
     };
@@ -172,6 +190,18 @@ window.jeopardy = (function (jeopardy) {
 
 
     /* These are library functions */
+
+    function getActivePlayer() {
+        var players = jeopardy.getPlayerElements();
+
+        for (var i in players) {
+            if ($(players[i]).data('active-player') == true) {
+                return $(players[i]).data('player-name');
+            }
+        }
+
+        console.error("Could not determine active player");
+    }
 
     function setBuzzerActive(status_indicator) {
         jeopardy.buzzer_active_at = Date.now();
@@ -234,6 +264,13 @@ window.jeopardy = (function (jeopardy) {
         if (data.hasOwnProperty("clue")) {
             modal.find('.final-jeopardy-clue').html(data.clue);
             $('#final-jeopardy-next').attr('data-current-step', "answer");
+
+            var answer_input = jeopardy.getFinalJeopardyAnswerInput();
+            if (answer_input == undefined) return;
+            var bet_input = jeopardy.getFinalJeopardyBetInput();
+            if (bet_input == undefined) return;
+            bet_input.parent().hide('fast');
+            answer_input.parent().show('fast');
             return;
         }
 
@@ -245,6 +282,24 @@ window.jeopardy = (function (jeopardy) {
             modal.find('.answer').show('fast');
             $('#final-jeopardy-next').hide('fast'); //TODO this selector is tightly coupled
         }
+    }
+
+    function handleFinalJeopardyResponses(topic, data) {
+        data = JSON.parse(data);
+
+        if (data.content == "bet") {
+            collectFinalJeopardyBet();
+        }
+    }
+
+    function collectFinalJeopardyBet() {
+        var input = jeopardy.getFinalJeopardyBetInput();
+        if (input == undefined) {
+            return;
+        }
+        console.log(input.val());
+
+        jeopardy.attemptFinalJeopardyBet(getActivePlayer(), input.val());
     }
 
     function handleDailyDoubleBet(topic, data) {

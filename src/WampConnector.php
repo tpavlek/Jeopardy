@@ -189,7 +189,6 @@ class WampConnector implements WampServerInterface
                 }
 
                 if ($event['content'] == "answer") {
-                    echo "Requesting answer";
                     $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerRequest());
                     break;
                 }
@@ -198,13 +197,18 @@ class WampConnector implements WampServerInterface
             case self::FINAL_JEOPARDY_RESPONSES_TOPIC:
                 if (!isset($event['contestant']) || !isset($event['type'])) {
                     //TODO logging
-                    echo "Invalid jeopardy response, did not specify type or did not include contestant";
+                    echo "Invalid jeopardy response, did not specify type or did not include contestant\n";
+                    print_r($event);
+                    break;
                 }
 
                 if ($event['type'] == "bet") {
+
                     if (!isset($event['bet'])) {
                         //TODO logging
-                        echo "Invalid final jeopardy bet, did not include a bet value";
+                        echo "Invalid final jeopardy bet, did not include a bet value\n";
+                        print_r($event);
+                        break;
                     }
                     $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyBetEvent($event['contestant'], $event['bet']));
                     break;
@@ -215,7 +219,8 @@ class WampConnector implements WampServerInterface
                         echo "Invalid final jeopardy answer, did not include an answer response";
                     }
 
-                    $this->emitter->emit()
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerEvent($event['contestant'], $event['answer']));
+                    break;
                 }
 
                 break;
@@ -402,6 +407,32 @@ class WampConnector implements WampServerInterface
         $response = json_encode([ $requestType => $data ]);
 
         $this->subscribedTopics[self::FINAL_JEOPARDY_TOPIC]->broadcast($response);
+    }
+
+    public function onFinalJeopardyBetCollectionRequest()
+    {
+        if (!array_key_exists(self::FINAL_JEOPARDY_RESPONSES_TOPIC, $this->subscribedTopics)) {
+            return;
+        }
+
+        $response = json_encode([
+            'content' => "bet"
+        ]);
+
+        $this->subscribedTopics[self::FINAL_JEOPARDY_RESPONSES_TOPIC]->broadcast($response);
+    }
+
+    public function onFinalJeopardyAnswerCollectionRequest()
+    {
+        if (!array_key_exists(self::FINAL_JEOPARDY_RESPONSES_TOPIC, $this->subscribedTopics)) {
+            return;
+        }
+
+        $response = json_encode([
+            'content' => 'answer'
+        ]);
+
+        $this->subscribedTopics[self::FINAL_JEOPARDY_RESPONSES_TOPIC]->broadcast($response);
     }
 
 
