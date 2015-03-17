@@ -19,7 +19,7 @@
                 <div class="content"></div>
             </div>
             <button id="final-jeopardy-next" data-current-step="category" class="button success">Next</button>
-        {% else %}
+        {% elseif not obs %}
             <div class="final-jeopardy-bet-input-container">
                 <label for="final-jeopardy-bet-input">Bet: </label>
                 <input id="final-jeopardy-bet-input" type="number" value="0" />

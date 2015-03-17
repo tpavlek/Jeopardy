@@ -28,6 +28,11 @@ $router->get('/play', function (Request $request, Response $response, array $arg
     return new \Symfony\Component\HttpFoundation\RedirectResponse('/');
 });
 
+$router->get('/obs', function (Request $request, Response $response, array $args) use ($twig, $config) {
+    $response->setContent($twig->render('obs.html.twig', [ 'players' => $config['players'] ]));
+    return $response;
+});
+
 $router->get('/play/{player}', function (Request $request, Response $response, array $args) use ($twig, $config) {
     $player = ucfirst(strtolower($args['player']));
 

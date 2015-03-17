@@ -1,4 +1,14 @@
+
 <div class="player-container">
+    {% if obs %}
+    <div class="player Troy">
+        <h2>@troypavlek</h2>
+        <div class="img-wrapper">
+            <img src="/img/fill.jpg">
+        </div>
+    </div>
+    <br />
+    {% endif %}
     {% for player in players %}
         <div class="player {{ player }}" data-player-name="{{ player }}" {% if player == user %} data-active-player="true" {% endif %}>
             <h2>{{ player }}</h2>

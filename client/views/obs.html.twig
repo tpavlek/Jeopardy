@@ -1,0 +1,34 @@
+{% set obs = true %}
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="buzzer-column">
+        {% include 'partials/contestants.html.twig' with {'players': players} %}
+    </div>
+    <div class="content-wrapper">
+        {% include 'partials/board.html.twig' %}
+    </div>
+
+
+
+<script>
+    var jeo = window.jeopardy;
+    jeo.getJeopardyBoardElement = function() {
+        return $('.jeopardy-board');
+    };
+    jeo.getQuestionDisplayModal = function() {
+        return $('#question-display-modal');
+    };
+    jeo.getPlayerElements = function() {
+        return $('.player-container').find('.player').toArray();
+    };
+    jeo.getDailyDoubleModal = function() {
+        return $('#daily-double-display-modal');
+    };
+    jeo.getFinalJeopardyModal = function() {
+        return $("#final-jeopardy-display-modal");
+    };
+
+</script>
+
+{% endblock %}
