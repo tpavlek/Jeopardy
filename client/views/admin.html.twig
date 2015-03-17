@@ -99,6 +99,11 @@
                 jeo.attemptFinalJeopardyDisplay(current_step);
             });
 
+            $('.responses .response').click(function() {
+                jeo.attemptGetFinalJeopardyAnswer($(this).attr('data-player'));
+                return false;
+            });
+
             $('#daily-double-form').submit(function() {
                 var modal = jeo.getDailyDoubleModal();
                 var category = modal.attr('data-category');

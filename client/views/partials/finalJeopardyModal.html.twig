@@ -1,7 +1,13 @@
 <div id="final-jeopardy-display-modal">
     <div class="content">
-        <h1 class="final-jeopardy-category"></h1>
-        <h1 class="final-jeopardy-clue"></h1>
+        <h1 class="final-jeopardy-category" {% if admin %} style="font-size:50%" {% endif %}></h1>
+        <h1 class="final-jeopardy-clue" {% if admin %} style="font-size:50%" {% endif %}></h1>
+
+        <div class="contestant-response" style="display:none;">
+            <h3 class="contestant-name"></h3>
+            <h4 class="contestant-answer"></h4>
+            <h5 class="contestant-wager"></h5>
+        </div>
 
         {% if admin %}
             <div class="responses">

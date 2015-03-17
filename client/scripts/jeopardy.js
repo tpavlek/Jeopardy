@@ -9,6 +9,7 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.daily_double_bet_topic = "com.sc2ctl.jeopardy.daily_double_bet";
     jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
     jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy.final_jeopardy_responses";
+    jeopardy.final_jeopardy_answer_topic = "com.sc2ctl.jeopardy.final_jeopardy_answers";
     jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
     jeopardy.buzzer_active_at = false;
     jeopardy.penalty_until = 0;
@@ -26,7 +27,9 @@ window.jeopardy = (function (jeopardy) {
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
             conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
             conn.subscribe(jeopardy.final_jeopardy_topic, handleFinalJeopardy);
-            conn.subscribe(jeopardy.final_jeopardy_responses_topic, handleFinalJeopardyResponses)
+            conn.subscribe(jeopardy.final_jeopardy_responses_topic, handleFinalJeopardyResponses);
+            conn.subscribe(jeopardy.final_jeopardy_answer_topic, handleFinalJeopardyAnswers);
+
         },
         function () {
             console.warn('WebSocket connection closed');
@@ -171,6 +174,23 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.final_jeopardy_responses_topic, payload, [], []);
     };
 
+    jeopardy.attemptFinalJeopardyAnswer = function(playerName, answer) {
+        var payload = {
+            contestant: playerName,
+            answer: answer,
+            type: "answer"
+        };
+        conn.publish(jeopardy.final_jeopardy_responses_topic, payload, [], []);
+    };
+
+    jeopardy.attemptGetFinalJeopardyAnswer = function(playerName) {
+        var payload = {
+            contestant: playerName
+        };
+
+        conn.publish(jeopardy.final_jeopardy_answer_topic, payload, [], []);
+    };
+
     jeopardy.attemptSetPlayerScore = function (playerName, score) {
 
     };
@@ -190,6 +210,17 @@ window.jeopardy = (function (jeopardy) {
 
 
     /* These are library functions */
+
+    function handleFinalJeopardyAnswers(topic, data) {
+        data = JSON.parse(data);
+
+        var modal = jeopardy.getFinalJeopardyModal();
+        var response = modal.find('.contestant-response');
+        response.find('.contestant-name').html(data.contestant);
+        response.find('.contestant-answer').html(data.answer);
+        response.find('.contestant-wager').html(data.bet).attr('data-bet', data.bet);
+        response.show('fast');
+    }
 
     function getActivePlayer() {
         var players = jeopardy.getPlayerElements();
@@ -269,13 +300,19 @@ window.jeopardy = (function (jeopardy) {
             if (answer_input == undefined) return;
             var bet_input = jeopardy.getFinalJeopardyBetInput();
             if (bet_input == undefined) return;
+
             bet_input.parent().hide('fast');
             answer_input.parent().show('fast');
             return;
         }
 
         if (data.hasOwnProperty("answer")) {
-            if (!jeopardy.admin_mode) return;
+            if (!jeopardy.admin_mode) {
+                var my_answer_input = jeopardy.getFinalJeopardyAnswerInput();
+                if (my_answer_input == undefined) return;
+                my_answer_input.parent().hide('fast');
+                return;
+            }
 
             modal.find('.responses').show('fast');
             modal.find('.answer .content').html(data.answer);
@@ -290,6 +327,10 @@ window.jeopardy = (function (jeopardy) {
         if (data.content == "bet") {
             collectFinalJeopardyBet();
         }
+
+        if (data.content == "answer") {
+            collectFinalJeopardyAnswer();
+        }
     }
 
     function collectFinalJeopardyBet() {
@@ -297,9 +338,18 @@ window.jeopardy = (function (jeopardy) {
         if (input == undefined) {
             return;
         }
-        console.log(input.val());
 
         jeopardy.attemptFinalJeopardyBet(getActivePlayer(), input.val());
+    }
+
+    function collectFinalJeopardyAnswer() {
+        var input = jeopardy.getFinalJeopardyAnswerInput();
+        if (input == undefined) {
+            return;
+        }
+
+        console.log(input.val());
+        jeopardy.attemptFinalJeopardyAnswer(getActivePlayer(), input.val());
     }
 
     function handleDailyDoubleBet(topic, data) {

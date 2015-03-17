@@ -32,6 +32,7 @@ class WampConnector implements WampServerInterface
     const DAILY_DOUBLE_BET_TOPIC = "com.sc2ctl.jeopardy.daily_double_bet";
     const FINAL_JEOPARDY_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy";
     const FINAL_JEOPARDY_RESPONSES_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy_responses";
+    const FINAL_JEOPARDY_ANSWER_TOPIC = "com.sc2ctl.jeopardy.final_jeopardy_answers";
 
     public function __construct(Emitter $emitter)
     {
@@ -184,6 +185,7 @@ class WampConnector implements WampServerInterface
                 }
 
                 if ($event['content'] == "clue") {
+                    echo "Recieved clue request";
                     $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyClueRequest());
                     break;
                 }
@@ -210,19 +212,29 @@ class WampConnector implements WampServerInterface
                         print_r($event);
                         break;
                     }
-                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyBetEvent($event['contestant'], $event['bet']));
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyBetEvent($event['contestant'],
+                        $event['bet']));
                     break;
                 }
                 if ($event['type'] == "answer") {
                     if (!isset($event['answer'])) {
                         //TODO Logging
-                        echo "Invalid final jeopardy answer, did not include an answer response";
+                        echo "Invalid final jeopardy answer, did not include an answer response\n";
+                        print_r($event);
+                        break;
                     }
 
-                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerEvent($event['contestant'], $event['answer']));
+                    $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyAnswerEvent($event['contestant'],
+                        $event['answer']));
                     break;
                 }
 
+                break;
+
+            case self::FINAL_JEOPARDY_ANSWER_TOPIC:
+                //TODO error checking
+
+                $this->emitter->emit(new Question\FinalJeopardy\FinalJeopardyResponseRequest($event['contestant']));
                 break;
 
             default:
@@ -285,8 +297,8 @@ class WampConnector implements WampServerInterface
     /**
      * When a user subscribes to the Contestant Score feed, they should get and update of all the current contestants
      *
-     * @param Collection $contestants  A collection containing Contestant objects
-     * @param string     $sessionId    The session ID of the user who subscribed.
+     * @param Collection $contestants A collection containing Contestant objects
+     * @param string $sessionId The session ID of the user who subscribed.
      */
     public function onContestantScoreSubscription(Collection $contestants, $sessionId)
     {
@@ -305,8 +317,8 @@ class WampConnector implements WampServerInterface
      * We have a new subscriber to the question feed, which means we want to send them the data about all the currently
      * active questions.
      *
-     * @param Collection $categories  A collection which contains Category objects.
-     * @param string     $sessionId   The session ID of the user who subscribed.
+     * @param Collection $categories A collection which contains Category objects.
+     * @param string $sessionId The session ID of the user who subscribed.
      */
     public function onQuestionSubscribe(Collection $categories, $sessionId)
     {
@@ -324,8 +336,8 @@ class WampConnector implements WampServerInterface
     /**
      * A question has been selected, and should be displayed to all clients.
      *
-     * @param Question  $question
-     * @param string    $category
+     * @param Question $question
+     * @param string $category
      */
     public function onQuestionDisplay(Question $question, $category)
     {
@@ -396,13 +408,14 @@ class WampConnector implements WampServerInterface
         $this->subscribedTopics[self::QUESTION_DISMISS_TOPIC]->broadcast($response);
     }
 
-    public function onFinalJeopardyRequest($requestType, Question\FinalJeopardyClue $finalJeopardyClue) {
+    public function onFinalJeopardyRequest($requestType, Question\FinalJeopardyClue $finalJeopardyClue)
+    {
         if (!array_key_exists(self::FINAL_JEOPARDY_TOPIC, $this->subscribedTopics)) {
             return;
         }
 
         $requestedData = ucfirst($requestType);
-        $data = call_user_func([ $finalJeopardyClue, "get{$requestedData}"]);
+        $data = call_user_func([ $finalJeopardyClue, "get{$requestedData}" ]);
 
         $response = json_encode([ $requestType => $data ]);
 
@@ -435,9 +448,14 @@ class WampConnector implements WampServerInterface
         $this->subscribedTopics[self::FINAL_JEOPARDY_RESPONSES_TOPIC]->broadcast($response);
     }
 
+    public function onFinalJeopardyResponse(Question\FinalJeopardy\FinalJeopardyQuestionResponse $response)
+    {
+        if (!array_key_exists(self::FINAL_JEOPARDY_ANSWER_TOPIC, $this->subscribedTopics)) {
+            return;
+        }
 
-
-
+        $this->subscribedTopics[self::FINAL_JEOPARDY_ANSWER_TOPIC]->broadcast($response->toJson());
+    }
 
 
     /**

@@ -4,10 +4,14 @@ namespace Depotwarehouse\Jeopardy;
 
 use Depotwarehouse\Jeopardy\Board\BoardFactory;
 use Depotwarehouse\Jeopardy\Board\Question\DailyDouble\DailyDoubleBetEvent;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyAnswerEvent;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyAnswerRequest;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyBetEvent;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyCategoryRequest;
 use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyClueRequest;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyQuestionResponse;
+use Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy\FinalJeopardyResponseRequest;
+use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswer;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionAnswerEvent;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissal;
 use Depotwarehouse\Jeopardy\Board\Question\QuestionDismissalEvent;
@@ -50,7 +54,7 @@ class Server
      * The time, in seconds that we will wait for final jeopardy bets/responses to come in.
      * @var int
      */
-    protected $final_jeopardy_collection_timeout = 5;
+    protected $final_jeopardy_collection_timeout = 5.5;
 
     public function __construct(LoopInterface $loopInterface)
     {
@@ -157,7 +161,6 @@ class Server
         });
 
         $emitter->addListener(FinalJeopardyClueRequest::class, function(FinalJeopardyClueRequest $event) use ($wamp, $board) {
-            // First we need to collect all the bets.
             $wamp->onFinalJeopardyBetCollectionRequest();
 
             // We're going to wait for a set time
@@ -172,6 +175,8 @@ class Server
                 $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
             });
 
+
+
         });
 
         $emitter->addListener(FinalJeopardyBetEvent::class, function(FinalJeopardyBetEvent $event) use ($wamp, $board) {
@@ -180,7 +185,46 @@ class Server
         });
 
         $emitter->addListener(FinalJeopardyAnswerRequest::class, function(FinalJeopardyAnswerRequest $event) use ($wamp, $board) {
-            $wamp->onFinalJeopardyRequest("answer", $board->getFinalJeopardyClue());
+            $wamp->onFinalJeopardyAnswerCollectionRequest();
+
+            $timer = $this->eventLoop->addTimer($this->final_jeopardy_collection_timeout, function() use ($wamp, $board) {
+                if (!$board->getFinalJeopardy()->hasAllAnswers()) {
+                    //TODO logging
+                    echo "Did not receive all final jeopardy answers!\n";
+                    $missingAnswers = $board->getFinalJeopardy()->getMissingAnswers();
+                    $missingAnswers = implode(", ", $missingAnswers);
+                    echo "Require answers from: {$missingAnswers}\n";
+                }
+                $wamp->onFinalJeopardyRequest("answer", $board->getFinalJeopardyClue());
+            });
+
+
+
+        });
+
+        $emitter->addListener(FinalJeopardyAnswerEvent::class, function(FinalJeopardyAnswerEvent $event) use ($wamp, $board) {
+            $finalJeopardy = $board->getFinalJeopardy();
+
+            if ($finalJeopardy->hasAnswer($event->getContestant())) {
+                //TODO logging
+                echo "{$event->getContestant()} has already submitted a final answer";
+                return;
+            }
+
+            $finalJeopardy->setAnswer($event->getContestant(), $event->getAnswer());
+        });
+
+        $emitter->addListener(FinalJeopardyResponseRequest::class, function(FinalJeopardyResponseRequest $event) use ($wamp, $board) {
+            $finalJeopardy = $board->getFinalJeopardy();
+
+            if (!$finalJeopardy->hasAnswer($event->getContestant())) {
+                //TODO logging
+                $response = new FinalJeopardyQuestionResponse($event->getContestant(), 0, "No answer, Troy");
+                $wamp->onFinalJeopardyResponse($response);
+                return;
+            }
+
+            $wamp->onFinalJeopardyResponse($finalJeopardy->getResponse($event->getContestant()));
         });
 
         $this->eventLoop->run();

@@ -4,16 +4,14 @@ namespace Depotwarehouse\Jeopardy\Board\Question\FinalJeopardy;
 
 use League\Event\AbstractEvent;
 
-class FinalJeopardyAnswerEvent extends AbstractEvent
+class FinalJeopardyResponseRequest extends AbstractEvent
 {
 
     protected $contestant;
-    protected $answer;
 
-    public function __construct($contestant, $answer)
+    public function __construct($contestant)
     {
         $this->contestant = $contestant;
-        $this->answer = $answer;
     }
 
     /**
@@ -22,14 +20,6 @@ class FinalJeopardyAnswerEvent extends AbstractEvent
     public function getContestant()
     {
         return $this->contestant;
-    }
-
-    /**
-     * @return string
-     */
-    public function getAnswer()
-    {
-        return $this->answer;
     }
 
 

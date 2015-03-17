@@ -30,9 +30,9 @@ class State
     public function __construct(FinalJeopardyClue $clue, array $contestants)
     {
         $this->clue = $clue;
-        $this->contestants = [];
+        $this->contestants = [ ];
         foreach ($contestants as $contestant) {
-            $this->contestants[$contestant] = [];
+            $this->contestants[$contestant] = [ ];
         }
     }
 
@@ -59,12 +59,22 @@ class State
     /**
      * @return Collection
      */
-    protected function findMissingBets() {
-        $hasBet = function($contestant) {
+    protected function findMissingBets()
+    {
+        $hasBet = function ($contestant) {
             return !isset($contestant['bet']);
         };
 
         return (new Collection($this->contestants))->filter($hasBet);
+    }
+
+    protected function findMissingAnswers()
+    {
+        $hasAnswer = function($contestant) {
+            return !isset($contestant['answer']);
+        };
+
+        return (new Collection($this->contestants))->filter($hasAnswer);
     }
 
     public function hasAllBets()
@@ -73,12 +83,38 @@ class State
 
     }
 
+    public function hasAllAnswers()
+    {
+        return $this->findMissingAnswers()->count() === 0;
+    }
+
     /**
      * @return array
      */
     public function getMissingBets()
     {
         return $this->findMissingBets()->keys()->toArray();
+    }
+
+    public function getMissingAnswers()
+    {
+        return $this->findMissingAnswers()->keys()->toArray();
+    }
+
+    public function hasAnswer($contestant)
+    {
+        if (!array_key_exists($contestant, $this->contestants)) {
+            return false;
+        }
+
+        return isset($this->contestants[$contestant]['answer']);
+    }
+
+    public function getResponse($contestant)
+    {
+        $arr = $this->contestants[$contestant];
+        $response = new FinalJeopardyQuestionResponse($contestant, $arr['bet'], $arr['answer']);
+        return $response;
     }
 
     public function getClue()
