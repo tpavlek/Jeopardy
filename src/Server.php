@@ -164,6 +164,7 @@ class Server
             $wamp->onFinalJeopardyBetCollectionRequest();
 
             // We're going to wait for a set time
+            //TODO this doesn't work for some reason in every case, so we simply don't close the acceptance of responses.
             $this->eventLoop->addTimer($this->final_jeopardy_collection_timeout, function() use ($wamp, $board) {
                 if (!$board->getFinalJeopardy()->hasAllBets()) {
                     //TODO logging
