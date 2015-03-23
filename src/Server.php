@@ -26,6 +26,7 @@ use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Buzzer\Resolver;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Depotwarehouse\Jeopardy\Participant\ContestantScoreChangeEvent;
 use Depotwarehouse\Jeopardy\Participant\ContestantScoreSubscriptionEvent;
 use League\Event\Emitter;
 use League\Event\Event;
@@ -176,8 +177,18 @@ class Server
                 $wamp->onFinalJeopardyRequest("clue", $board->getFinalJeopardyClue());
             });
 
+        });
 
+        $emitter->addListener(ContestantScoreChangeEvent::class, function(ContestantScoreChangeEvent $event) use ($wamp, $board) {
+            $board->addScore(new Contestant($event->getContestant()), $event->getScoreChange());
 
+            $contestant = $board->getContestants()->first(
+                function($key, Contestant $contestant) use ($event) {
+                    return $contestant->getName() == $event->getContestant();
+                }
+            );
+
+            $wamp->onContestantScoreUpdate($contestant);
         });
 
         $emitter->addListener(FinalJeopardyBetEvent::class, function(FinalJeopardyBetEvent $event) use ($wamp, $board) {

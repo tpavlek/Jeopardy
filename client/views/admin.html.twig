@@ -67,24 +67,45 @@
             $('.player').click(function() {
                 var playerName = $(this).attr('data-player-name');
                 var modal = jeo.getQuestionDisplayModal();
-                var category = modal.attr('data-category');
-                var value = modal.attr('data-value');
-                var bet = jeo.getRealModalValue(modal);
 
-                jeopardy.attemptQuestionAnswer(category, value, playerName, bet, true);
+                if (modal.is(":visible")) {
+                    var category = modal.attr('data-category');
+                    var value = modal.attr('data-value');
+
+                    jeopardy.attemptQuestionAnswer(category, value, playerName, bet, true);
+                    return false;
+                }
+
+                modal = jeo.getFinalJeopardyModal();
+                if (modal.is(':visible')) {
+                    jeo.attemptAwardFinalJeopardyAmount(playerName, true);
+                }
+
             });
 
             $('.player').bind('contextmenu', function() {
                 var playerName = $(this).attr('data-player-name');
                 var modal = jeo.getQuestionDisplayModal();
-                var category = modal.attr('data-category');
-                var value = parseInt(jeo.getRealModalValue(modal));
-                var bet = jeo.getRealModalValue(modal);
 
+                if (modal.is(':visible')) {
+                    var category = modal.attr('data-category');
+                    var value = parseInt(jeo.getRealModalValue(modal));
+                    var bet = jeo.getRealModalValue(modal);
 
-                jeopardy.attemptQuestionAnswer(category, value, playerName, bet, false);
+                    jeopardy.attemptQuestionAnswer(category, value, playerName, bet, false);
+
+                    return false;
+                }
+
+                modal = jeo.getFinalJeopardyModal();
+                if (modal.is(':visible')) {
+                    jeo.attemptAwardFinalJeopardyAmount(playerName, false);
+                    return false;
+                }
 
                 return false;
+
+
             });
 
             $('#trigger-final').bind('contextmenu', function() {

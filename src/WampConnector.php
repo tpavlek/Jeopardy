@@ -12,6 +12,7 @@ use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusChangeEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzerStatusSubscriptionEvent;
 use Depotwarehouse\Jeopardy\Buzzer\BuzzReceivedEvent;
 use Depotwarehouse\Jeopardy\Participant\Contestant;
+use Depotwarehouse\Jeopardy\Participant\ContestantScoreChangeEvent;
 use Depotwarehouse\Jeopardy\Participant\ContestantScoreSubscriptionEvent;
 use Illuminate\Support\Collection;
 use League\Event\Emitter;
@@ -105,6 +106,17 @@ class WampConnector implements WampServerInterface
                         new BuzzerStatus($event['active'])
                     )
                 );
+                break;
+
+            case self::CONTESTANT_SCORE:
+                if (!isset($event['diff']) || !isset($event['contestant'])) {
+                    // TODO logging
+                    echo "Invalid parameters sent to update contestant score\n";
+                    print_r($event);
+                    break;
+                }
+
+                $this->emitter->emit(new ContestantScoreChangeEvent($event['contestant'], $event['diff']));
                 break;
 
             case self::QUESTION_DISPLAY_TOPIC:
@@ -311,6 +323,17 @@ class WampConnector implements WampServerInterface
         })->toJson();
 
         $this->subscribedTopics[self::CONTESTANT_SCORE]->broadcast($response, [ ], [ $sessionId ]);
+    }
+
+    public function onContestantScoreUpdate(Contestant $contestant)
+    {
+        if (!array_key_exists(self::CONTESTANT_SCORE, $this->subscribedTopics)) {
+            return;
+        }
+
+        $response = $contestant->toJson();
+
+        $this->subscribedTopics[self::CONTESTANT_SCORE]->broadcast($response, [], []);
     }
 
     /**

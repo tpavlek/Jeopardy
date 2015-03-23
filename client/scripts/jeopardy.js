@@ -16,6 +16,8 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.host = 'ws://' + window.location.hostname + '/ws';
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
 
+    var final_jeopardy_response = null;
+
 
     var conn = new ab.Session(jeopardy.host,
         function () {
@@ -191,8 +193,26 @@ window.jeopardy = (function (jeopardy) {
         conn.publish(jeopardy.final_jeopardy_answer_topic, payload, [], []);
     };
 
-    jeopardy.attemptSetPlayerScore = function (playerName, score) {
+    jeopardy.attemptChangePlayerScore = function (playerName, score) {
+        var payload = {
+            contestant: playerName,
+            diff: score
+        };
 
+        conn.publish(jeopardy.contestant_score_topic, payload, [], [])
+    };
+
+    jeopardy.attemptAwardFinalJeopardyAmount = function(playerName, correct) {
+
+        if (final_jeopardy_response == null) {
+            return;
+        }
+
+        if (final_jeopardy_response.contestant != playerName) {
+            return;
+        }
+
+        jeopardy.attemptChangePlayerScore(playerName, final_jeopardy_response.bet * ((!correct) ? -1 : 1));
     };
 
 
@@ -215,6 +235,8 @@ window.jeopardy = (function (jeopardy) {
         data = JSON.parse(data);
 
         var modal = jeopardy.getFinalJeopardyModal();
+
+        final_jeopardy_response = data;
         var response = modal.find('.contestant-response');
         response.find('.contestant-name').html(data.contestant);
         response.find('.contestant-answer').html(data.answer);
@@ -272,9 +294,15 @@ window.jeopardy = (function (jeopardy) {
 
     function handleContestantScore(topic, data) {
         data = JSON.parse(data);
-        for (var i in data) {
-            updateContestantScore(data[i].name, data[i].score);
+
+        if (data instanceof Array) {
+            for (var i in data) {
+                updateContestantScore(data[i].name, data[i].score);
+            }
+            return;
         }
+
+        updateContestantScore(data.name, data.score);
     }
 
     function updateContestantScore(contestant, score) {
