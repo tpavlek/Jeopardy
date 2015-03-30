@@ -1,0 +1,171 @@
+{
+  "contestants": [
+    {
+      "name": "Fenner",
+      "score": 0
+    },
+    {
+      "name": "Jackson",
+      "score": 0
+    },
+    {
+      "name": "Gemini",
+      "score": 0
+    }
+  ],
+
+  "categories": [
+    {
+      "name": "So the Drama",
+      "questions": [
+        {
+          "clue": "Racial slurs and \"dumb risks\" lost this person a position at Evil Geniuses.",
+          "answer": "Orb / Jake Sklarew",
+          "value": 200
+        },
+        {
+          "clue": "This Quebec based player was often accused of stream-sniping and cheating against many grandmaster players",
+          "answer": "RatzDeezer (Deezer)",
+          "value": 400
+        },
+        {
+          "clue": "$1800 of profit caused a storm of outrage for this tournament",
+          "answer": "Destiny I",
+          "value": 600
+        },
+        {
+          "clue": "300,000 karma disappeared when this popular personality deleted his reddit account in August of 2013",
+          "answer": "TotalBiscuit",
+          "value": 800
+        },
+        {
+          "clue": "If you’re hoping for clean games free of scandal, this player is probably not your \"Messiah\"",
+          "answer": "Ma \"Savior\" Jae Yoon",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "name": "Ouch Doc, I need a cast",
+      "questions": [
+        {
+          "clue": "These two make up the original \"Casting Archon\"",
+          "answer": "Daniel \"Artosis\" Stemkoski and Nick \"Tasteless\" Plott",
+          "value": 200
+        },
+        {
+          "clue": "If you’re watching proleague at 2am and are seeing a self-referential headband, you might be watching this caster",
+          "answer": "Nathan \"Nathanias\" Fabrikant",
+          "value": 400
+        },
+        {
+          "clue": "This British Columbia-based caster is the \"king\" of broadcasting online tournaments",
+          "answer": "Graham Rogers / Rifkin / Rif_king",
+          "value": 600
+        },
+        {
+          "clue": "If you got \"Whiplash\" from listening to poorly-received proleague casters, you probably didn’t enjoy this Korean-speaking half of the archon.",
+          "answer": "Supernovamaniac / Alex Kim",
+          "value": 800
+        },
+
+        {
+          "clue": "This Australian caster should have no problems \"sending workers\" to his natural expansion.",
+          "answer": "Maynarde / Leigh Mandalov",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "name": "Terran It Up",
+      "questions": [
+        {
+          "clue": "A MULE can carry this many minerals in a single load.",
+          "answer": "30",
+          "value": 200
+        },
+        {
+          "clue": "This splash-damage missile from the Raven is often incorrectly referred to by its name from the beta",
+          "answer": "Seeker Missile",
+          "value": 400
+        },
+        {
+          "clue": "This Terran building, originally from Starcraft, was reduced by 5 grid units in size and was made unable to lift off in Starcraft 2.",
+          "answer": "Engineering bay",
+          "value": 600
+        },
+        {
+          "clue": "These three terran upgrades are rarely researched and are known as the Gretorp upgrades.",
+          "answer": "Hi-Sec Auto Tracking, Building Armor and Neosteel Frame",
+          "value": 800,
+          "daily_double": true
+        },
+        {
+          "clue": "He voiced Tychus Findlay, the character who uttered the famous \"Hell, it’s about time\" line",
+          "answer": "Neil Kaplan",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "name": "S H O W B O Y S",
+      "questions": [
+        {
+          "clue": "This man’s \"Dailies\" have been a backbone of SC2 viewership since beta release.",
+          "answer": "Sean Day[9] Plott",
+          "value": 200
+        },
+
+        {
+          "clue": "Steven \"Destiny\" Bonnell II made this Youtube series to showcase the importance of mechanics over build order at lower leagues.",
+          "answer": "Destiny goes Mass Queens",
+          "value": 400
+        },
+        {
+          "clue": "The name of this short-lived show is a word you might use to described an overpowered unit.",
+          "answer": "Imbalanced",
+          "value": 600
+        },
+        {
+          "clue": "You don’t need an Atari to enjoy this show produced by Feardragon",
+          "answer": "Breaking out.",
+          "value": 800
+        },
+        {
+          "clue": "This short-lived show featured Suppy, Scarlett, Sasquatch, Hendralisk and Major",
+          "answer": "Zerg plus Juan.",
+          "value": 1000
+        }
+      ]
+    },
+    {
+      "name": "Unit Quotes",
+      "questions": [
+        {
+          "clue": "\"In the pipe, five by five\"",
+          "answer": "Medivac",
+          "value": 200
+        },
+        {
+          "clue": "\"None can withstand the Templar\"",
+          "answer": "Zealot",
+          "value": 400
+        },
+        {
+          "clue": "\"We interpret\"",
+          "answer": "Oracle",
+          "value": 600
+        },
+        {
+          "clue": "\"Gotta WHOLE lot of love\"",
+          "answer": "Marauder",
+          "value": 800
+        },{
+          "clue": "\"Breach in progess. We are undone!\"",
+          "answer": "Mothership Core",
+          "value": 1000
+        }
+      ]
+    }
+  ]
+}
