@@ -106,7 +106,7 @@ span.active-buzzer:after {
   display: inline-block;
   // TODO make this buzzer-column-width
   width: calc(100% - 20rem);
-  background:#1460DB;
+  background:#071174;
   height:100%;
 }
 
@@ -134,6 +134,16 @@ span.active-buzzer:after {
       height:16%;
       font-size: 1.5vw;
       overflow:hidden;
+
+      background: #071174;
+      background: -moz-linear-gradient(top,  #071174 0%, #21296d 100%);
+      background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#071174), color-stop(100%,#21296d));
+      background: -webkit-linear-gradient(top,  #071174 0%,#21296d 100%);
+      background: -o-linear-gradient(top,  #071174 0%,#21296d 100%);
+      background: -ms-linear-gradient(top,  #071174 0%,#21296d 100%);
+      background: linear-gradient(to bottom,  #071174 0%,#21296d 100%);
+      filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#071174', endColorstr='#21296d',GradientType=0 );
+
     }
 
     .question.box .clue {
@@ -168,12 +178,14 @@ span.active-buzzer:after {
 @mixin modal-content() {
   @include box-sizing(border-box);
   text-align:center;
-  position:relative;
   width: 100%;
   height: 100%;
   padding: 1rem;
-  background:#202899;
   color: white;
+  background:#202899;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .answer, .answer .content {
@@ -182,17 +194,11 @@ span.active-buzzer:after {
 }
 
 .answer {
-  display: none;
-  position:absolute;
-  width: 90%;
-  left: 0;
-  right: 0;
-  margin: auto;
-  bottom: 1rem;
+  display:none;
+  align-self: flex-end;
+  width: 100%;
 
-  h1 {
-    margin: 0;
-  }
+  h1 { margin: 0; }
 }
 
 #question-display-modal {
@@ -203,6 +209,12 @@ span.active-buzzer:after {
   }
 
   .clue {
+    /* These set the clue text to vertically aligned */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    flex-grow: 2;
     font-size: 400%;
   }
 }
