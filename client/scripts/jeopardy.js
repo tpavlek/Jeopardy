@@ -1,4 +1,6 @@
-window.jeopardy = (function (jeopardy) {
+// NOTE: buzzer.js *must* be included before this file.
+
+window.jeopardy = (function (jeopardy, buzzer) {
 
     jeopardy.buzzer_topic = 'com.sc2ctl.jeopardy.buzzer';
     jeopardy.buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
@@ -10,11 +12,9 @@ window.jeopardy = (function (jeopardy) {
     jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
     jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy.final_jeopardy_responses";
     jeopardy.final_jeopardy_answer_topic = "com.sc2ctl.jeopardy.final_jeopardy_answers";
-    jeopardy.penalty_amount = 500; // amt in milliseconds that you're penalized for clicking early
-    jeopardy.buzzer_active_at = false;
-    jeopardy.penalty_until = 0;
     jeopardy.host = 'ws://' + window.location.hostname + '/ws';
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
+
 
     var final_jeopardy_response = null;
 
@@ -41,60 +41,36 @@ window.jeopardy = (function (jeopardy) {
 
     /* These methods should be overridden */
 
-    jeopardy.getStatusIndicatorElement = function () {
-        console.warn("You need to override the getStatusIndicatorElement method!");
-    };
-
-    jeopardy.getBuzzerButtonElement = function () {
-        console.warn("You need to override the getBuzzerButtonElement method!");
-    };
-
-    jeopardy.getPenaltyDisplayElement = function () {
-        console.warn("You need to override the getPenaltyDisplayElement method!");
-    };
-
-    jeopardy.getJeopardyBoardElement = function () {
-        console.warn("You need to override the getJeopardyBoardElement method!");
-    };
-    jeopardy.getQuestionDisplayModal = function () {
-        console.warn("You need to override the getQuestionDisplayModal");
-    };
-    jeopardy.getDailyDoubleModal = function () {
-        console.warn("You need to override the getDailyDoubleModal");
-    };
-    jeopardy.getFinalJeopardyModal = function () {
-        console.warn("You need to override the getFinalJeopardyModal");
-    };
-    jeopardy.getFinalJeopardyBetInput = function () {
-        console.warn("You need to override the getFinalJeopardyBetInput");
-    };
-    jeopardy.getFinalJeopardyAnswerInput = function () {
-        console.warn("You need to override the getFinalJeopardyBetInput");
-    };
-
-    jeopardy.getPlayerElements = function () {
-        console.warn("You need to override the getPlayerElements method!");
-    };
+    jeopardy.getStatusIndicatorElement = function () { console.warn("You need to override the getStatusIndicatorElement method!"); };
+    jeopardy.getBuzzerButtonElement = function () { console.warn("You need to override the getBuzzerButtonElement method!"); };
+    jeopardy.getPenaltyDisplayElement = function () { console.warn("You need to override the getPenaltyDisplayElement method!"); };
+    jeopardy.getJeopardyBoardElement = function () { console.warn("You need to override the getJeopardyBoardElement method!"); };
+    jeopardy.getQuestionDisplayModal = function () { console.warn("You need to override the getQuestionDisplayModal"); };
+    jeopardy.getDailyDoubleModal = function () { console.warn("You need to override the getDailyDoubleModal"); };
+    jeopardy.getFinalJeopardyModal = function () { console.warn("You need to override the getFinalJeopardyModal"); };
+    jeopardy.getFinalJeopardyBetInput = function () { console.warn("You need to override the getFinalJeopardyBetInput"); };
+    jeopardy.getFinalJeopardyAnswerInput = function () { console.warn("You need to override the getFinalJeopardyBetInput"); };
+    jeopardy.getPlayerElements = function () { console.warn("You need to override the getPlayerElements method!"); };
 
     /* Our public API */
 
     jeopardy.attemptBuzz = function (name) {
 
-        if (jeopardy.buzzer_active_at === false) {
-            enablePenalty();
+        if (!buzzer.isActive()) {
+            showPenalty();
             return;
         }
-        var difference = 0;
 
-        var now = Date.now();
-        if (jeopardy.penalty_until > now) {
-            difference = (now - jeopardy.buzzer_active_at) + jeopardy.penalty_amount;
-        } else {
-            difference = (now - jeopardy.buzzer_active_at);
+        var difference = buzzer.buzz();
+        if (difference === false) {
+            // Something wrong happened here, the buzzer is probably not active. Let's just stop.
+            console.warn("Received false difference from the buzzer - maybe it's inactive?");
+            return;
         }
-
-        disableBuzzButton(jeopardy.getBuzzerButtonElement());
-        resetPenalty();
+        if (difference === true) {
+            // The user has already buzzed.
+            console.log("User has already buzzed in! Keep on hammerin' dat j key...");
+        }
 
         var buzz = {
             'name': name,
@@ -522,11 +498,16 @@ window.jeopardy = (function (jeopardy) {
     }
 
 
-    function resetPenalty() {
-        if (jeopardy.admin_mode) {
-            return true;
-        }
+    function showPenalty() {
+        var penalty_span = jeopardy.getPenaltyDisplayElement();
+        if (penalty_span == null) { return; }
 
+        penalty_span.html("Penalty!");
+        // This is a magic number of 3 seconds, after which we will hide the penalty display, if the penalty is expired by then.
+        setTimeout(resetPenaltyDisplay, 3000);
+    }
+
+    function resetPenaltyDisplay() {
         var now = Date.now();
         if (now < jeopardy.penalty_until) {
             return;
@@ -541,17 +522,7 @@ window.jeopardy = (function (jeopardy) {
         penalty_span.html("");
     }
 
-    function enablePenalty() {
-        jeopardy.penalty_until = Date.now() + jeopardy.penalty_amount;
 
-        var penalty_span = jeopardy.getPenaltyDisplayElement();
-        if (penalty_span == null) {
-            return;
-        }
-        penalty_span.html("Penalty!");
-
-        setTimeout(resetPenalty, 4 * jeopardy.penalty_amount);
-    }
 
     function processBuzzerActiveResult(topic, data) {
         data = JSON.parse(data);
@@ -579,5 +550,5 @@ window.jeopardy = (function (jeopardy) {
 
     return jeopardy;
 
-}(window.jeopardy || {}));
+}((window.jeopardy || {}), window.buzzer));
 
