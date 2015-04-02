@@ -75,6 +75,8 @@ window.buzzer = (function(buzzer) {
     {
         active_at = false;
         buzzer.resetPenalty();
-    }
+    };
+
+    return buzzer;
 
 }(window.buzzer || {}));

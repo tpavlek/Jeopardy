@@ -56,15 +56,10 @@ window.jeopardy = (function (jeopardy, buzzer) {
 
     jeopardy.attemptBuzz = function (name) {
 
-        if (!buzzer.isActive()) {
-            showPenalty();
-            return;
-        }
-
         var difference = buzzer.buzz();
         if (difference === false) {
-            // Something wrong happened here, the buzzer is probably not active. Let's just stop.
-            console.warn("Received false difference from the buzzer - maybe it's inactive?");
+            // buzzer is not active, assign a penalty.
+            showPenalty();
             return;
         }
         if (difference === true) {
@@ -532,20 +527,6 @@ window.jeopardy = (function (jeopardy, buzzer) {
         } else {
             setBuzzerInactive(jeopardy.getStatusIndicatorElement());
         }
-    }
-
-    function disableBuzzButton(buzz_button) {
-        if (jeopardy.admin_mode) {
-            return;
-        }
-        buzz_button.prop('disabled', true);
-    }
-
-    function enableBuzzButton(buzz_button) {
-        if (jeopardy.admin_mode) {
-            return;
-        }
-        buzz_button.prop('disabled', false);
     }
 
     return jeopardy;
