@@ -58,21 +58,16 @@
             });
 
             $('#modal-dismiss').click(function() {
-                var modal = jeo.getQuestionDisplayModal();
-                var category = modal.attr('data-category');
-                var value = modal.attr('data-value');
-                jeopardy.attemptQuestionDismiss(category, value);
+                jeopardy.attemptQuestionDismiss();
             });
 
             $('.player').click(function() {
                 var playerName = $(this).attr('data-player-name');
                 var modal = jeo.getQuestionDisplayModal();
 
+                // We're checking if the question display modal is visible, otherwise we're probably in final jeopardy.
                 if (modal.is(":visible")) {
-                    var category = modal.attr('data-category');
-                    var value = modal.attr('data-value');
-
-                    jeopardy.attemptQuestionAnswer(category, value, playerName, bet, true);
+                    jeopardy.attemptQuestionAnswer(playerName, true);
                     return false;
                 }
 
@@ -87,13 +82,9 @@
                 var playerName = $(this).attr('data-player-name');
                 var modal = jeo.getQuestionDisplayModal();
 
+                // We're checking if the question display modal is visible, otherwise we're probably in final jeopardy.
                 if (modal.is(':visible')) {
-                    var category = modal.attr('data-category');
-                    var value = parseInt(jeo.getRealModalValue(modal));
-                    var bet = jeo.getRealModalValue(modal);
-
-                    jeopardy.attemptQuestionAnswer(category, value, playerName, bet, false);
-
+                    jeopardy.attemptQuestionAnswer(playerName, false);
                     return false;
                 }
 
@@ -126,11 +117,8 @@
             });
 
             $('#daily-double-form').submit(function() {
-                var modal = jeo.getDailyDoubleModal();
-                var category = modal.attr('data-category');
-                var value = parseInt(modal.attr('data-value'));
-                var bet = $('#daily-double-bet').val();
-                jeo.attemptDailyDoubleBet(category, value, bet);
+                var bet = parseInt($('#daily-double-bet').val());
+                jeo.attemptDailyDoubleBet(bet);
                 return false;
             });
         });

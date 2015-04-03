@@ -1,6 +1,6 @@
 // NOTE: buzzer.js *must* be included before this file.
 
-window.jeopardy = (function (jeopardy, buzzer) {
+window.jeopardy = (function (jeopardy, buzzer, question) {
 
     jeopardy.buzzer_topic = 'com.sc2ctl.jeopardy.buzzer';
     jeopardy.buzzer_status_topic = 'com.sc2ctl.jeopardy.buzzer_status';
@@ -12,7 +12,9 @@ window.jeopardy = (function (jeopardy, buzzer) {
     jeopardy.final_jeopardy_topic = "com.sc2ctl.jeopardy.final_jeopardy";
     jeopardy.final_jeopardy_responses_topic = "com.sc2ctl.jeopardy.final_jeopardy_responses";
     jeopardy.final_jeopardy_answer_topic = "com.sc2ctl.jeopardy.final_jeopardy_answers";
+
     jeopardy.host = 'ws://' + window.location.hostname + '/ws';
+    jeopardy.buzz_display_time = 3000;
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
 
 
@@ -22,10 +24,10 @@ window.jeopardy = (function (jeopardy, buzzer) {
     var conn = new ab.Session(jeopardy.host,
         function () {
             conn.subscribe(jeopardy.buzzer_topic, handleBuzzEvent);
-            conn.subscribe(jeopardy.buzzer_status_topic, processBuzzerActiveResult);
+            conn.subscribe(jeopardy.buzzer_status_topic, handleBuzzerStatusEvent);
             conn.subscribe(jeopardy.question_display_topic, handleQuestionDisplay);
-            conn.subscribe(jeopardy.question_answer_topic, handleQuestionAnswer);
             conn.subscribe(jeopardy.question_dismiss_topic, handleQuestionDismiss);
+            conn.subscribe(jeopardy.question_answer_topic, handleQuestionAnswer);
             conn.subscribe(jeopardy.contestant_score_topic, handleContestantScore);
             conn.subscribe(jeopardy.daily_double_bet_topic, handleDailyDoubleBet);
             conn.subscribe(jeopardy.final_jeopardy_topic, handleFinalJeopardy);
@@ -46,7 +48,7 @@ window.jeopardy = (function (jeopardy, buzzer) {
     jeopardy.getPenaltyDisplayElement = function () { console.warn("You need to override the getPenaltyDisplayElement method!"); };
     jeopardy.getJeopardyBoardElement = function () { console.warn("You need to override the getJeopardyBoardElement method!"); };
     jeopardy.getQuestionDisplayModal = function () { console.warn("You need to override the getQuestionDisplayModal"); };
-    jeopardy.getDailyDoubleModal = function () { console.warn("You need to override the getDailyDoubleModal"); };
+    jeopardy.getDailyDoubleModal = function() { console.warn("You need to override the getDailyDoubleModal"); };
     jeopardy.getFinalJeopardyModal = function () { console.warn("You need to override the getFinalJeopardyModal"); };
     jeopardy.getFinalJeopardyBetInput = function () { console.warn("You need to override the getFinalJeopardyBetInput"); };
     jeopardy.getFinalJeopardyAnswerInput = function () { console.warn("You need to override the getFinalJeopardyBetInput"); };
@@ -90,40 +92,43 @@ window.jeopardy = (function (jeopardy, buzzer) {
         conn.publish(jeopardy.question_display_topic, payload, [], []);
     };
 
-    jeopardy.attemptQuestionAnswer = function(category, value, contestant, bet, correct) {
-        if (correct == undefined) {
+    jeopardy.attemptQuestionDismiss = function ()
+    {
+        if (!question.hasQuestion()) {
+            console.warn("Attempted to dismiss an undefined question");
+        }
+
+        var payload = {
+            category: question.getCategory(),
+            value: question.getQuestionValue()
+        };
+
+        conn.publish(jeopardy.question_dismiss_topic, payload, [], []);
+    };
+
+    jeopardy.attemptQuestionAnswer = function(contestant, correct) {
+        // The default behaviour is to assume that the answer was correct, unless otherwise specified.
+        if (correct == null) {
             correct = true;
         }
 
         var payload = {
-            category: category,
-            value: value,
+            category: question.getCategory(),
+            value: question.getQuestionValue(),
             contestant: contestant,
-            bet: bet,
+            bet: question.getBetValue(),
             correct: correct
         };
 
         conn.publish(jeopardy.question_answer_topic, payload, [], []);
     };
 
-    jeopardy.
-        attemptQuestionDismiss = function (category, value) {
-        if (category == undefined || value == undefined) {
-            console.warn("Attempted to dismiss with undefined category or value");
-            return;
-        }
-        var payload = {
-            category: category,
-            value: value
-        };
 
-        conn.publish(jeopardy.question_dismiss_topic, payload, [], []);
-    };
 
-    jeopardy.attemptDailyDoubleBet = function (category, value, bet) {
+    jeopardy.attemptDailyDoubleBet = function (bet) {
         var payload = {
-            category: category,
-            value: value,
+            category: question.getCategory(),
+            value: question.getQuestionValue(),
             bet: bet
         };
 
@@ -164,15 +169,6 @@ window.jeopardy = (function (jeopardy, buzzer) {
         conn.publish(jeopardy.final_jeopardy_answer_topic, payload, [], []);
     };
 
-    jeopardy.attemptChangePlayerScore = function (playerName, score) {
-        var payload = {
-            contestant: playerName,
-            diff: score
-        };
-
-        conn.publish(jeopardy.contestant_score_topic, payload, [], [])
-    };
-
     jeopardy.attemptAwardFinalJeopardyAmount = function(playerName, correct) {
 
         if (final_jeopardy_response == null) {
@@ -183,86 +179,129 @@ window.jeopardy = (function (jeopardy, buzzer) {
             return;
         }
 
-        jeopardy.attemptChangePlayerScore(playerName, final_jeopardy_response.bet * ((!correct) ? -1 : 1));
+        jeopardy.attemptChangePlayerScore(playerName, final_jeopardy_response.bet * ((correct) ? 1 : -1));
     };
 
+    jeopardy.attemptChangePlayerScore = function (playerName, score) {
+        var payload = {
+            contestant: playerName,
+            diff: score
+        };
 
-    /* Helper public functions (which should probably be moved to another module sometime */
-    jeopardy.getRealModalValue = function(modal) {
-        var bet = modal.attr('data-bet');
-        var value = modal.attr('data-value');
-
-        if (bet != undefined && bet != null) {
-            return bet;
-        }
-
-        return value;
+        conn.publish(jeopardy.contestant_score_topic, payload, [], [])
     };
-
 
     /* These are library functions */
 
-    function handleFinalJeopardyAnswers(topic, data) {
-        data = JSON.parse(data);
-
-        var modal = jeopardy.getFinalJeopardyModal();
-
-        final_jeopardy_response = data;
-        var response = modal.find('.contestant-response');
-        response.find('.contestant-name').html(data.contestant);
-        response.find('.contestant-answer').html(data.answer);
-        response.find('.contestant-wager').html(data.bet).attr('data-bet', data.bet);
-        response.show('fast');
-    }
-
-    function getActivePlayer() {
-        var players = jeopardy.getPlayerElements();
-
-        for (var i in players) {
-            if ($(players[i]).data('active-player') == true) {
-                return $(players[i]).data('player-name');
-            }
-        }
-
-        console.error("Could not determine active player");
-    }
-
-    function setBuzzerActive(status_indicator) {
-        jeopardy.buzzer_active_at = Date.now();
-        status_indicator.removeClass('inactive-buzzer').addClass('active-buzzer');
-    }
-
-    function setBuzzerInactive(status_indicator) {
-        jeopardy.buzzer_active_at = false;
-        status_indicator.removeClass('active-buzzer').addClass('inactive-buzzer');
-        resetPenalty();
-        enableBuzzButton(jeopardy.getBuzzerButtonElement());
-    }
-
-    function clearPlayerBuzzes() {
-        var players = jeopardy.getPlayerElements();
-        for (var i in players) {
-            $(players[i]).removeClass('buzz');
-        }
-    }
-
-    function addPlayerBuzz(playerName) {
-        var players = jeopardy.getPlayerElements();
-        for (var i in players) {
-            if ($(players[i]).hasClass(playerName)) {
-                $(players[i]).addClass('buzz');
-            }
-        }
-    }
-
+    /**
+     * This function is called whenever the system receives that a player has successfully buzzed in.
+     *
+     * We should show which player has buzzed in, and then deactivate the buzzer.
+     * @param topic
+     * @param data
+     */
     function handleBuzzEvent(topic, data) {
         data = JSON.parse(data);
         addPlayerBuzz(data.contestant);
         // We only want the buzz to show for 3 seconds.
-        setTimeout(clearPlayerBuzzes, 3000);
-        setBuzzerInactive(jeopardy.getStatusIndicatorElement());
+        buzzer.deactivate(jeopardy.getStatusIndicatorElement());
+
     }
 
+    /**
+     * This function is called whenever the system recieves a change in the buzzer status.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleBuzzerStatusEvent(topic, data) {
+        data = JSON.parse(data);
+
+        if (data.active == true) {
+            buzzer.activate(jeopardy.getStatusIndicatorElement());
+        } else {
+            buzzer.deactivate(jeopardy.getStatusIndicatorElement());
+        }
+    }
+
+    /**
+     * This function is called whenever we recieve any information in the question display topic.
+     *
+     * If we get an array, we will populate the board with it. If this is an individual question, we will display it
+     * in the modal or collect the daily double bet, depending on the type of question we received.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleQuestionDisplay(topic, data)
+    {
+        data = JSON.parse(data);
+        // If we have recieved an array back, we're just starting up and want to populate the board with questions.
+        if (data instanceof Array) {
+            populateBoard(data);
+            return;
+        }
+
+        question.setQuestion(data);
+
+        if (question.isDailyDouble()) {
+            showDailyDouble(jeopardy.getDailyDoubleModal());
+            return;
+        }
+
+        showQuestion(jeopardy.getQuestionDisplayModal());
+    }
+
+    /**
+     * This function is called whenever we receive data in the question dismissal topic.
+     *
+     * We need to remove its entry from the list of available clues, and we need to clear data from the question modal.
+     * Since we know that we have yet to select another question, we will automatically disable the buzzer if it was
+     * still enabled.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleQuestionDismiss(topic, data) {
+        data = JSON.parse(data);
+
+        blankOutQuestionBox(data.category, data.value);
+        hideQuestion(jeopardy.getQuestionDisplayModal());
+
+        question.clear();
+        buzzer.deactivate(jeopardy.getStatusIndicatorElement());
+    }
+
+    /**
+     * This function is called whenever we receive a message that a player has answered a question.
+     *
+     * Note that this will simply update the players' score based on their answer, and if it was incorrect then we
+     * will activate the buzzer again for another round of answers. If the answer was correct, this event will be received,
+     * and then a separate question dismissal event will also come along.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleQuestionAnswer(topic, data) {
+        data = JSON.parse(data);
+
+        updateContestantScore(data.contestant, data.value, true);
+
+        if (!data.correct) {
+            buzzer.activate(jeopardy.getStatusIndicatorElement());
+        }
+    }
+
+
+    /**
+     * Called whenever we receive an update to the contestant score topic.
+     *
+     * This will be either when the game starts and we're getting caught up with the current data or if there is an arbitrary
+     * update to a contestant's score sent out by an admin.
+     *
+     * @param topic
+     * @param data
+     */
     function handleContestantScore(topic, data) {
         data = JSON.parse(data);
 
@@ -276,10 +315,38 @@ window.jeopardy = (function (jeopardy, buzzer) {
         updateContestantScore(data.name, data.score);
     }
 
-    function updateContestantScore(contestant, score) {
-        $('.player.' + contestant).find('.score').first().html(score);
+    /**
+     * Called whenever we have received a bet on a daily double. We'll set it in the question state, and transition
+     * to showing the regular clue for the question. The flow after this will be no different from a regular question.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleDailyDoubleBet(topic, data) {
+        data = JSON.parse(data);
+
+        question.setBet(data.bet);
+
+        hideDailyDouble(jeopardy.getDailyDoubleModal());
+        showQuestion(jeopardy.getQuestionDisplayModal());
     }
 
+    /**
+     * This is the main progressor through final jeopardy.
+     *
+     * The server expects certain "current steps" to be sent to it, and it will respond differently based on the current
+     * step.
+     *
+     * 1. The server will send a category. To get to the next step we need to send it a payload to this topic with
+     *     { content: 'clue' }
+     * 2. The server will send a clue. To get to the next step we need to send it a payload to this topic with
+     *     { content: 'answer' }
+     * 3. The server will send an answer. At that point we want to hide the next button, and display buttons with each
+     *     of the contestant's names. Clicking on each of those will display the contestant's response.
+     *
+     * @param topic
+     * @param data
+     */
     function handleFinalJeopardy(topic, data) {
         data = JSON.parse(data);
         var modal = jeopardy.getFinalJeopardyModal();
@@ -320,6 +387,17 @@ window.jeopardy = (function (jeopardy, buzzer) {
         }
     }
 
+    /**
+     * This is received when the server is sending a collection request for final jeopardy responses.
+     *
+     * There are two types of collection requests:
+     * 1. { content: 'bet' } in which each contestant should send in the amount that they bet on final jeopardy
+     * 2. { content: 'answer' } in which each contestant should send in their response to final jeopardy.
+     *
+     * This requires no interaction and the bets and answers will be automatically collected and sent in.
+     * @param topic
+     * @param data
+     */
     function handleFinalJeopardyResponses(topic, data) {
         data = JSON.parse(data);
 
@@ -331,6 +409,28 @@ window.jeopardy = (function (jeopardy, buzzer) {
             collectFinalJeopardyAnswer();
         }
     }
+
+    /**
+     * This is received when we have received information about a contestant's final jeopardy answer. We will have
+     * explicitly requested this as an admin (unless something has gone wrong) and we should display it for all clients.
+     *
+     * @param topic
+     * @param data
+     */
+    function handleFinalJeopardyAnswers(topic, data) {
+        data = JSON.parse(data);
+
+        var modal = jeopardy.getFinalJeopardyModal();
+
+        final_jeopardy_response = data;
+        var response = modal.find('.contestant-response');
+        response.find('.contestant-name').html(data.contestant);
+        response.find('.contestant-answer').html(data.answer);
+        response.find('.contestant-wager').html(data.bet).attr('data-bet', data.bet);
+        response.show('fast');
+    }
+
+    /* These are some helper functions for final jeopardy */
 
     function collectFinalJeopardyBet() {
         var input = jeopardy.getFinalJeopardyBetInput();
@@ -351,48 +451,72 @@ window.jeopardy = (function (jeopardy, buzzer) {
         jeopardy.attemptFinalJeopardyAnswer(getActivePlayer(), input.val());
     }
 
-    function handleDailyDoubleBet(topic, data) {
-        var modal = jeopardy.getDailyDoubleModal();
-        clearModalData(modal);
-        modal.hide('fast');
-        data = JSON.parse(data);
+    function getActivePlayer() {
+        var players = jeopardy.getPlayerElements();
 
-        showQuestionModal(data.category, data.value, data.clue, data.answer, data.bet);
-    }
-
-    function handleQuestionDisplay(topic, data) {
-        data = JSON.parse(data);
-        if (data instanceof Array) {
-            populateBoard(data);
-            return;
+        for (var i in players) {
+            if ($(players[i]).data('active-player') == true) {
+                return $(players[i]).data('player-name');
+            }
         }
 
-        if (data.daily_double) {
-            showDailyDouble(data);
-            return;
+        console.error("Could not determine active player");
+    }
+
+
+    /* These functions handle various display logic concerns */
+
+    /**
+     * Displays the buzz notification over a particular player.
+     *
+     * Will automatically clear this buzz notification after the time configured in jeopardy.buzz_display_time.
+     *
+     * @param playerName
+     */
+    function addPlayerBuzz(playerName)
+    {
+        var clearPlayerBuzzes = function()
+        {
+            var players = jeopardy.getPlayerElements();
+            for (var i in players) {
+                $(players[i]).removeClass('buzz');
+            }
+        };
+
+        var players = jeopardy.getPlayerElements();
+        for (var i in players) {
+            if ($(players[i]).hasClass(playerName)) {
+                $(players[i]).addClass('buzz');
+
+                setTimeout(clearPlayerBuzzes, jeopardy.buzz_display_time)
+            }
         }
-
-        data.bet = (data.bet != null && data.bet != undefined) ? data.bet : null;
-        showQuestionModal(data.category, data.value, data.clue, data.answer, data.bet);
     }
 
-    function showDailyDouble(data) {
-        var modal = jeopardy.getDailyDoubleModal();
-        setModalData(modal, data);
-        modal.show('fast');
+    function showPenalty()
+    {
+        var penalty_span = jeopardy.getPenaltyDisplayElement();
+        if (penalty_span == null) { return; }
+
+        penalty_span.html("Penalty!");
+        // This is a magic number of 3 seconds, after which we will hide the penalty display, if the penalty is expired by then.
+        setTimeout(resetPenaltyDisplay, 3000);
     }
 
-    function showQuestionModal(category, value, clue, answer, bet) {
-        var modal = jeopardy.getQuestionDisplayModal();
-        setModalData(modal, { category: category, value: value, bet: bet });
-        modal.find('.content').first().find('.clue').first().html(clue);
-        if (jeopardy.admin_mode) {
-            modal.find('.content').first().find('.answer').first().show();
-            modal.find('.content').first().find('.answer').first().find('.content').html(answer);
-        }
-        modal.show('fast');
+    function resetPenaltyDisplay()
+    {
+        if (buzzer.hasActivePenalty()) { return; }
+
+        var penalty_span = jeopardy.getPenaltyDisplayElement();
+        if (penalty_span == null) { return; }
+        penalty_span.html("");
     }
 
+    /**
+     * Fills in a blank board with the categories and available clues.
+     *
+     * @param data
+     */
     function populateBoard(data) {
         var board = jeopardy.getJeopardyBoardElement();
         var categories = board.find('.category');
@@ -409,7 +533,6 @@ window.jeopardy = (function (jeopardy, buzzer) {
             var questions_data = category_data.questions;
             for (var j in questions_data) {
                 if (questions_data[j].used) {
-                    console.log("used");
                     clearQuestionBox($(questions_column[j]));
                     continue;
                 }
@@ -420,41 +543,12 @@ window.jeopardy = (function (jeopardy, buzzer) {
         }
     }
 
-    function handleQuestionAnswer(topic, data) {
-        data = JSON.parse(data);
-        console.log(data);
-
-        var players = jeopardy.getPlayerElements();
-        for (var i in players) {
-            if ($(players[i]).hasClass(data.contestant)) {
-                var score = parseInt($(players[i]).find('.score').html());
-                $(players[i]).find('.score').html(score + parseInt(data.value));
-            }
-        }
-
-        if (!data.correct) {
-            setBuzzerActive(jeopardy.getStatusIndicatorElement());
-        }
-    }
-
-    function handleQuestionDismiss(topic, data) {
-        data = JSON.parse(data);
-        console.log(data);
-
-        blankOutQuestionBox(data.category, data.value);
-        var modal = jeopardy.getQuestionDisplayModal();
-        clearModalData(modal);
-        modal.find('.content').first().find('.clue').first().html("");
-        modal.hide('fast');
-
-        modal = jeopardy.getDailyDoubleModal();
-        clearModalData(modal);
-        modal.find('.content').first().find('.clue').first().html("");
-        modal.hide('fast');
-
-        setBuzzerInactive(jeopardy.getStatusIndicatorElement());
-    }
-
+    /**
+     * Searches for a question box with a given categoryName and value, and blanks it out.
+     *
+     * @param categoryName
+     * @param value
+     */
     function blankOutQuestionBox(categoryName, value) {
         var categories = jeo.getJeopardyBoardElement().find('.category').toArray();
 
@@ -470,66 +564,97 @@ window.jeopardy = (function (jeopardy, buzzer) {
         }
     }
 
-    function setModalData(modal, data) {
-        modal.attr('data-category', data.category);
-        modal.attr('data-value', data.value);
-        if (data.bet != null) {
-            modal.attr('data-bet', data.bet);
-        }
-    }
-
-    function clearModalData(modal) {
-        modal.attr('data-category', null);
-        modal.attr('data-value', null);
-        modal.attr('data-bet', null);
-    }
-
-
-
+    /**
+     * Given a particular question box, actually clear all HTML from the box and unbind any handlers associated with it
+     * @param questionBox
+     */
     function clearQuestionBox(questionBox) {
         questionBox.unbind("click");
         questionBox.html("");
         questionBox.removeClass('question');
     }
 
+    /**
+     * Populates the question modal with data about the current question, and displays it to the user.
+     *
+     * @param question_modal
+     */
+    function showQuestion(question_modal)
+    {
+        if (question_modal == null) {
+            console.error("Could not display the question - no modal defined!");
+            return;
+        }
+        question_modal.find('.content').first().find('.clue').first().html(question.getClue());
 
-    function showPenalty() {
-        var penalty_span = jeopardy.getPenaltyDisplayElement();
-        if (penalty_span == null) { return; }
-
-        penalty_span.html("Penalty!");
-        // This is a magic number of 3 seconds, after which we will hide the penalty display, if the penalty is expired by then.
-        setTimeout(resetPenaltyDisplay, 3000);
+        if (jeopardy.admin_mode) {
+            question_modal.find('.content').first().find('.answer').first().show();
+            question_modal.find('.content').first().find('.answer').first().find('.content').html(question.getAnswer());
+        }
+        question_modal.show('fast');
     }
 
-    function resetPenaltyDisplay() {
-        var now = Date.now();
-        if (now < jeopardy.penalty_until) {
+    /**
+     * Clears all question data from the question modal and hides it.
+     *
+     * @param question_modal
+     */
+    function hideQuestion(question_modal)
+    {
+        if (question_modal == null) {
+            console.error("Could not hide the question - no modal defined!");
             return;
         }
 
-        jeopardy.penalty_until = 0;
+        question_modal.find('.content').first().find('.clue').first().html("");
 
-        var penalty_span = jeopardy.getPenaltyDisplayElement();
-        if (penalty_span == null) {
-            return;
+        if (jeopardy.admin_mode) {
+            question_modal.find('.content').first().find('.answer').first().hide();
+            question_modal.find('.content').first().find('.answer').first().find('.content').html("");
         }
-        penalty_span.html("");
+
+        question_modal.hide('fast');
     }
 
-
-
-    function processBuzzerActiveResult(topic, data) {
-        data = JSON.parse(data);
-
-        if (data.active == true) {
-            setBuzzerActive(jeopardy.getStatusIndicatorElement());
-        } else {
-            setBuzzerInactive(jeopardy.getStatusIndicatorElement());
+    function showDailyDouble(daily_double_modal) {
+        if (daily_double_modal == null) {
+            console.error("Could not show daily double - modal is not defined!");
         }
+        daily_double_modal.show('fast');
+    }
+
+    function hideDailyDouble(daily_double_modal)
+    {
+        // Daily double betting is handled by the admin, the client doesn't need to do this.
+        if (jeopardy.admin_mode) {
+            $('#daily-double-bet').val("");
+        }
+
+        if (daily_double_modal == null) {
+            console.error("Could not hide daily double - no modal defined!");
+            return;
+        }
+
+        daily_double_modal.hide();
+    }
+
+    /**
+     * Updates a given contestants score. If the optional third parameter "add" is true, then it will add the new score
+     * to their current score. Otherwise, it will simply replace their current score with the new score.
+     *
+     * @param contestant
+     * @param score
+     * @param add
+     */
+    function updateContestantScore(contestant, score, add) {
+        if (add) {
+            var curScore = parseInt($('.player.' + contestant).find('.score').html());
+            score = curScore + parseInt(score);
+        }
+        $('.player.' + contestant).find('.score').first().html(score);
     }
 
     return jeopardy;
 
-}((window.jeopardy || {}), window.buzzer));
+}((window.jeopardy || {}), window.buzzer, window.question));
 

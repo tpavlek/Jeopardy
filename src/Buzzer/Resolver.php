@@ -20,6 +20,14 @@ class Resolver
         return $this->buzzes->isEmpty();
     }
 
+    /**
+     * Add a buzz to the resolver.
+     *
+     * We don't care about adding duplicate buzzes for the same contestant, because their lowest one will always be
+     * the one that is selected.
+     *
+     * @param BuzzReceivedEvent $event
+     */
     public function addBuzz(BuzzReceivedEvent $event)
     {
         $this->buzzes->push($event);

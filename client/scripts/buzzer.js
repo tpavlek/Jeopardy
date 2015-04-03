@@ -63,18 +63,28 @@ window.buzzer = (function(buzzer) {
     /**
      * Set the buzzer status to active.
      */
-    buzzer.activate = function()
+    buzzer.activate = function(buzzer_indicator)
     {
         active_at = Date.now();
+
+        if (buzzer_indicator != null) {
+            buzzer_indicator.removeClass('inactive-buzzer').addClass('active-buzzer');
+        }
     };
 
     /**
      * Set the buzzer status to inactive.
      */
-    buzzer.deactivate = function()
+    buzzer.deactivate = function(buzzer_indicator)
     {
         active_at = false;
         buzzer.resetPenalty();
+
+        // If we were passed a buzzer indicator, we should set it to inactive. If no buzzer indicator exists, we're fine
+        // anyway.
+        if (buzzer_indicator != null) {
+            buzzer_indicator.removeClass('active-buzzer').addClass('inactive-buzzer');
+        }
     };
 
     return buzzer;
