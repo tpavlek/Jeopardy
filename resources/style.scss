@@ -150,6 +150,7 @@ span.active-buzzer:after {
       position: relative;
       top: 40%;
       font-size:150%;
+      max-width: 100%;
       text-shadow: 5px 5px 5px #000;
       color: #d69f4c;
       transform: translateY(-50%);
