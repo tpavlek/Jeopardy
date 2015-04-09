@@ -52,7 +52,7 @@
 
             $('.question.box').click(function() {
                 var categoryName = $(this).attr('data-category');
-                var value = $(this).find('.clue').first().html();
+                var value = $(this).find('.clue').first().text();
 
                 jeo.attemptNewQuestionDisplay(categoryName, value);
             });

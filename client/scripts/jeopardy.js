@@ -526,7 +526,8 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
             var category_column = categories[i];
 
             $(category_column).attr('data-category', category_data.name);
-            $(category_column).find('.category-name').html(category_data.name);
+            var category_box = $(category_column).find('.category-name');
+            category_box.html("<span>" + category_data.name + "</span>")
 
             var questions_column = $(category_column).find('.question.box');
 
@@ -536,7 +537,10 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
                     clearQuestionBox($(questions_column[j]));
                     continue;
                 }
-                $(questions_column[j]).find('.clue').first().html(questions_data[j].value);
+                var clue_box = $(questions_column[j]).find('.clue').first();
+                clue_box.html("<span>" + questions_data[j].value + "</span>");
+                clue_box.textfill();
+
                 $(questions_column[j]).attr('data-value', questions_data[j].value);
                 $(questions_column[j]).attr('data-category', category_data.name);
             }

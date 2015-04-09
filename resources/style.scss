@@ -23,6 +23,8 @@ html, button, input, select, textarea,
   float:left;
   position:relative;
   height: 100%;
+  // todo general background color
+  background:#071174;
 }
 
 
@@ -30,6 +32,7 @@ html, button, input, select, textarea,
   height:50px;
   width:100%;
   margin-top:0.5rem;
+  margin-left:0.5rem;
 }
 .active-buzzer {
   background: green;
@@ -50,6 +53,51 @@ span.active-buzzer:after {
   font-weight: bold;
 }
 
+.player {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  cursor: pointer;
+
+  //todo general background color
+  background: lighten(#071174, 10%);
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  .img-wrapper {
+    height: 10rem;
+    //background:#3D3D3D;
+    img {
+      max-height: 10rem;
+    }
+
+  }
+  color:white;
+
+  box-shadow: 7px 2px 21px -2px rgba(0,0,0,0.75);
+  margin-left: 0.5rem;
+  margin-bottom: 1rem;
+
+}
+
+.host { margin-top: 1rem;}
+
+.player.active {
+  background: #D0D6D6;
+}
+.player.buzz {
+  color: black;
+  background: #E3E34D !important;
+}
+
+.player.buzz .img-wrapper {
+  background: #E3E34D !important;
+}
+.player:hover {
+  color:black;
+  background: #CDE1FA;
+}
+
 .player-container {
   position: absolute;
   bottom: 0;
@@ -59,39 +107,10 @@ span.active-buzzer:after {
   left: 0;
   right: 0;
   z-index: 1;
+  //background: url("/img/bg/black_paper.png");
 
-  .player {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    cursor: pointer;
-    h2 {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-    .img-wrapper {
-      height: 10rem;
-      background:#3D3D3D;
-      img {
-        max-height: 10rem;
-      }
 
-    }
 
-  }
-  .player.active {
-    background: #D0D6D6;
-  }
-  .player.buzz {
-    color: black;
-    background: #E3E34D !important;
-  }
-
-  .player.buzz .img-wrapper {
-    background: #E3E34D !important;
-  }
-  .player:hover {
-    background: #CDE1FA;
-  }
 }
 
 .score {
@@ -108,6 +127,26 @@ span.active-buzzer:after {
   width: calc(100% - 20rem);
   background:#071174;
   height:100%;
+}
+
+.header.box {
+  padding: 0.5rem;
+}
+.category-name {
+  @include box-sizing(border-box);
+  height: 100%;
+  display: flex;
+  align-items: center;
+
+  text-transform: uppercase;
+  color: white;
+  font-weight: bold;
+  font-size: 38px;
+
+  span {
+    flex-grow: 2;
+  }
+
 }
 
 .jeopardy-board {
@@ -132,7 +171,6 @@ span.active-buzzer:after {
       color: $button-primary-background-color;
       border:3px solid black;
       height:16%;
-      font-size: 1.5vw;
       overflow:hidden;
 
       background: #071174;
@@ -146,14 +184,19 @@ span.active-buzzer:after {
 
     }
 
-    .question.box .clue {
-      position: relative;
-      top: 40%;
-      font-size:150%;
+    .question.box {
       text-shadow: 5px 5px 5px #000;
       color: #d69f4c;
-      transform: translateY(-50%);
+
+      display:flex;
+      align-items: center;
+      justify-content: center;
+
+      .clue {
+        font-size: 50px;
+      }
     }
+
     .question.box:hover {
 
       background: lighten($button-primary-background-color, 20%);
@@ -207,6 +250,9 @@ span.active-buzzer:after {
   color: #202899;
   align-self: flex-end;
   width: 100%;
+}
+.flex-starter {
+  align-self: flex-start;
 }
 .answer {
   display:none;

@@ -1,21 +1,24 @@
-
-<div class="player-container">
-    {% if obs %}
-    <div class="player Troy">
+{% if obs %}
+    <div class="player host Troy">
         <h2>@troypavlek</h2>
         <div class="img-wrapper">
-            <img src="/img/fill.jpg">
+            <img src="/img/fill4.jpg">
         </div>
     </div>
     <br />
-    {% endif %}
+{% endif %}
+
+<div class="player-container">
+
     {% for player in players %}
         <div class="player {{ player }}" data-player-name="{{ player }}" {% if player == user %} data-active-player="true" {% endif %}>
-            <h2>{{ player }}</h2>
+            <h2 style="display: inline; float:left; padding-left: 1em;">{{ player }}</h2>
+            <span class="score" style="float:right; padding-right: 1em;">0</span>
+            <div style="clear:both;"></div>
             <div class="img-wrapper">
-                <img src="/img/fill.jpg" />
+                <img src="/img/fill{{ loop.index }}.jpg" />
             </div>
-            <span class="score">0</span>
+
         </div>
     {% endfor %}
 </div>
