@@ -150,7 +150,6 @@ span.active-buzzer:after {
       position: relative;
       top: 40%;
       font-size:150%;
-      max-width: 100%;
       text-shadow: 5px 5px 5px #000;
       color: #d69f4c;
       transform: translateY(-50%);
@@ -188,7 +187,7 @@ span.active-buzzer:after {
   text-align:center;
   width: 100%;
   height: 100%;
-  padding: 1rem;
+  padding: 2rem;
   color: white;
   background:#202899;
   display: flex;
@@ -201,6 +200,14 @@ span.active-buzzer:after {
   background: #6BACFA !important;
 }
 
+/** because of the interaction between flexbox and jquery.filltext, we need to always have something flex-align:end
+  when we're not using the answer (because we're not an admin), we use this placeholder element
+  */
+.flex-ender {
+  color: #202899;
+  align-self: flex-end;
+  width: 100%;
+}
 .answer {
   display:none;
   align-self: flex-end;
@@ -217,13 +224,20 @@ span.active-buzzer:after {
   }
 
   .clue {
+    @include box-sizing(border-box);
     /* These set the clue text to vertically aligned */
     display: flex;
     flex-direction: column;
     justify-content: center;
-
     flex-grow: 2;
-    font-size: 400%;
+
+    width: 100%;
+    max-width: 100%;
+    padding: 5%;
+
+    span {
+      display: block;
+    }
   }
 }
 

@@ -585,13 +585,17 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
             console.error("Could not display the question - no modal defined!");
             return;
         }
-        question_modal.find('.content').first().find('.clue').first().html(question.getClue());
+        var clue = question_modal.find('.content').first().find('.clue').first();
+        clue.html("<span>" + question.getClue() + "</span>");
 
         if (jeopardy.admin_mode) {
             question_modal.find('.content').first().find('.answer').first().show();
             question_modal.find('.content').first().find('.answer').first().find('.content').html(question.getAnswer());
         }
-        question_modal.show('fast');
+        question_modal.show('fast', function() {
+            clue.textfill({maxFontPixels: 150});
+        });
+
     }
 
     /**

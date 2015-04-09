@@ -3,10 +3,16 @@
         <div class="clue">
             <div class="content"></div>
         </div>
+        {% if admin %}
         <div class="answer">
             <h1>Answer</h1>
             <div class="content"></div>
         </div>
+        {% else %}
+            {# The interaction between flexbox and textfill means that if we dont have something that is flex-align:end #}
+            {# with content in it, the question extends out of the box. So we add a period, and make it the background color #}
+            <div class="flex-ender">.</div>
+        {% endif %}
     </div>
 </div>
 
