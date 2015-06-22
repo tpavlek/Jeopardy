@@ -72,7 +72,8 @@ class BoardFactory
                                 new Clue($question->clue),
                                 new Answer($question->answer),
                                 $question->value,
-                                (isset($question->daily_double)) ? $question->daily_double : false
+                                (isset($question->daily_double)) ? $question->daily_double : false,
+                                (isset($question->type)) ? $question->type : Question::CLUE_TYPE_DEFAULT
                             );
                             if ($questionObj->getClue() == null || (isset($question->used) && $question->used)) {
                                 $questionObj->setUsed(true);

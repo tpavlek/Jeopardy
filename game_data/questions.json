@@ -1,1 +1,223 @@
-{"contestants":[{"name":"nice__username","score":-1200},{"name":"JaKaTaK","score":800},{"name":"PengWin","score":7000}],"categories":[{"name":"Remember Me?","questions":[{"clue":"Over the span of his casting career he dropped both his beard and his online tag, citing professionalism as the reason for the latter.","answer":"Kevin Knocke (CatsPajamas)","value":400,"daily_double":false},{"clue":"This Peruivian terran was notably signed by korean powerhouse Incredible Miracle in 2011.","answer":"Fenix","value":800,"daily_double":true},{"clue":"This Korean terran player was on NSHoSeo before he moved to Western Wolves - just 8 days before beating Grubby in the IEM Singapore finals!","answer":"Sting","value":1200,"daily_double":false},{"clue":"He was a South African Protoss player who would probably win against a group of DesRow's followers in a fight.","answer":"PandaTank.","value":1600,"daily_double":false},{"clue":"In 2012, this Estonian protoss was dubbed \"The People's champion\" when he almost managed to qualify for TSL 4.","answer":"Mycerion","value":2000,"daily_double":false}]},{"name":"They have names you know","questions":[{"clue":"ToD","answer":"Yoan Merlo.","value":400,"daily_double":false},{"clue":"SaroVati","answer":"Brian Zhao.","value":800,"daily_double":false},{"clue":"Bunny.","answer":"Patrick Brix.","value":1200,"daily_double":false},{"clue":"MajOr.","answer":"Juan Carlos Tena Lopez","value":1600,"daily_double":true},{"clue":"Flash.","answer":"Lee Young Ho.","value":2000,"daily_double":false}]},{"name":"Brood War","questions":[{"clue":"This unit was a favorite of Day9's, and one of his most used as well.","answer":"Lurker.","value":400,"daily_double":false},{"clue":"This person was known as the original Kong.","answer":"YellOw","value":800,"daily_double":false},{"clue":"This title was given to the top 6 Protoss players that dominated the scene between November 2008 and March 2009. ","answer":"The Six Dragons.","value":1200,"daily_double":false},{"clue":"This player was called the Protoss BoxeR due to his creative and frequently unorthodox style. ","answer":"Nal_rA.","value":1600,"daily_double":false},{"clue":"These four players form TaekBangLeeSsang a formidable final boss in the Brood War scene.","answer":"Bisu, Stork, Jaedong, Flash.","value":2000,"daily_double":false}]},{"name":"Resources Lost Tab","questions":[{"clue":"A banshee killing seven SCVs","answer":"350.","value":400,"daily_double":false},{"clue":"A raven and a viking die to a missile turret.","answer":"525","value":800,"daily_double":false},{"clue":"Hellbats kill a spore crawler, a queen and a drone.","answer":"325","value":1200,"daily_double":false},{"clue":"An ultralisk and a thor both die to a voidray.","answer":"1,000","value":1600,"daily_double":false},{"clue":"Six zerglings die killing a High Templar and a Twilight Council.","answer":"600","value":2000,"daily_double":false}]},{"name":"Potent Starcraftables","questions":[{"clue":"A player is rewarded with this portrait for winning 1000 games with each race.","answer":"What is Predator","value":400,"daily_double":false},{"clue":"Heart of the Swarm was released on this date.","answer":"March 12, 2013","value":800,"daily_double":false},{"clue":"This is the only automatically-cast spell in the game","answer":"Heal (Medivac)","value":1200,"daily_double":false},{"clue":"This unit can prevent a nuke without killing the ghost.","answer":"Sentry","value":1600,"daily_double":false},{"clue":"If you're playing zerg, these units you control cannot enter Nydus Networks nor overlords with Ventral Sacs","answer":"Temporary Units (Infested Terrans, Changelings, Broodlings, Locusts)","value":2000,"daily_double":false}]}],"final":{"category":"Yer a wizard, nice__JaKaWin!","clue":"If you combine the energy costs of all the spells available on a single unit, this unit has the highest total.","answer":"Raven"}}
+{
+    "contestants": [
+        {
+            "name": "Tempo",
+            "score": 0
+        },
+        {
+            "name": "Lycan",
+            "score": 0
+        },
+        {
+            "name": "Pengwin",
+            "score": 0
+        }
+    ],
+    "categories": [
+        {
+            "name": "No I in Team",
+            "questions": [
+                {
+                    "clue": "Though there's another similar team on campus, this one manages Linux Servers.",
+                    "answer": "System Administration 1.",
+                    "value": 200,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "They don't do door-to-door delivery, but they manage the Mailman server",
+                    "answer": "Infrastructure Applications",
+                    "value": 400,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "This team puts out the weekly Departmental Newsletter.",
+                    "answer": "Communications.",
+                    "value": 600,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "This team formerly reported to Solutions and Standards before being moved under Enterprise Applications in 2014.",
+                    "answer": "Application Development",
+                    "value": 800,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Grandmaster Flash wouldn't recommend pushing this IST team, which regularly has to wear hard hats as part of their job.",
+                    "answer": "Edge Networking",
+                    "value": 1000,
+                    "daily_double": false,
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "Dates and Times",
+            "questions": [
+                {
+                    "clue": "Most support staff switch to summer hours on May 1, this much earlier than their winter counterparts.",
+                    "answer": "30 min",
+                    "value": 200,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "It's alive! ServiceNow hit production on this date.",
+                    "answer": "July 30th, 2014",
+                    "value": 400,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Coming soon: our new President-Elect David Turpin assumes office on this date.",
+                    "answer": "July 1, 2015.",
+                    "value": 600,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "There won't be a Connect conference next year as it will be replaced by this alternative conference occurring on June 19 through June 22, 2016.",
+                    "answer": "canHEIT",
+                    "value": 800,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Be extra careful with deploys during this time, often at the start and end of terms as well as end of the fiscal year.",
+                    "answer": "Cautionary Change Window.",
+                    "value": 1000,
+                    "daily_double": false,
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "Name the Building",
+            "questions": [
+                {
+                    "clue": "http:\/\/img.tpavlek.me\/ualberta\/butterdome.jpg",
+                    "answer": "Butterdome.",
+                    "value": 200,
+                    "daily_double": false,
+                    "type": "img"
+                },
+                {
+                    "clue": "http:\/\/img.tpavlek.me\/ualberta\/tory.jpg",
+                    "answer": "Tory",
+                    "value": 400,
+                    "daily_double": false,
+                    "type": "img"
+                },
+                {
+                    "clue": "http:\/\/img.tpavlek.me\/ualberta\/education.jpg",
+                    "answer": "Education",
+                    "value": 600,
+                    "daily_double": false,
+                    "type": "img"
+                },
+                {
+                    "clue": "http:\/\/img.tpavlek.me\/ualberta\/athabasca.jpg",
+                    "answer": "Athabasca",
+                    "value": 800,
+                    "daily_double": false,
+                    "type": "img"
+                },
+                {
+                    "clue": "http:\/\/img.tpavlek.me\/ualberta\/convocation.jpg",
+                    "answer": "Arts & Convocation Hall",
+                    "value": 1000,
+                    "daily_double": false,
+                    "type": "img"
+                }
+            ]
+        },
+        {
+            "name": "Before and After",
+            "questions": [
+                {
+                    "clue": "Your university-issued identification and some after-hours Hearts or Poker.",
+                    "answer": "One Card Game.",
+                    "value": 200,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "The segment of the newsletter all about what's going on around IST and the plague affecting Edmonton roads.",
+                    "answer": "Hot Pot Hole",
+                    "value": 400,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "The creator of Seinfeld and the Director of Enterprise Applications",
+                    "answer": "Larry David Dittaro.",
+                    "value": 600,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "The single-point-of-contact assisting with your Dell tower and monitor.",
+                    "answer": "HelpdeskTop.",
+                    "value": 800,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "GSB 156 and a basketball maneuver in which the ball is thrown to a mid-air teammate who immediately dunks it.",
+                    "answer": "Bowling Alley-oop",
+                    "value": 1000,
+                    "daily_double": false,
+                    "type": "text"
+                }
+            ]
+        },
+        {
+            "name": "Sum of the Parts",
+            "questions": [
+                {
+                    "clue": "The process for consolidation, AMRO, is short for this.",
+                    "answer": "Acquire, Merge, Rationalize, Optimize",
+                    "value": 200,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Not all consolidations are forever; this team moved under the Faculty of Education in early 2015.",
+                    "answer": "DigiTAL",
+                    "value": 400,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Moving consolidated support to IST's helpdesk is often colloquially called this; it sounds like something from Star Trek.",
+                    "answer": "SPOCing",
+                    "value": 600,
+                    "daily_double": true,
+                    "type": "text"
+                },
+                {
+                    "clue": "At an approximate 1300 staff affected, this is the largest department to have begun the consolidation process.",
+                    "answer": "Faculty of Science",
+                    "value": 800,
+                    "daily_double": false,
+                    "type": "text"
+                },
+                {
+                    "clue": "Every good project needs guidance, she provides guidance as the Program Manager for the Consolidation Project.",
+                    "answer": "Lili Chevrier",
+                    "value": 1000,
+                    "daily_double": false,
+                    "type": "text"
+                }
+            ]
+        }
+    ],
+    "final": {
+        "category": "VPIT",
+        "clue": "Since 2011, these two have held the office of the VPIT.",
+        "answer": "Jonathan Schaeffer, Duane Szafron, Mike MacGregor"
+    }
+}

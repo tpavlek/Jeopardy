@@ -12,6 +12,8 @@ $config['players'] = array_map(function(array $contestant_info) {
     return ucfirst(strtolower($contestant_info['name']));
 }, $json['contestants']);
 
+$config['display_host'] = false;
+
 
 $loader = new Twig_Loader_Filesystem('views');
 
@@ -29,7 +31,12 @@ $router->get('/play', function (Request $request, Response $response, array $arg
 });
 
 $router->get('/obs', function (Request $request, Response $response, array $args) use ($twig, $config) {
-    $response->setContent($twig->render('obs.html.twig', [ 'players' => $config['players'] ]));
+    $response->setContent(
+        $twig->render(
+            'obs.html.twig',
+            [ 'players' => $config['players'], 'display_host' => $config['display_host'] ]
+        )
+    );
     return $response;
 });
 

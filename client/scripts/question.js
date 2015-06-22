@@ -12,8 +12,17 @@ window.question = (function(question) {
         return q.hasOwnProperty('daily_double') && q.daily_double;
     };
 
+    question.isImageClue = function()
+    {
+        return q.hasOwnProperty('type') && q.type === 'img';
+    };
+
     question.getClue = function()
     {
+        if (question.isImageClue()) {
+            return "<img src='" + q.clue + "' />"
+        }
+
         return q.clue;
     };
 

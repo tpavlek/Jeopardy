@@ -8,10 +8,21 @@ use Illuminate\Contracts\Support\Jsonable;
 class Question implements Arrayable, Jsonable
 {
 
+    const CLUE_TYPE_TEXT = "text";
+    const CLUE_TYPE_IMAGE = "img";
+    const CLUE_TYPE_DEFAULT = "text";
+
     protected $clue;
     protected $answer;
     /** @var  int */
     protected $value;
+    /**
+     * The type of clue we're dealing with. Acceptable values are:
+     * * "text" => a standard text clue
+     * * "img" => We will display an image as the clue.
+     * @var string
+     */
+    protected $type;
 
     /**
      * Have we already used this question in this round?
@@ -21,12 +32,13 @@ class Question implements Arrayable, Jsonable
 
     protected $isDailyDouble = false;
 
-    public function __construct(Clue $clue, Answer $answer, $value, $isDailyDouble = false)
+    public function __construct(Clue $clue, Answer $answer, $value, $isDailyDouble = false, $type = self::CLUE_TYPE_DEFAULT)
     {
         $this->clue = $clue;
         $this->answer = $answer;
         $this->value = $value;
         $this->isDailyDouble = $isDailyDouble;
+        $this->type = $type;
     }
 
     /**
@@ -55,6 +67,16 @@ class Question implements Arrayable, Jsonable
     public function isDailyDouble()
     {
         return $this->isDailyDouble;
+    }
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    public function isImageClue()
+    {
+        return $this->type === self::CLUE_TYPE_IMAGE;
     }
 
     /**
@@ -105,7 +127,8 @@ class Question implements Arrayable, Jsonable
             'answer' => (string)$this->getAnswer(),
             'value' => (int)$this->getValue(),
             'used' => (bool)$this->isUsed(),
-            'daily_double' => $this->isDailyDouble()
+            'daily_double' => $this->isDailyDouble(),
+            'type' => $this->getType()
         ];
     }
 
