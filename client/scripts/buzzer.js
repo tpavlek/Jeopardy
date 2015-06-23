@@ -7,6 +7,13 @@ window.buzzer = (function(buzzer) {
     /** If the user has already buzzed in for this round, since we don't want to keep sending events to the server after the first */
     var already_buzzed = false;
 
+    buzzer.clear = function()
+    {
+        active_at = false;
+        penalty_until = Date.now() - 1;
+        already_buzzed = false;
+    };
+
     /**
      * Is our buzzer currently active?
      * @returns {boolean}
@@ -77,8 +84,7 @@ window.buzzer = (function(buzzer) {
      */
     buzzer.deactivate = function(buzzer_indicator)
     {
-        active_at = false;
-        buzzer.resetPenalty();
+        buzzer.clear();
 
         // If we were passed a buzzer indicator, we should set it to inactive. If no buzzer indicator exists, we're fine
         // anyway.

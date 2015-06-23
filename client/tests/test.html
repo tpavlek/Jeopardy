@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>QUnit basic example</title>
+    <link rel="stylesheet" href="//code.jquery.com/qunit/qunit-1.18.0.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture"></div>
+<script src="//code.jquery.com/qunit/qunit-1.18.0.js"></script>
+<script src="../scripts/buzzer.js"></script>
+<script>
+    QUnit.module("Buzzer Testing", {
+        beforeEach: function() {
+            window.buzzer.clear();
+        },
+        afterEach: function() {
+            window.buzzer.clear();
+        }
+    });
+
+    QUnit.test("Activates the buzzer", function (assert) {
+        var buzzer = window.buzzer;
+
+        assert.notOk(buzzer.isActive(), "Buzzer should not be active on startup.");
+        buzzer.activate(null);
+
+        assert.ok(buzzer.isActive(), "We have activated the buzzer");
+    });
+
+    QUnit.test("Penalty is assigned to early buzzes", function (assert) {
+        var buzzer = window.buzzer;
+
+        assert.notOk(buzzer.isActive(), "Buzzer should not be active on startup.");
+
+        assert.notOk(buzzer.hasActivePenalty(), "No penalty should be present on the buzzer");
+        assert.notOk(buzzer.buzz(), "It is impossible to buzz when the buzzer is not active");
+        assert.ok(buzzer.hasActivePenalty(), "Attempting to buzz on an inactive buzzer should assign a penalty");
+
+        buzzer.activate();
+
+        var buzzAmt = buzzer.buzz();
+        assert.ok(buzzAmt, "Buzz amount should not be false");
+
+        console.log("BuzzAmt is " + buzzAmt);
+        assert.ok(buzzAmt >= 500, "Buzz amount should be greater than 500 (the penalty amount)");
+    });
+
+    QUnit.test("Regression: buzzes do not revert to 1ms after the first buzz", function (assert) {
+
+        var buzzer = window.buzzer;
+        var done = assert.async();
+
+        buzzer.activate();
+        // The first buzz will take a normal amount of time.
+        assert.ok(buzzer.buzz() <= 5);
+
+        buzzer.deactivate();
+        buzzer.activate();
+
+        // Ensure the subsequent buzz
+        setTimeout(function() {
+            var buzzAmt = buzzer.buzz();
+            assert.ok((buzzAmt >= 50 && buzzAmt <= 55), "The buzz amount should be around 50ms");
+            done();
+        }, 50);
+    });
+</script>
+</body>
+</html>

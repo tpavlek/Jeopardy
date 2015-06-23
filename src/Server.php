@@ -96,6 +96,9 @@ class Server
         });
 
         $emitter->addListener(BuzzerResolutionEvent::class, function(BuzzerResolutionEvent $event) use ($wamp) {
+
+            //TODO Store this event
+            echo "Buzzer Resolution: " . $event->getResolution()->getContestant()->getName() . " buzzed in ({$event->getResolution()->getTime()}ms)\n";
             $wamp->onBuzzerResolution($event->getResolution());
         });
 
@@ -148,6 +151,8 @@ class Server
                 });
             }
 
+            // TODO store this event
+            echo "Buzz in (" . $event->getContestant()->getName() . "): " . $event->getDifference() . "ms \n";
             $board->getResolver()->addBuzz($event);
 
         });

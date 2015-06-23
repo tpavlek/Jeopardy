@@ -76,7 +76,7 @@ class Board
     protected $buzzerStatus;
 
     /**
-     * @return mixed
+     * @return Resolver
      */
     public function getResolver()
     {
