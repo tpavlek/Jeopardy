@@ -23,7 +23,7 @@ window.question = (function(question) {
             return "<img src='" + q.clue + "' />"
         }
 
-        return q.clue;
+        return "<span>" + q.clue + "</span>";
     };
 
     question.getAnswer = function()

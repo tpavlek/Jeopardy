@@ -284,6 +284,13 @@ span.active-buzzer:after {
     span {
       display: block;
     }
+
+    img {
+      max-width: 50%;
+      max-height: 50%;
+      margin: 0px auto;
+
+    }
   }
 }
 

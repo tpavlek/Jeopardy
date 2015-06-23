@@ -590,7 +590,7 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
             return;
         }
         var clue = question_modal.find('.content').first().find('.clue').first();
-        clue.html("<span>" + question.getClue() + "</span>");
+        clue.html(question.getClue());
 
         if (jeopardy.admin_mode) {
             question_modal.find('.content').first().find('.answer').first().show();
