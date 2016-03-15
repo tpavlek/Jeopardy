@@ -2,16 +2,15 @@
 
 {% block content %}
 
-    {% for player in players %}
-        <div class="player {{ player }}" data-player-name="{{ player }}" {% if player == user %} data-active-player="true" {% endif %}>
-            <h2 style="display: inline; float:left; padding-left: 1em;">{{ player }}</h2>
-            <span class="score" style="float:right; padding-right: 1em;">0</span>
-            <div style="clear:both;"></div>
-            <div class="img-wrapper">
-                <img src="/img/fill{{ loop.index }}.jpg" />
+    <div class="players-lower-third">
+        {% for player in players %}
+            <div class="player {{ player }}" data-player-name="{{ player }}">
+                <h2>{{ player }}</h2>
+                <span class="score">0</span>
             </div>
-        </div>
-    {% endfor %}
+        {% endfor %}
+    </div>
+
 
     <script>
         var jeo = window.jeopardy;
