@@ -51,6 +51,17 @@ $router->get('/board', function (Request $request, Response $response, array $ar
     return $response;
 });
 
+$router->get('/contestants', function (Request $request, Response $response, array $args) use ($twig, $config) {
+    $response->setContent(
+        $twig->render(
+            'contestants.html.twig',
+            [ 'players' => $config['players'] ]
+        )
+    );
+
+    return $response;
+});
+
 $router->get('/play/{player}', function (Request $request, Response $response, array $args) use ($twig, $config) {
     $player = ucfirst(strtolower($args['player']));
 

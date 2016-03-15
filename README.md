@@ -137,4 +137,4 @@ Contributing
 If you find a bug, send a pull or file an issue.
 
 If you want to add significant new features or change functionality, file an issue first or fire an email
-to troy@depotwarehouse.net, so I can ensure it fits in with the idea for this project :)
+to troy@tpavlek.me, so I can ensure it fits in with the idea for this project :)
