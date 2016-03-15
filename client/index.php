@@ -40,6 +40,17 @@ $router->get('/obs', function (Request $request, Response $response, array $args
     return $response;
 });
 
+$router->get('/board', function (Request $request, Response $response, array $args) use ($twig, $config) {
+
+    $response->setContent(
+        $twig->render(
+            'board.html.twig'
+        )
+    );
+
+    return $response;
+});
+
 $router->get('/play/{player}', function (Request $request, Response $response, array $args) use ($twig, $config) {
     $player = ucfirst(strtolower($args['player']));
 

@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <div class="content-wrapper" style="width:100%">
+        {% include 'partials/board.html.twig' %}
+    </div>
+
+
+
+    <script>
+        var jeo = window.jeopardy;
+        jeo.getJeopardyBoardElement = function() {
+            return $('.jeopardy-board');
+        };
+        jeo.getQuestionDisplayModal = function() {
+            return $('#question-display-modal');
+        };
+        jeo.getDailyDoubleModal = function() {
+            return $('#daily-double-display-modal');
+        };
+        jeo.getFinalJeopardyModal = function() {
+            return $("#final-jeopardy-display-modal");
+        };
+        jeo.getFinalJeopardyBetInput = function() {
+            return $('#final-jeopardy-bet-input');
+        };
+        jeo.getFinalJeopardyAnswerInput = function() {
+            return $('#final-jeopardy-answer-input');
+        };
+
+    </script>
+
+{% endblock %}
