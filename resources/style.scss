@@ -28,6 +28,8 @@ html, button, input, select, textarea,
 }
 
 .players-lower-third {
+  position: absolute;
+  bottom: 20px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -35,9 +37,8 @@ html, button, input, select, textarea,
 
   .player {
     flex: 1;
-    margin-left: 10%;
-    margin-right: 10%;
     text-align:center;
+    box-shadow: none;
 
     h2 {
       font-size: 3em;
@@ -46,6 +47,16 @@ html, button, input, select, textarea,
       display: block;
       float: none;
     }
+  }
+
+  .player:first-child {
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .player:last-child {
+    margin-left: 5%;
+    margin-right: 5%;
   }
 }
 
