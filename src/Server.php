@@ -49,7 +49,7 @@ class Server
      * The time, in seconds, in which we want to wait after receiving the first buzz before resolving a winner.
      * @var float
      */
-    protected $buzzer_resolve_timeout = 2;
+    protected $buzzer_resolve_timeout = 0.75;
 
     /**
      * The time, in seconds that we will wait for final jeopardy bets/responses to come in.
@@ -143,8 +143,6 @@ class Server
                 // The buzzer isn't active, so there's nothing to do.
                 return;
             }
-
-            echo "Buzz in (" . $event->getContestant()->getName() . "): " . $event->getDifference() . "ms \n";
 
             if ($board->getResolver()->isEmpty()) {
                 // If this is the first buzz, then we want to resolve it after the timeout.
