@@ -2,7 +2,7 @@ window.buzzer = (function(buzzer) {
     /* This is our buzzer. It can be active or inactive, and includes the time at which it became active */
 
     var active_at = false;
-    var penalty_amount = 500;
+    var penalty_amount = 2000;
     var penalty_until = Date.now() - 1;
     /** If the user has already buzzed in for this round, since we don't want to keep sending events to the server after the first */
     var already_buzzed = false;
