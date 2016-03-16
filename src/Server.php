@@ -143,6 +143,9 @@ class Server
                 // The buzzer isn't active, so there's nothing to do.
                 return;
             }
+
+            echo "Buzz in (" . $event->getContestant()->getName() . "): " . $event->getDifference() . "ms \n";
+
             if ($board->getResolver()->isEmpty()) {
                 // If this is the first buzz, then we want to resolve it after the timeout.
                 $this->eventLoop->addTimer($this->buzzer_resolve_timeout, function() use ($board, $emitter) {
