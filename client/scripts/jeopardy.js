@@ -67,6 +67,7 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
         if (difference === true) {
             // The user has already buzzed.
             console.log("User has already buzzed in! Keep on hammerin' dat j key...");
+            return;
         }
 
         var buzz = {
