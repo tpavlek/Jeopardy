@@ -14,7 +14,7 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
     jeopardy.final_jeopardy_answer_topic = "com.sc2ctl.jeopardy.final_jeopardy_answers";
 
     jeopardy.host = 'ws://' + window.location.hostname + '/ws';
-    jeopardy.buzz_display_time = 3000;
+    jeopardy.buzz_display_time = 4500;
     jeopardy.admin_mode = false; // Sets admin mode, which will disable feedback like penalties, buzzbuttons, etc.
 
 
