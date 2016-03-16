@@ -49,7 +49,7 @@ class Server
      * The time, in seconds, in which we want to wait after receiving the first buzz before resolving a winner.
      * @var float
      */
-    protected $buzzer_resolve_timeout = 0.5;
+    protected $buzzer_resolve_timeout = 2;
 
     /**
      * The time, in seconds that we will wait for final jeopardy bets/responses to come in.
