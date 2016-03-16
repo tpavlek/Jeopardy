@@ -38,6 +38,7 @@ window.buzzer = (function(buzzer) {
 
         var now = Date.now();
         if (penalty_until > now) {
+            already_buzzed = true;
             return (now - active_at) + penalty_amount
         }
 
