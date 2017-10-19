@@ -665,5 +665,6 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
 
     return jeopardy;
 
+    console.log("WEEEEEE");
 }((window.jeopardy || {}), window.buzzer, window.question));
 
