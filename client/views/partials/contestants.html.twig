@@ -11,7 +11,7 @@
 <div class="player-container">
 
     {% for player in players %}
-        <div class="player {{ player }}" data-player-name="{{ player }}" {% if player == user %} data-active-player="true" {% endif %}>
+        <div class="{{ player }} {{ " " }} player" data-player-name="{{ player }}" {% if player == user %} data-active-player="true" {% endif %}>
             <h2 style="display: inline; float:left; padding-left: 1em;">{{ player }}</h2>
             <span class="score" style="float:right; padding-right: 1em;">0</span>
             <div style="clear:both;"></div>
