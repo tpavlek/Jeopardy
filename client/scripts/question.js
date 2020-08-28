@@ -22,18 +22,13 @@ window.question = (function(question) {
         return q.hasOwnProperty('type') && q.type === 'video';
     };
 
-    question.hasVideoLink = function()
-    {
-        return q.hasOwnProperty('videolink');
-    };
-
     question.getClue = function()
     {
         if (question.isImageClue()) {
             return "<img src='" + q.clue + "' />"
         }
-        if (question.isVideoClue() && question.hasVideoLink()) {
-            return '<iframe width="560" height="315" src="' + q.videolink + '"></iframe>';
+        if (question.isVideoClue()) {
+            return '<iframe width="560" height="315" src="' + q.clue + '"></iframe>';
         }
 
         return "<span>" + q.clue + "</span>";
