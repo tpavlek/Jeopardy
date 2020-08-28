@@ -17,10 +17,23 @@ window.question = (function(question) {
         return q.hasOwnProperty('type') && q.type === 'img';
     };
 
+    question.isVideoClue = function()
+    {
+        return q.hasOwnProperty('type') && q.type === 'video';
+    };
+
+    question.hasVideoLink = function()
+    {
+        return q.hasOwnProperty('videolink');
+    };
+
     question.getClue = function()
     {
         if (question.isImageClue()) {
             return "<img src='" + q.clue + "' />"
+        }
+        if (question.isVideoClue() && question.hasVideoLink()) {
+            return '<iframe width="560" height="315" src="' + q.videolink + '"></iframe>';
         }
 
         return "<span>" + q.clue + "</span>";
