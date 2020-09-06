@@ -1,0 +1,26 @@
+version: "3.3"
+services:
+ app:
+  build:
+   context: .
+   dockerfile: .docker/app/Dockerfile
+  hostname: divoc.hacker-jeopardy.de
+  networks:
+   dockerbridge.local:
+    ipv4_address: 192.168.100.20
+    aliases:
+      - divoc.hacker-jeopardy.de
+  ports:
+    - 80:80
+  volumes:
+  - .:/var/www/jeopardy
+  environment:
+  - QT_QPA_PLATFORM=offscreen
+networks:
+  dockerbridge.local:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 192.168.100.0/24
+        
