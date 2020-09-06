@@ -14,9 +14,9 @@ RUN mkdir /var/run/php-fpm
 COPY .docker/app/php-fpm/www.conf /etc/php-fpm.d/www.conf
 COPY .docker/app/apache2/divoc-jeopardy.conf /etc/httpd/conf.d/divoc-jeopardy.conf
 
-RUN php-fpm -D
+#RUN php-fpm -D
 #RUN chmod 0666 /var/run/php-fpm/php7.3-fpm.sock
-RUN httpd -k start
+#RUN httpd -k start
 
 COPY . /var/www/jeopardy/
 WORKDIR /var/www/jeopardy
