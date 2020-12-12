@@ -539,7 +539,7 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
                     continue;
                 }
                 var clue_box = $(questions_column[j]).find('.clue').first();
-                clue_box.html("<span>" + questions_data[j].value + "</span>");
+                clue_box.html("<span style='font-size:36px'>" + questions_data[j].value + "</span>");
                 clue_box.textfill();
 
                 $(questions_column[j]).attr('data-value', questions_data[j].value);

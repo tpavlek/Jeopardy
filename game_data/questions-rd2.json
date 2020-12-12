@@ -1,1 +1,223 @@
-{"contestants":[{"name":"Sarah","score":0},{"name":"Andrew","score":0},{"name":"Aaron","score":0}],"categories":[{"name":"In the Neighbourhood","questions":[{"clue":"Clue: Home to King Edward Elementary school, this neighbourhood shares its name with a county, former city, and federal and provincial ridings","answer":"Answer: Strathcona","value":400,"daily_double":false,"type":"text"},{"clue":"Clue: The second most-dense neighbourhood in Edmonton which, if we\u2019re being \u201cfrank\u201d, probably deserves more green amenities","answer":"Answer: Oliver","value":800,"daily_double":false,"type":"text"},{"clue":"Clue: Despite its name, this Edmonton neighbourhood just north of Londonderry mall isn\u2019t proposing an assault on the premier, rather it\u2019s named after a community in Ireland.","answer":"Answer: Kilkenny","value":1200,"daily_double":false,"type":"text"},{"clue":"Clue: Even well after 2009, you won\u2019t be able to get a degree in this Edmonton neighbourhood just south of the Henday off 111st","answer":"Answer: MacEwan","value":1600,"daily_double":false,"type":"text"},{"clue":"Clue: The only residential neighbourhood in Edmonton to contain two \u201cy\u201ds, this neighbourhood seems to be encouraging you to just do nothing for a while during your stay","answer":"Answer: Idylwylde","value":2000,"daily_double":false,"type":"text"}]},{"name":"Councillor Math","questions":[{"clue":"Clue: The sum of Esslinger, Banga and Knack","answer":"Answer: 15","value":400,"daily_double":false,"type":"text"},{"clue":"Clue: Subtract Nickel from Paquette","answer":"Answer: -7","value":800,"daily_double":false,"type":"text"},{"clue":"Clue: The product of Cartmell and Dziadyk (friend of the podcast)","answer":"Answer: 27","value":1200,"daily_double":false,"type":"text"},{"clue":"Clue: First sum Walters and Henderson, then divide that by McKeen","answer":"Answer: 3","value":1600,"daily_double":false,"type":"text"},{"clue":"Clue: The contestant here with the highest ward, multiplied by the total number of members on council","answer":"Answer: 65","value":2000,"daily_double":false,"type":"text"}]},{"name":"In this term","questions":[{"clue":"Clue: \u201cMissing Links\u201d was nomenclature that was used in an official motion after being popularized by this local people-focused organization that champions moving around without the use of personal vehicles","answer":"Answer: Paths For People","value":400,"daily_double":false,"type":"text"},{"clue":"Clue: Banga, Dziadyk, Nickel, and Paquette all voted against the phase 1 gondola report, rejecting the idea born in this competition which encouraged Edmontonians to dream big and imagine something new","answer":"Answer: The Edmonton Project","value":800,"daily_double":false,"type":"text"},{"clue":"Clue: Though it was shelved in budget deliberations, they were the only councillor to vote against the Lewis Farms Rec Centre and Library earlier this year","answer":"Answer: Jon Dziadyk","value":1200,"daily_double":false,"type":"text"},{"clue":"Clue: While options for privacy and noise remediation in Councillor offices ranged from $500k to $5.2M, council instead opted for this cheaper solution, at $25k","answer":"Answer: A glass door","value":1600,"daily_double":false,"type":"text"},{"clue":"Clue: A review of Tim Hague\u2019s death prompted council to implement a temporary ban on this in late 2017","answer":"Answer: Combative Sports","value":2000,"daily_double":false,"type":"text"}]},{"name":"Who Said it?","questions":[{"clue":"Clue: \u201cI know criticism is a summer sport here in Edmonton\u201d","answer":"Answer: Don Iveson","value":400,"daily_double":false,"type":"text"},{"clue":"Clue: \u201cI think I\u2019ve got a bunch of what I call \u2018economic crisis deniers\u2019 going right now\u201d","answer":"Answer: Mike Nickel","value":800,"daily_double":false,"type":"text"},{"clue":"Clue: \u201cI don\u2019t think there\u2019s a true mobility function to e-scooters. I think they\u2019re a toy, they\u2019re fun.\u201d","answer":"Answer: Scott McKeen","value":1200,"daily_double":false,"type":"text"},{"clue":"Clue: \u201cQuite frankly, I want to get up on a Saturday from my house and just drive two minutes to my office so that I can meet with people on weekends and in the evenings\u201d","answer":"Answer: Dzyiadyk","value":1600,"daily_double":false,"type":"text"},{"clue":"Clue: \u201cI\u2019m not the kind of political leader that\u2019s ever chained myself to anything before or laid down in front of a bulldozer, but when it comes to this ballpark I just might be\u201d","answer":"Answer: Michael Walters","value":2000,"daily_double":false,"type":"text"}]},{"name":"Before and After","questions":[{"clue":"Clue: A STEM-focused attraction drops it\u2019s TELUS branding and instead brands itself with the one true name of Keillor Point Viewing Area","answer":"Answer: The End of the World of Science","value":400,"daily_double":false,"type":"text"},{"clue":"Clue: A ski club that joined forces with the animal conservatory on the opposite side of the river from it","answer":"Answer: Snow Valley Zoo","value":800,"daily_double":false,"type":"text"},{"clue":"Clue: The plan that provides strategic guidance for the southwest and northeast corners of the river valley gets an amendment by Siu To puts a cart selling his staple edmonton snack on every path","answer":"Answer: Ribbon of Green Onion Cake (Man)","value":1200,"daily_double":false,"type":"text"},{"clue":"Clue: The Bison and Night Sky preserve east of Edmonton is paved over into a lot where people leave their cars to jump on the LRT","answer":"Answer: Elk Island National Park and Ride","value":1600,"daily_double":false,"type":"text"},{"clue":"Clue: The Fire Chief moves his retirement announcement to a Whyte Coffee Shop in a building that\u2019s 107 years old","answer":"Answer: Chief Ken Block 1912","value":2000,"daily_double":false,"type":"text"}]}],"final":{"category":"Edmonton Historical Firsts","clue":"This building, first built in 1938 and the first in Canada, was instrumental in growing a faith group in Edmonton. Now, nearly two decades after the building was moved to make way for the Royal Alex in 1991, Edmontonians can visit the original building in Fort Edmonton Park","answer":"Al-Rashid Mosque"}}
+{
+  "contestants": [
+    {
+      "name": "Sarah",
+      "score": 4000
+    },
+    {
+      "name": "Andrew",
+      "score": 7000
+    },
+    {
+      "name": "Aaron",
+      "score": -4800
+    }
+  ],
+  "categories": [
+    {
+      "name": "In the Neighbourhood",
+      "questions": [
+        {
+          "clue": " Home to King Edward Elementary school, this neighbourhood shares its name with a county, former city, and federal and provincial ridings",
+          "answer": "Strathcona",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The second most-dense neighbourhood in Edmonton which, if we\u2019re being \u201cfrank\u201d, probably deserves more green amenities",
+          "answer": "Oliver",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Despite its name, this Edmonton neighbourhood just north of Londonderry mall isn\u2019t proposing an assault on the premier, rather it\u2019s named after a community in Ireland.",
+          "answer": "Kilkenny",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Even well after 2009, you won\u2019t be able to get a degree in this Edmonton neighbourhood just south of the Henday off 111st",
+          "answer": "MacEwan",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The only residential neighbourhood in Edmonton to contain two \u201cy\u201ds, this neighbourhood seems to be encouraging you to just do nothing for a while during your stay",
+          "answer": "Idylwylde",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Councillor Math",
+      "questions": [
+        {
+          "clue": " The sum of Esslinger, Banga and Knack",
+          "answer": "15",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Subtract Nickel from Paquette",
+          "answer": "-7",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The product of Cartmell and Dziadyk (friend of the podcast)",
+          "answer": "27",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " First sum Walters and Henderson, then divide that by McKeen",
+          "answer": "3",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The contestant here with the highest ward, multiplied by the total number of members on council",
+          "answer": "65",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "In this term",
+      "questions": [
+        {
+          "clue": " \u201cMissing Links\u201d was nomenclature that was used in an official motion after being popularized by this local people-focused organization that champions moving around without the use of personal vehicles",
+          "answer": "Paths For People",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Banga, Dziadyk, Nickel, and Paquette all voted against the phase 1 gondola report, rejecting the idea born in this competition which encouraged Edmontonians to dream big and imagine something new",
+          "answer": "The Edmonton Project",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Though it was shelved in budget deliberations, they were the only councillor to vote against the Lewis Farms Rec Centre and Library earlier this year",
+          "answer": "Jon Dziadyk",
+          "value": 1200,
+          "daily_double": true,
+          "type": "text"
+        },
+        {
+          "clue": " While options for privacy and noise remediation in Councillor offices ranged from $500k to $5.2M, council instead opted for this cheaper solution, at $25k",
+          "answer": "A glass door",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " A review of Tim Hague\u2019s death prompted council to implement a temporary ban on this in late 2017",
+          "answer": "Combative Sports",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Who Said it?",
+      "questions": [
+        {
+          "clue": " \u201cI know criticism is a summer sport here in Edmonton\u201d",
+          "answer": "Don Iveson",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI think I\u2019ve got a bunch of what I call \u2018economic crisis deniers\u2019 going right now\u201d",
+          "answer": "Mike Nickel",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI don\u2019t think there\u2019s a true mobility function to e-scooters. I think they\u2019re a toy, they\u2019re fun.\u201d",
+          "answer": "Scott McKeen",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cQuite frankly, I want to get up on a Saturday from my house and just drive two minutes to my office so that I can meet with people on weekends and in the evenings\u201d",
+          "answer": "Dzyiadyk",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI\u2019m not the kind of political leader that\u2019s ever chained myself to anything before or laid down in front of a bulldozer, but when it comes to this ballpark I just might be\u201d",
+          "answer": "Michael Walters",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Before and After",
+      "questions": [
+        {
+          "clue": " A STEM-focused attraction drops it\u2019s TELUS branding and instead brands itself with the one true name of Keillor Point Viewing Area",
+          "answer": "The End of the World of Science",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " A ski club that joined forces with the animal conservatory on the opposite side of the river from it",
+          "answer": "Snow Valley Zoo",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The plan that provides strategic guidance for the southwest and northeast corners of the river valley gets an amendment by Siu To that puts a cart selling his staple Edmonton snack on every path",
+          "answer": "Ribbon of Green Onion Cake (Man)",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "The Bison and Night Sky preserve east of Edmonton is paved over into a lot where people leave their cars to jump on the LRT",
+          "answer": "Elk Island National Park and Ride",
+          "value": 1600,
+          "daily_double": true,
+          "type": "text"
+        },
+        {
+          "clue": " The Fire Chief moves his retirement announcement to a Whyte Coffee Shop in a building that\u2019s 107 years old",
+          "answer": "Chief Ken Block 1912",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "final": {
+    "category": "Edmonton Historical Firsts",
+    "clue": " This building, first built in 1938 and the first in Canada, was instrumental in growing a faith group in Edmonton. Now, nearly two decades after the building was moved to make way for the Royal Alex in 1991, Edmontonians can visit the original building in Fort Edmonton Park",
+    "answer": "Al-Rashid Mosque"
+  }
+}

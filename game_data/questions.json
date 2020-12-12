@@ -1,1 +1,223 @@
-{"contestants":[{"name":"Player1","score":0},{"name":"Player2","score":0},{"name":"Player3","score":0}],"categories":[{"name":"HELLO, SUCKER!","questions":[{"clue":"At the tequila bar, lick the salt off your hand, drink the shot, then suck on this","answer":"the lemon (or lime)","value":200,"daily_double":false,"type":"text"},{"clue":"Completes the title of an 1847 novel featuring \"a gush of blood, and a hideous sucking noise\": \"Varney the...\"","answer":"vampire","value":400,"daily_double":false,"type":"text"},{"clue":"The Amer. Academy of Pediatrics says this habit fulfills a need of all infants but around age 5, maybe worry a bit","answer":"thumb-sucking","value":600,"daily_double":false,"type":"text"},{"clue":"H. Cecil Booth's version of this contraption was used to clean up Westminster Abbey for a coronation in 1902","answer":"a vacuum cleaner","value":800,"daily_double":false,"type":"text"},{"clue":"The ultimate hitchhikers, these suckerfish attach themselves to other fish, like sharks","answer":"remora","value":1000,"daily_double":false,"type":"text"}]},{"name":"STEPHEN KING'S BAD FOLKS","questions":[{"clue":"A fan named Annie Wilkes breaks a writer's illusions of safety in this novel","answer":"<i>Misery<\/i>","value":200,"daily_double":false,"type":"text"},{"clue":"There's \"no play\" for this character who comes under the influence of evil at the Overlook Hotel in \"The Shining\"","answer":"Jack Torrance","value":400,"daily_double":false,"type":"text"},{"clue":"Her mother is the domineering & ultra-religious Margaret White; don't wait up!","answer":"Carrie","value":600,"daily_double":false,"type":"text"},{"clue":"An encounter with an amoral politician makes a psychic contemplate murder in this work","answer":"<i>The Dead Zone<\/i>","value":800,"daily_double":false,"type":"text"},{"clue":"It could only be this ageless creepy clown in \"It\"","answer":"Pennywise","value":1000,"daily_double":false,"type":"text"}]},{"name":"COUNTRIES OF THE WORLD","questions":[{"clue":"It's the Hellenic Republic","answer":"Greece","value":200,"daily_double":false,"type":"text"},{"clue":"Its 83 divisions include 21 \"republics\" & 2 \"federal cities\"","answer":"the Russian Federation","value":400,"daily_double":false,"type":"text"},{"clue":"Formerly Upper Volta, still 2 words","answer":"Burkina Faso","value":600,"daily_double":false,"type":"text"},{"clue":"It's greatest width is 7 miles, so a walk from Austria to Switzerland... no problem","answer":"Liechtenstein","value":800,"daily_double":false,"type":"text"},{"clue":"This peninsular country's only land border is with Saudi Arabia","answer":"Qatar","value":1000,"daily_double":false,"type":"text"}]},{"name":"TOYS & GAMES","questions":[{"clue":"The character behind bars in this game is Jake the Jailbird, put there due to the efforts of Officer Edgar Mallory","answer":"Monopoly","value":200,"daily_double":false,"type":"text"},{"clue":"In 2013 this educational toy company \"jumped\" over its competitors by introducing a kids tablet with WiFi","answer":"LeapFrog","value":400,"daily_double":false,"type":"text"},{"clue":"2 of the characters in this game are Cutie Cone & Giggly Gumdrop","answer":"Candy Land","value":600,"daily_double":false,"type":"text"},{"clue":"Sales of this game first known as Pretzel got a big boost in 1966 when Eva Gabor & Johnny Carson played it on TV","answer":"Twister","value":800,"daily_double":true,"type":"text"},{"clue":"Created in 1914 and still fun a century later, it was inspired by watching kids play with simple items like sticks","answer":"Tinker Toys","value":1000,"daily_double":false,"type":"text"}]},{"name":"TV FOR THEE","questions":[{"clue":"Anthony Geary won Emmys in 4 different decades for playing Luke on this soap (& Luke wasn't even a doctor!)","answer":"<i>General Hospital<\/i>","value":200,"daily_double":false,"type":"text"},{"clue":"This host's Top 10 list of \"Least Popular Dr. Seuss Books\" includes \"If I Ran the Knicks\"","answer":"David Letterman","value":400,"daily_double":false,"type":"text"},{"clue":"Jeff & Beau's dad, he starred in \"Sea Hunt\" on TV & picked the wrong week to quit sniffing glue on film in \"Airplane!\"","answer":"Lloyd Bridges","value":600,"daily_double":false,"type":"text"},{"clue":"If we rebuilt Steve Austin in 2017 instead of 1974 when this show premiered, the title number would be $30 million","answer":"<i>The Six Million Dollar Man<\/i>","value":800,"daily_double":false,"type":"text"},{"clue":"For fashion & style that's \"Trendy@Wendy\", check out this host's show","answer":"Wendy Williams","value":1000,"daily_double":false,"type":"text"}]}],"final":{"category":"Something","clue":"Something","answer":"Something"}}
+{
+  "contestants": [
+    {
+      "name": "Sarah",
+      "score": 4000
+    },
+    {
+      "name": "Andrew",
+      "score": 7000
+    },
+    {
+      "name": "Aaron",
+      "score": -4800
+    }
+  ],
+  "categories": [
+    {
+      "name": "In the Neighbourhood",
+      "questions": [
+        {
+          "clue": " Home to King Edward Elementary school, this neighbourhood shares its name with a county, former city, and federal and provincial ridings",
+          "answer": "Strathcona",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The second most-dense neighbourhood in Edmonton which, if we\u2019re being \u201cfrank\u201d, probably deserves more green amenities",
+          "answer": "Oliver",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Despite its name, this Edmonton neighbourhood just north of Londonderry mall isn\u2019t proposing an assault on the premier, rather it\u2019s named after a community in Ireland.",
+          "answer": "Kilkenny",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Even well after 2009, you won\u2019t be able to get a degree in this Edmonton neighbourhood just south of the Henday off 111st",
+          "answer": "MacEwan",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The only residential neighbourhood in Edmonton to contain two \u201cy\u201ds, this neighbourhood seems to be encouraging you to just do nothing for a while during your stay",
+          "answer": "Idylwylde",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Councillor Math",
+      "questions": [
+        {
+          "clue": " The sum of Esslinger, Banga and Knack",
+          "answer": "15",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Subtract Nickel from Paquette",
+          "answer": "-7",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The product of Cartmell and Dziadyk (friend of the podcast)",
+          "answer": "27",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " First sum Walters and Henderson, then divide that by McKeen",
+          "answer": "3",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The contestant here with the highest ward, multiplied by the total number of members on council",
+          "answer": "65",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "In this term",
+      "questions": [
+        {
+          "clue": " \u201cMissing Links\u201d was nomenclature that was used in an official motion after being popularized by this local people-focused organization that champions moving around without the use of personal vehicles",
+          "answer": "Paths For People",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Banga, Dziadyk, Nickel, and Paquette all voted against the phase 1 gondola report, rejecting the idea born in this competition which encouraged Edmontonians to dream big and imagine something new",
+          "answer": "The Edmonton Project",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " Though it was shelved in budget deliberations, they were the only councillor to vote against the Lewis Farms Rec Centre and Library earlier this year",
+          "answer": "Jon Dziadyk",
+          "value": 1200,
+          "daily_double": true,
+          "type": "text"
+        },
+        {
+          "clue": " While options for privacy and noise remediation in Councillor offices ranged from $500k to $5.2M, council instead opted for this cheaper solution, at $25k",
+          "answer": "A glass door",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " A review of Tim Hague\u2019s death prompted council to implement a temporary ban on this in late 2017",
+          "answer": "Combative Sports",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Who Said it?",
+      "questions": [
+        {
+          "clue": " \u201cI know criticism is a summer sport here in Edmonton\u201d",
+          "answer": "Don Iveson",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI think I\u2019ve got a bunch of what I call \u2018economic crisis deniers\u2019 going right now\u201d",
+          "answer": "Mike Nickel",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI don\u2019t think there\u2019s a true mobility function to e-scooters. I think they\u2019re a toy, they\u2019re fun.\u201d",
+          "answer": "Scott McKeen",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cQuite frankly, I want to get up on a Saturday from my house and just drive two minutes to my office so that I can meet with people on weekends and in the evenings\u201d",
+          "answer": "Dzyiadyk",
+          "value": 1600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " \u201cI\u2019m not the kind of political leader that\u2019s ever chained myself to anything before or laid down in front of a bulldozer, but when it comes to this ballpark I just might be\u201d",
+          "answer": "Michael Walters",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Before and After",
+      "questions": [
+        {
+          "clue": " A STEM-focused attraction drops it\u2019s TELUS branding and instead brands itself with the one true name of Keillor Point Viewing Area",
+          "answer": "The End of the World of Science",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " A ski club that joined forces with the animal conservatory on the opposite side of the river from it",
+          "answer": "Snow Valley Zoo",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": " The plan that provides strategic guidance for the southwest and northeast corners of the river valley gets an amendment by Siu To that puts a cart selling his staple Edmonton snack on every path",
+          "answer": "Ribbon of Green Onion Cake (Man)",
+          "value": 1200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "The Bison and Night Sky preserve east of Edmonton is paved over into a lot where people leave their cars to jump on the LRT",
+          "answer": "Elk Island National Park and Ride",
+          "value": 1600,
+          "daily_double": true,
+          "type": "text"
+        },
+        {
+          "clue": " The Fire Chief moves his retirement announcement to a Whyte Coffee Shop in a building that\u2019s 107 years old",
+          "answer": "Chief Ken Block 1912",
+          "value": 2000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "final": {
+    "category": "Edmonton Historical Firsts",
+    "clue": " This building, first built in 1938 and the first in Canada, was instrumental in growing a faith group in Edmonton. Now, nearly two decades after the building was moved to make way for the Royal Alex in 1991, Edmontonians can visit the original building in Fort Edmonton Park",
+    "answer": "Al-Rashid Mosque"
+  }
+}
