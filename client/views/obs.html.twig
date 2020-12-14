@@ -2,10 +2,15 @@
 {% extends 'layout.html.twig' %}
 
 {% block content %}
-    <div class="buzzer-column">
+    <style>
+        .player {
+            height:15rem;
+        }
+    </style>
+    <div class="buzzer-column" style="width:20%">
         {% include 'partials/contestants.html.twig' with {'players': players} %}
     </div>
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="width:80%">
         {% include 'partials/board.html.twig' %}
     </div>
 
