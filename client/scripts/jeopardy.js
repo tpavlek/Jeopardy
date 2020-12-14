@@ -423,6 +423,8 @@ window.jeopardy = (function (jeopardy, buzzer, question) {
 
         var modal = jeopardy.getFinalJeopardyModal();
 
+        modal.find('.final-jeopardy-clue').hide();
+
         final_jeopardy_response = data;
         var response = modal.find('.contestant-response');
         response.find('.contestant-name').html(data.contestant);
