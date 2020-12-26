@@ -11,7 +11,7 @@
             </div>
         </div>
 
-        {% include 'partials/contestants.html.twig' with {'players': players, 'user': user} %}
+        {% include 'partials/contestants.html.twig' with {'players': players, 'user': user, 'show_image': false } %}
     </div>
     <div class="content-wrapper">
         {% include 'partials/board.html.twig' %}

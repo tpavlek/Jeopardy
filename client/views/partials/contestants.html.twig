@@ -15,9 +15,11 @@
             <h2 style="display: inline; float:left; padding-left: 1em;">{{ player }}</h2>
             <span class="score" style="float:right; padding-right: 1em;">0</span>
             <div style="clear:both;"></div>
-            <div class="img-wrapper">
-                <img src="/img/fill{{ loop.index }}.jpg" />
-            </div>
+            {% if show_image %}
+                <div class="img-wrapper">
+                    <img src="/img/fill{{ loop.index }}.jpg" />
+                </div>
+            {% endif %}
 
         </div>
     {% endfor %}
