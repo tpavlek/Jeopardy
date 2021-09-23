@@ -189,7 +189,7 @@ class Server
             $board->addScore(new Contestant($event->getContestant()), $event->getScoreChange());
 
             $contestant = $board->getContestants()->first(
-                function($key, Contestant $contestant) use ($event) {
+                function(Contestant $contestant) use ($event) {
                     return $contestant->getName() == $event->getContestant();
                 }
             );
