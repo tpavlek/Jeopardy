@@ -104,7 +104,7 @@ class Board
     public function addScore(Contestant $contestant, $value)
     {
         /** @var Contestant $c */
-        $c = $this->getContestants()->first(function($key, Contestant $c) use ($contestant) {
+        $c = $this->getContestants()->first(function(Contestant $c) use ($contestant) {
             return $c->getName() == $contestant->getName();
         });
 
@@ -129,7 +129,7 @@ class Board
         //TODO what if we can't find anything? what if either of these return empty. Must throw exceptions, I suppose.
 
         /** @var Category $category */
-        $category = $this->categories->first(function ($key, Category $category) use ($categoryName) {
+        $category = $this->categories->first(function (Category $category) use ($categoryName) {
             return $category->getName() == $categoryName;
         });
 
@@ -137,7 +137,7 @@ class Board
             throw new QuestionNotFoundException;
         }
 
-        $question = $category->getQuestions()->first(function ($key, Question $question) use ($value) {
+        $question = $category->getQuestions()->first(function (Question $question) use ($value) {
             return $question->getValue() == $value;
         });
 
