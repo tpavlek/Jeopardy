@@ -1,0 +1,223 @@
+{
+  "contestants": [
+    {
+      "name": "Dana",
+      "score": 0
+    },
+    {
+      "name": "Greg",
+      "score": 0
+    },
+    {
+      "name": "Joy",
+      "score": 0
+    }
+  ],
+  "categories": [
+    {
+      "name": "Reviews",
+      "questions": [
+        {
+          "clue": "This popular platform recently gave a thumbs down to text reviews, only up and down ratings are allowed now",
+          "answer": "Apple Maps",
+          "value": 200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This infamous company treats asking customers to leave you a review as a crime and it will be punishable through their notorious review filter",
+          "answer": "Yelp",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This practice, prohibited in 2018 by Google, funnels unhappy customers to a business's internal feedback form, instead of to online review sites.",
+          "answer": "Review Gating",
+          "value": 600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This GMB review feature uses machine learning to help customers understand the business's review landscape at a glance.",
+          "answer": "Place Topics",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "Once a laughingstock of digital marketing, these square images that require you to pull out your camera have recently made a comeback helping with review acquisition.",
+          "answer": "QR Codes",
+          "value": 1000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Rhyme Time",
+      "questions": [
+        {
+          "clue": "Your company celebrates getting the #1 spot in the 3 local positions on Google by inscribing the results on a ceremonial, wall-mounted tablet called this",
+          "answer": "Pack Plaque",
+          "value": 200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This flatbread popular with Indigenous North Americans is pesticide free, though the name suggests you could probably find it in Google's web results.",
+          "answer": "Organic Bannock",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "The process of helping the man with the most generic name possible rank better in search engines",
+          "answer": "John Doe SEO",
+          "value": 600,
+          "daily_double": true,
+          "type": "text"
+        },
+        {
+          "clue": "Both words are something a police officer might give you, but together they're the #1 infraction of local data management: duplicate and incorrect listings on the same directory",
+          "answer": "Citation Violation",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "In this streaming-only sequel, the genie played by Shaquille O'Neal helps you remove fake listings from Google Maps.",
+          "answer": "Spam Kazaam",
+          "value": 1000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Name That SEO",
+      "questions": [
+        {
+          "clue": "This local SEO loves to brave cold waters, is a gif master on Twitter, and a wizard at GMB attribution.",
+          "answer": "Claire Carllile",
+          "value": 200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This Canadian YouTube and content marketing master makes epic educational videos for a prominent SEO SaaS company",
+          "answer": "Sam Oh",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "She authors the local SEO playbook and she isn't driving a LOCOMOTIVE when she's kicking your butt in Mario Kart!",
+          "answer": "Amanda Jordan",
+          "value": 600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "He once was lost, but now he's Found(er)",
+          "answer": "Rand Fishkin",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "This SEO is an international sensation, who will have you feeling all sorts of FOMO.",
+          "answer": "Aleyda Solis",
+          "value": 1000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Google My Business",
+      "questions": [
+        {
+          "clue": "This feature is available to all businesses but trying to find it from the GMB dashboard will only leave you with more questions than answers.",
+          "answer": "Q&A",
+          "value": 200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "The feature was abridged In June of 2021, but if you were using it you'll still have access in \"short\" order",
+          "answer": "Short Name",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "Mentioning this common garden tool will just \"rake\" in automatic rejections of Google Posts.",
+          "answer": "Hoe",
+          "value": 600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "Reviews influence these two local algorithm factors.",
+          "answer": "Relevance and Prominence",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "Website mentions, review snippets and \"sold here\" are all examples of this intent-matching addition to a listing.",
+          "answer": "Justifications",
+          "value": 1000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "name": "Initialisms & Acronyms",
+      "questions": [
+        {
+          "clue": "WLSS",
+          "answer": "Whitespark Local Search Summit",
+          "value": 200,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "PAA",
+          "answer": "People Also Ask",
+          "value": 400,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "IYP",
+          "answer": "Internet Yellow Pages",
+          "value": 600,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "UTM",
+          "answer": "Urchin Tracking Module",
+          "value": 800,
+          "daily_double": false,
+          "type": "text"
+        },
+        {
+          "clue": "LCP",
+          "answer": "Largest Contentful Paint",
+          "value": 1000,
+          "daily_double": false,
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "final": {
+    "category": "$Local Services Ads$",
+    "clue": "Forget all the rest and the exception, in the LSA dashboard you can only dispute leads within this time frame",
+    "answer": "30 days"
+  }
+}
