@@ -5,7 +5,7 @@
         "league/event": "~2.0",
         "illuminate/support": "~5.0",
         "symfony/var-dumper": "~2.6",
-        "twig/twig": "~1.18",
+        "twig/twig": "~2.12",
         "league/route": "~1.0"
     },
     "autoload": {
