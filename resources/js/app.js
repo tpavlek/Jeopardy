@@ -1,5 +1,6 @@
 import './bootstrap';
 import {createApp} from 'vue';
+import store from "./store";
 
 const app = createApp({});
 
@@ -10,4 +11,5 @@ Object.entries(components).forEach(([path, definition]) => {
     app.component(componentName, definition.default)
 });
 
+app.use(store);
 app.mount('#app');
