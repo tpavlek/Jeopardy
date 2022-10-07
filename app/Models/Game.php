@@ -7,6 +7,7 @@ use App\GameRound;
 use App\GameStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Collection;
 
@@ -20,6 +21,11 @@ class Game extends Model
         'status' => GameStatus::class,
         'round_status' => GameRound::class,
     ];
+
+    public function users(): BelongsToMany
+    {
+        return $this->belongsToMany(User::class);
+    }
 
     public function clues(): BelongsToMany
     {
@@ -67,5 +73,15 @@ class Game extends Model
             ->where('value', $value)
             ->where('category_id', $category->id)
             ->firstOrFail();
+    }
+
+    public function authorizeUsers(string ...$users): self
+    {
+        $users = collect($users)
+            ->map(fn (string $username) => User::forName($username));
+
+        $this->users()->syncWithoutDetaching($users->pluck('id'));
+
+        return $this;
     }
 }
