@@ -20,9 +20,16 @@ class Buzzer
         return $this;
     }
 
+    public function control(BuzzerStatus $status): self
+    {
+        Redis::set($this->getKey(), $status->value);
+
+        return $this;
+    }
+
     public function status(): BuzzerStatus
     {
-        return BuzzerStatus::from(Redis::get($this->getKey()));
+        return BuzzerStatus::tryFrom(Redis::get($this->getKey())) ?? BuzzerStatus::Closed;
     }
 
     private function getKey(): string

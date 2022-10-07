@@ -10,7 +10,7 @@ abstract class GameMasterActionRequest extends FormRequest
 
     public function authorize(): bool
     {
-        return User::current()?->isAdmin();
+        return User::current()?->isAdmin() === true;
     }
 
 }
