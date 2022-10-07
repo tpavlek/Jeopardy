@@ -3,8 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\GameRound;
+use App\Models\Category;
 use App\Models\Clue;
 use App\Models\Game;
+use App\Models\GameCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 
@@ -38,14 +41,26 @@ class DatabaseSeeder extends Seeder
 
         foreach ($rounds as $round) {
             foreach ($categories as $category) {
+                $category_model = Category::build($category);
+
                 $factory = $factory->has(
                     Clue::factory()->count(5)
                         ->sequence(fn ($sequence) => [ 'value' => ($sequence->index + 1) * ($round * 200) ])
-                        ->state(fn() => [ 'category' => $category ])
+                        ->state(fn () => [ 'category_id' => $category_model->id ])
                 );
             }
         }
 
-        return $factory->create();
+        $game = $factory
+            ->state(fn () => [ 'slug' => 'default' ])
+            ->create();
+
+        foreach ($categories as $category) {
+            $category_model = Category::findNamed($category);
+            $game->categories()->attach($category_model, [
+                'round' => GameRound::Single,
+                'file' => 1
+            ]);
+        }
     }
 }
