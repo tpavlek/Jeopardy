@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\BoardController;
 use App\Http\Controllers\ClueController;
+use App\Http\Controllers\PlayController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,8 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/', [ PlayController::class, 'index' ])->name('play');
 
 Route::get('/game/{game:slug}/board', [ BoardController::class, 'show' ])->name('board.show');
 Route::post('/game/{game:slug}/clue/{clue:uuid}/reveal', [ ClueController::class, 'reveal' ])->name('clue.reveal');
