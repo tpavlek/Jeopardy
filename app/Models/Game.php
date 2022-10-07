@@ -43,7 +43,15 @@ class Game extends Model
 
     public function markShowingClue(): self
     {
-        $this->status = GameStatus::ShowingClue->value;
+        $this->status = GameStatus::ShowingClue;
+        $this->save();
+
+        return $this;
+    }
+
+    public function markWaitingForSelection(): self
+    {
+        $this->status = GameStatus::WaitingForSelection;
         $this->save();
 
         return $this;
