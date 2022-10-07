@@ -14,6 +14,12 @@ class User extends Authenticatable
 
     protected $guarded = [];
 
+    public static function forName(string $name): self
+    {
+        return self::query()
+            ->firstOrCreate([ 'name' => $name ], [ 'is_admin' => false ]);
+    }
+
     public static function current(): ?self
     {
         return Auth::user();
