@@ -10,6 +10,11 @@ class Category extends Model
 {
     use HasFactory;
 
+    public static function build(string $name): self
+    {
+        return self::query()->create([ 'name' => $name ]);
+    }
+
     public static function findNamed(string $name): self
     {
         return self::query()->where('name', $name)->firstOrFail();

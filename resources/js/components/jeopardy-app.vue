@@ -1,6 +1,8 @@
 <template>
-    <div>{{ title }}</div>
-    <button @click="changeTitle">Change title</button>
+    <div>Loaded categories:</div>
+    <ul>
+        <li v-for="category in categories">{{ category }}</li>
+    </ul>
 </template>
 <script>
 import {computed} from "vue";
@@ -9,10 +11,10 @@ import {useStore} from "vuex";
 export default {
     setup() {
         const store = useStore();
+        store.dispatch("game/load", "default");
 
         return {
-            title: computed(() => store.getters["game/title"]),
-            changeTitle: () => store.dispatch("game/changeTitle", "new title"),
+            categories: computed(() => store.getters["game/categories"]),
         }
     }
 }

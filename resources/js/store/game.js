@@ -1,21 +1,23 @@
 export default {
     namespaced: true,
     state: {
-        title: "This is jeopardy!",
+        categories: [],
     },
     getters: {
-        title(state) {
-            return state.title;
+        categories(state) {
+            return state.categories;
         }
     },
     mutations: {
-        setTitle(state, title) {
-            state.title = title;
+        setCategories(state, categories) {
+            state.categories = categories;
         }
     },
     actions: {
-        changeTitle({commit}, title) {
-            commit('setTitle', `New title: ${title}.`);
+        async load({commit}, slug) {
+            const {data} = await axios.get(`/game/${slug}/board`);
+
+            commit('setCategories', data.categories);
         }
     }
 }
