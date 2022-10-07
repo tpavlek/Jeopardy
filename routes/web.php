@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\BuzzerController;
 use App\Http\Controllers\ClueController;
 use Illuminate\Support\Facades\Route;
 
@@ -17,3 +18,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/game/{game:slug}/board', [ BoardController::class, 'show' ])->name('board.show');
 Route::post('/game/{game:slug}/clue/{clue:uuid}/reveal', [ ClueController::class, 'reveal' ])->name('clue.reveal');
+Route::post('/game/{game:slug}/buzzer', [ BuzzerController::class, 'open' ])->name('buzzer.open');
