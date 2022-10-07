@@ -7,17 +7,19 @@ use App\BuzzerStatus;
 use Illuminate\Support\Facades\Redis;
 use Tests\TestCase;
 
-class EnableBuzzerTest extends TestCase
+class OpenBuzzerTest extends TestCase
 {
 
     /**
      * @test
      */
-    public function it_can_enable_buzzer()
+    public function it_can_open_buzzer()
     {
+        $this->actingAs($this->adminUser());
+
         $game = $this->unitTestGame();
 
-        $this->postJson(route('buzzer.open', [ 'game' => $game->slug ]))
+        $this->postJson(route('buzzer.control', [ 'game' => $game->slug ]), [ 'status' => BuzzerStatus::Open ])
             ->assertOk();
 
         $game->refresh();
