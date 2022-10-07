@@ -21,4 +21,5 @@ Route::get('/', [ PlayController::class, 'index' ])->name('play');
 
 Route::get('/game/{game:slug}/board', [ BoardController::class, 'show' ])->name('board.show');
 Route::post('/game/{game:slug}/clue/{clue:uuid}/reveal', [ ClueController::class, 'reveal' ])->name('clue.reveal');
+Route::post('/game/{game:slug}/clue/{clue:uuid}/dismiss', [ ClueController::class, 'dismiss' ])->name('clue.dismiss');
 Route::post('/game/{game:slug}/buzzer', [ BuzzerController::class, 'store' ])->name('buzzer.control');
